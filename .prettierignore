@@ -1,0 +1,5 @@
+# Ignore built files except scripts/index.js
+# scripts/*
+# !scripts/index.js
+
+# config/*
