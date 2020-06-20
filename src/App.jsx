@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Switch, Route, Redirect } from 'react-router-dom'
-
 import { withMyDeviceTypeDetector } from '@/common/hocs/withDeviceTypeDetector'
-import { asyncLoadUserInfoData } from '@/actions'
+import { asyncLoadUserInfoData, asyncLoadTestData } from '@/actions'
 import { NotFound } from '@/pages/not-found'
 import { CustomFullScreenLoader } from '@/mui/custom-components/Loader'
 import { MiniDrawerLeftHOC as MiniDrawerLeftDesktop } from '@/mui/layouts/dashboard/desktop'
@@ -72,6 +71,7 @@ class ConnectedApp extends React.Component {
   componentDidMount() {
     // TODO: APP INIT AS AUTHORIZATION
     this.props.dispatch(asyncLoadUserInfoData())
+    this.props.dispatch(asyncLoadTestData())
   }
   render() {
     const { isDeviceTypeDetected, deviceType, userInfo } = this.props

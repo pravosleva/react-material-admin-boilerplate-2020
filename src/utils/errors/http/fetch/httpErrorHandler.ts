@@ -1,0 +1,9 @@
+import { HttpError } from '@/utils/errors/http/HttpError'
+
+export const httpErrorHandler = (res: any): any | HttpError => {
+  if (res.ok && res.status === 200) {
+    return res.json()
+  } else {
+    throw new HttpError(res.status, res.statusText)
+  }
+}

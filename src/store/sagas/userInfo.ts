@@ -1,16 +1,10 @@
 import { put, takeLatest, call } from 'redux-saga/effects'
-
 import { ASYNC_LOAD_USER_INFO_DATA, setIsLoadingUserInfoData, setUserInfoData, showAsyncToast } from '@/actions'
 import { getApiUrl } from '@/utils/getApiUrl'
 import { NetworkError, networkErrorHandler } from '@/utils/errors/network'
-import { HttpRequestError } from '@/utils/errors/http'
-import {
-  apiResponseErrorHandler,
-  ApiResponseError,
-  IResponseLocalResultSuccess,
-  IResponseLocalResultError,
-} from '@/utils/errors/api'
-import { httpRequestErrorHandler as httpRequestErrorFetchHandler } from '@/utils/errors/http/fetch'
+import { HttpError } from '@/utils/errors/http'
+import { apiErrorHandler, ApiError, IResponseLocalResultSuccess, IResponseLocalResultError } from '@/utils/errors/api'
+import { httpErrorHandler as httpRequestErrorFetchHandler } from '@/utils/errors/http/fetch'
 
 const apiUrl = getApiUrl()
 
@@ -22,7 +16,7 @@ function fetchUserInfoData(): Promise<IResponseLocalResultSuccess | IResponseLoc
   })
     .then(networkErrorHandler)
     .then(httpRequestErrorFetchHandler)
-    .then(apiResponseErrorHandler)
+    .then(apiErrorHandler)
     .then((data: any) => ({
       isOk: true,
       response: data,
@@ -30,8 +24,8 @@ function fetchUserInfoData(): Promise<IResponseLocalResultSuccess | IResponseLoc
     .catch((err: any) => {
       switch (true) {
         case err instanceof NetworkError:
-        case err instanceof HttpRequestError:
-        case err instanceof ApiResponseError:
+        case err instanceof HttpError:
+        case err instanceof ApiError:
           return {
             isOk: false,
             msg: err.getErrorMsg(),

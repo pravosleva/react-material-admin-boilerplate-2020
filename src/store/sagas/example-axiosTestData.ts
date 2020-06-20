@@ -2,20 +2,14 @@ import { put, takeLatest, call } from 'redux-saga/effects'
 
 import { ASYNC_LOAD_USER_INFO_DATA, setIsLoadingUserInfoData, setUserInfoData, showAsyncToast } from '@/actions'
 // import { NetworkError, networkErrorHandler } from '@/utils/errors/network'
-// import { HttpRequestError } from '@/utils/errors/http'
-import {
-  apiResponseErrorHandler,
-  ApiResponseError,
-  IResponseLocalResultSuccess,
-  IResponseLocalResultError,
-} from '@/utils/errors/api'
-// V2: axios
+import { HttpError } from '@/utils/errors/http'
+import { apiErrorHandler, ApiError, IResponseLocalResultSuccess, IResponseLocalResultError } from '@/utils/errors/api'
 import axios from 'axios'
 /* NOTE 1
   Axios многое делает под капотом, поэтому вручную отлавливать все - нет смысла,
   иначе кода будет неоправдано больше, поэтому в этом проекте (без ssr) советую fetch.
 */
-// import { httpRequestErrorHandler as httpRequestErrorAxiosHandler } from '@/utils/errors/http/axios'
+import { httpErrorHandler } from '@/utils/errors/http/axios'
 
 async function fetchUserInfoData(): Promise<IResponseLocalResultSuccess | IResponseLocalResultError> {
   const url = 'https://jsonplaceholder.typicode.com/users'
@@ -26,8 +20,8 @@ async function fetchUserInfoData(): Promise<IResponseLocalResultSuccess | IRespo
       .get(url)
       // NOTE 1
       // .then(networkErrorHandler)
-      // .then(httpRequestErrorAxiosHandler)
-      .then(apiResponseErrorHandler) // .then((data) => data)
+      .then(httpErrorHandler) // res -> res.data
+      .then(apiErrorHandler) // data -> data
       .then((data: any) => ({
         isOk: true,
         response: data,
@@ -35,7 +29,7 @@ async function fetchUserInfoData(): Promise<IResponseLocalResultSuccess | IRespo
       .catch((err) => {
         if (err.response) {
           // Client received an error response (5xx, 4xx)
-          // По сути, встроенный httpRequestErrorAxiosHandler
+          // По сути, встроенный httpErrorHandler
           return {
             isOk: false,
             // eslint-disable-next-line no-useless-concat
@@ -52,19 +46,17 @@ async function fetchUserInfoData(): Promise<IResponseLocalResultSuccess | IRespo
           // Anything else
           switch (true) {
             // NOTE 2
-            // Доп. обрабочики (помимо apiResponseErrorHandler) будут нужны,
+            // Доп. обрабочики (помимо apiErrorHandler) будут нужны,
             // если настройки options будут позволять провалиться дальше: axios по умолчанию все перехватит сам
             // (см. обработку выше)
             // case err instanceof NetworkError:
-            // case err instanceof HttpRequestError:
-            case err instanceof ApiResponseError:
-              // case Object.getPrototypeOf(err).name === 'Error':
+            case err instanceof HttpError:
+            case err instanceof ApiError:
               return {
                 isOk: false,
                 msg: err.getErrorMsg(),
               }
             case err instanceof TypeError:
-              // case Object.getPrototypeOf(err).name === 'Error':
               return {
                 isOk: false,
                 msg: err.message,
@@ -102,7 +94,7 @@ function* asyncLoadUserInfoDataWorker() {
 
     yield put(
       showAsyncToast({
-        text: `${typeof data.response} received`,
+        text: `Data received as ${typeof data.response}`,
         delay: 5000,
         type: 'success',
       })
@@ -120,6 +112,6 @@ function* asyncLoadUserInfoDataWorker() {
   yield put(setIsLoadingUserInfoData(false))
 }
 
-export function* watchAsyncLoadUserInfoData() {
+export function* watchAsyncLoadTestData() {
   yield takeLatest(ASYNC_LOAD_USER_INFO_DATA, asyncLoadUserInfoDataWorker)
 }
