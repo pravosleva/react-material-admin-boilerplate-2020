@@ -5,9 +5,7 @@ import { HttpError } from '@/utils/errors/http'
 import { apiErrorHandler, ApiError, IResponseLocalResultSuccess, IResponseLocalResultError } from '@/utils/errors/api'
 import { httpErrorHandler } from '@/utils/errors/http/fetch'
 
-function fetchTestData(): Promise<IResponseLocalResultSuccess | IResponseLocalResultError> {
-  const url = 'https://jsonplaceholder.typicode.com/users'
-
+function fetchTestData(url: string): Promise<IResponseLocalResultSuccess | IResponseLocalResultError> {
   return fetch(url, {
     method: 'GET',
   })
@@ -50,7 +48,7 @@ interface IData {
 function* asyncLoadTestDataWorker() {
   yield put(setIsLoadingTestData(true))
 
-  const data: IData = yield call(fetchTestData)
+  const data: IData = yield call(fetchTestData, 'https://jsonplaceholder.typicode.com/users')
 
   if (data.isOk && !!data.response && Array.isArray(data.response)) {
     yield put(setTestData(data.response))

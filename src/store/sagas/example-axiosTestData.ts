@@ -1,5 +1,4 @@
 import { put, takeLatest, call } from 'redux-saga/effects'
-
 import { ASYNC_LOAD_USER_INFO_DATA, setIsLoadingUserInfoData, setUserInfoData, showAsyncToast } from '@/actions'
 // import { NetworkError, networkErrorHandler } from '@/utils/errors/network'
 import { HttpError } from '@/utils/errors/http'
@@ -11,70 +10,58 @@ import axios from 'axios'
 */
 import { httpErrorHandler } from '@/utils/errors/http/axios'
 
-async function fetchUserInfoData(): Promise<IResponseLocalResultSuccess | IResponseLocalResultError> {
-  const url = 'https://jsonplaceholder.typicode.com/users'
-  let result: IResponseLocalResultSuccess | IResponseLocalResultError
-
-  try {
-    result = await axios
-      .get(url)
-      // NOTE 1
-      // .then(networkErrorHandler)
-      .then(httpErrorHandler) // res -> res.data
-      .then(apiErrorHandler) // data -> data
-      .then((data: any) => ({
-        isOk: true,
-        response: data,
-      }))
-      .catch((err) => {
-        if (err.response) {
-          // Client received an error response (5xx, 4xx)
-          // По сути, встроенный httpErrorHandler
-          return {
-            isOk: false,
-            // eslint-disable-next-line no-useless-concat
-            msg: url + '\n' + `ERR ${err.response.request.status}: ${err.response.request.statusText}`,
-          }
-        } else if (err.request) {
-          // Client never received a response, or request never left
-          // По сути, встроенный networkErrorHandler
-          return {
-            isOk: false,
-            msg: url + '\nERR: Client never received a response, or request never left',
-          }
-        } else {
-          // Anything else
-          switch (true) {
-            // NOTE 2
-            // Доп. обрабочики (помимо apiErrorHandler) будут нужны,
-            // если настройки options будут позволять провалиться дальше: axios по умолчанию все перехватит сам
-            // (см. обработку выше)
-            // case err instanceof NetworkError:
-            case err instanceof HttpError:
-            case err instanceof ApiError:
-              return {
-                isOk: false,
-                msg: err.getErrorMsg(),
-              }
-            case err instanceof TypeError:
-              return {
-                isOk: false,
-                msg: err.message,
-              }
-            default:
-              return {
-                isOk: false,
-                msg: url + '\nAXIOS ERR: Не удалось обработать ошибку',
-              }
-          }
+async function fetchUserInfoData(url: string): Promise<IResponseLocalResultSuccess | IResponseLocalResultError> {
+  const result = await axios
+    .get(url)
+    // NOTE 1
+    // .then(networkErrorHandler)
+    .then(httpErrorHandler) // res -> res.data
+    .then(apiErrorHandler) // data -> data
+    .then((data: any) => ({
+      isOk: true,
+      response: data,
+    }))
+    .catch((err) => {
+      if (err.response) {
+        // Client received an error response (5xx, 4xx) - По сути, встроенный httpErrorHandler
+        return {
+          isOk: false,
+          // eslint-disable-next-line no-useless-concat
+          msg: url + '\n' + `ERR ${err.response.request.status}: ${err.response.request.statusText}`,
         }
-      })
-  } catch (err) {
-    result = {
-      isOk: false,
-      msg: url + '\nASYNC ERR: Не удалось обработать ошибку',
-    }
-  }
+      } else if (err.request) {
+        // Client never received a response, or request never left - По сути, встроенный networkErrorHandler
+        return {
+          isOk: false,
+          msg: url + '\nERR: Client never received a response, or request never left',
+        }
+      } else {
+        // Anything else
+        switch (true) {
+          // NOTE 2
+          // Доп. обрабочики (помимо apiErrorHandler) будут нужны,
+          // если настройки options будут позволять провалиться дальше: axios по умолчанию все перехватит сам
+          // (см. обработку выше)
+          // case err instanceof NetworkError:
+          case err instanceof HttpError:
+          case err instanceof ApiError:
+            return {
+              isOk: false,
+              msg: err.getErrorMsg(),
+            }
+          case err instanceof TypeError:
+            return {
+              isOk: false,
+              msg: err.message,
+            }
+          default:
+            return {
+              isOk: false,
+              msg: url + '\nAXIOS ERR: Не удалось обработать ошибку',
+            }
+        }
+      }
+    })
   return result
 }
 
@@ -87,11 +74,10 @@ interface IData {
 function* asyncLoadUserInfoDataWorker() {
   yield put(setIsLoadingUserInfoData(true))
 
-  const data: IData = yield call(fetchUserInfoData)
+  const data: IData = yield call(fetchUserInfoData, 'https://jsonplaceholder.typicode.com/users')
 
   if (data.isOk && !!data.response) {
     yield put(setUserInfoData(data.response))
-
     yield put(
       showAsyncToast({
         text: `Data received as ${typeof data.response}`,
