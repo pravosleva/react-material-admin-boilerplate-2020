@@ -6,17 +6,21 @@
 > `/^(feature|bugfix)\/(TPF)-[0-9]{1,4}/`
 
 ### `yarn start`
+
 _Local dev mode_
 
 ### `yarn build:local`
+
 _Build local prod_
 
 ### `yarn analyze`
+
 _Analyze bundles size_
 
 ## Production
 
 ### `yarn build`
+
 _Build production to `./build`_
 
 ## CodeStyle
@@ -46,9 +50,9 @@ _Build production to `./build`_
 - [ ] Swagger?
 - [ ] Network & HTTP & API errors handlers
   - [x] **networkErrorsHandler**
-  - [x] fetch **httpRequestHandler**
-  - [x] axios **httpRequestHandler**
-  - [ ] **apiResponseHandler** Выясняем, какой ожидать формат ошибок
+  - [x] fetch **httpErrorHandler**
+  - [x] axios **httpErrorHandler**
+  - [ ] **apiErrorHandler** Выясняем, какой ожидать формат ошибок
 - [ ] Login
   - [x] **/auth/login** page
   - [ ] Login mechanism
