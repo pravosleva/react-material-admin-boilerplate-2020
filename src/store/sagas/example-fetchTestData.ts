@@ -33,7 +33,7 @@ function fetchTestData(url: string): Promise<IResponseLocalResultSuccess | IResp
         default:
           return {
             isOk: false,
-            msg: url + '\nERR: Не удалось обработать ошибку',
+            msg: `Request Error (${err.constructor.name}): Не удалось обработать ошибку`,
           }
       }
     })

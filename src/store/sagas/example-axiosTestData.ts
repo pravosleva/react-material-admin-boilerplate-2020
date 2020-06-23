@@ -1,19 +1,18 @@
+/* eslint-disable no-useless-concat */
 import { put, takeLatest, call } from 'redux-saga/effects'
 import { ASYNC_LOAD_USER_INFO_DATA, setIsLoadingUserInfoData, setUserInfoData, showAsyncToast } from '@/actions'
 // import { NetworkError, networkErrorHandler } from '@/utils/errors/network'
 import { HttpError } from '@/utils/errors/http'
 import { apiErrorHandler, ApiError, IResponseLocalResultSuccess, IResponseLocalResultError } from '@/utils/errors/api'
 import axios from 'axios'
-/* NOTE 1
-  Axios многое делает под капотом, поэтому вручную отлавливать все - нет смысла,
-  иначе кода будет неоправдано больше, поэтому в этом проекте (без ssr) советую fetch.
-*/
 import { httpErrorHandler } from '@/utils/errors/http/axios'
 
 async function fetchUserInfoData(url: string): Promise<IResponseLocalResultSuccess | IResponseLocalResultError> {
-  const result = await axios
-    .get(url)
-    // NOTE 1
+  const result = await axios({
+    method: 'get',
+    url,
+    validateStatus: (status: number) => status >= 200 && status < 500, // default
+  })
     // .then(networkErrorHandler)
     .then(httpErrorHandler) // res -> res.data
     .then(apiErrorHandler) // data -> data
@@ -22,44 +21,43 @@ async function fetchUserInfoData(url: string): Promise<IResponseLocalResultSucce
       response: data,
     }))
     .catch((err) => {
-      if (err.response) {
-        // Client received an error response (5xx, 4xx) - По сути, встроенный httpErrorHandler
-        return {
-          isOk: false,
-          // eslint-disable-next-line no-useless-concat
-          msg: url + '\n' + `ERR ${err.response.request.status}: ${err.response.request.statusText}`,
-        }
-      } else if (err.request) {
-        // Client never received a response, or request never left - По сути, встроенный networkErrorHandler
-        return {
-          isOk: false,
-          msg: url + '\nERR: Client never received a response, or request never left',
-        }
-      } else {
-        // Anything else
-        switch (true) {
-          // NOTE 2
-          // Доп. обрабочики (помимо apiErrorHandler) будут нужны,
-          // если настройки options будут позволять провалиться дальше: axios по умолчанию все перехватит сам
-          // (см. обработку выше)
-          // case err instanceof NetworkError:
-          case err instanceof HttpError:
-          case err instanceof ApiError:
+      switch (true) {
+        case err.isAxiosError:
+          if (!!err.response) {
+            // Client received an error response (5xx, 4xx) - По сути, встроенный httpErrorHandler
             return {
               isOk: false,
-              msg: err.getErrorMsg(),
+              msg: `Axios Error ${err.response.request.status}: ${err.response.request.statusText}`,
             }
-          case err instanceof TypeError:
+          } else if (!!err.request) {
+            // Client never received a response, or request never left - По сути, встроенный networkErrorHandler
             return {
               isOk: false,
-              msg: err.message,
+              msg: 'Axios Error: Client never received a response, or request never left',
             }
-          default:
+          } else {
             return {
               isOk: false,
-              msg: url + '\nAXIOS ERR: Не удалось обработать ошибку',
+              msg: 'Axios Error: Не удалось обработать ошибку',
             }
-        }
+          }
+        // case err instanceof NetworkError:
+        case err instanceof HttpError:
+        case err instanceof ApiError:
+          return {
+            isOk: false,
+            msg: err.getErrorMsg(),
+          }
+        case err instanceof TypeError:
+          return {
+            isOk: false,
+            msg: err.message,
+          }
+        default:
+          return {
+            isOk: false,
+            msg: `Request Error (${err.constructor.name}): Не удалось обработать ошибку`,
+          }
       }
     })
   return result
