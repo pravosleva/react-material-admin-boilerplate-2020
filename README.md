@@ -48,7 +48,7 @@ _Build production to `./build`_
   - [x] Auth layout
 - [x] Test api Docker container
 - [ ] Swagger?
-- [ ] Network & HTTP & API errors handlers
+- [ ] Error handlers
   - [x] **networkErrorHandler**
   - [x] **httpErrorHandler**
     - [x] fetch
