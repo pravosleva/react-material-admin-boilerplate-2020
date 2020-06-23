@@ -23,17 +23,17 @@ _Analyze bundles size_
 
 _Build production to `./build`_
 
-## CodeStyle
+## Что-то еще
 
 ### Структура роутов
 
-`@/pages/` по аналогии с Next.js
+[@/pages/](/src/pages) по аналогии с Next.js
 
 ### API
 
 Для данной реализации рекомендуется fetch, но можно использовать axios. В любом случае, придерживаться правил использовать только общие обработчики в `@/utils/errors`.
 
-Смысл универсального обработчика `apiResponseErrorHandler`: Что бы ни было прислано с бэка, проверяем условный критерий "наличие поля success в виде строки" и возвращаем json. Для однообразной проверки успешности запроса, промис должен вернуть универсальный объект типа `{ isOk: boolean, msg?: string, response?: json }` (см. [@/store/sagas/example-fetchTestData](/src/store/sagas/example-fetchTestData.ts))
+Для однообразной проверки успешности запроса, промис должен вернуть универсальный объект типа `{ isOk: boolean, msg?: string, response?: json }` (см. [@/store/sagas/example-fetchTestData](/src/store/sagas/example-fetchTestData.ts))
 
 ## Roadmap
 
@@ -49,9 +49,10 @@ _Build production to `./build`_
 - [x] Test api Docker container
 - [ ] Swagger?
 - [ ] Network & HTTP & API errors handlers
-  - [x] **networkErrorsHandler**
-  - [x] fetch **httpErrorHandler**
-  - [x] axios **httpErrorHandler**
+  - [x] **networkErrorHandler**
+  - [x] **httpErrorHandler**
+    - [x] fetch
+    - [x] axios
   - [ ] **apiErrorHandler** Выясняем, какой ожидать формат ошибок
 - [ ] Login
   - [x] **/auth/login** page
