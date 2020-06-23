@@ -1,9 +1,9 @@
 import { put, takeLatest, call } from 'redux-saga/effects'
 import { ASYNC_LOAD_TEST_DATA, setIsLoadingTestData, setTestData, showAsyncToast } from '@/actions'
-import { NetworkError, networkErrorHandler } from '@/utils/errors/network'
-import { HttpError } from '@/utils/errors/http'
-import { apiErrorHandler, ApiError, IResponseLocalResultSuccess, IResponseLocalResultError } from '@/utils/errors/api'
+import { networkErrorHandler } from '@/utils/errors/network'
+import { apiErrorHandler, IResponseLocalResultSuccess, IResponseLocalResultError } from '@/utils/errors/api'
 import { httpErrorHandler } from '@/utils/errors/http/fetch'
+import { universalFetchCatch } from '@/utils/errors'
 
 function fetchTestData(url: string): Promise<IResponseLocalResultSuccess | IResponseLocalResultError> {
   return fetch(url, {
@@ -16,27 +16,7 @@ function fetchTestData(url: string): Promise<IResponseLocalResultSuccess | IResp
       isOk: true,
       response: data,
     }))
-    .catch((err: any) => {
-      switch (true) {
-        case err instanceof NetworkError:
-        case err instanceof HttpError:
-        case err instanceof ApiError:
-          return {
-            isOk: false,
-            msg: err.getErrorMsg(),
-          }
-        case err instanceof TypeError: // CORS?
-          return {
-            isOk: false,
-            msg: err.message,
-          }
-        default:
-          return {
-            isOk: false,
-            msg: `Request Error (${err.constructor.name}): Не удалось обработать ошибку`,
-          }
-      }
-    })
+    .catch(universalFetchCatch)
 }
 
 interface IData {
