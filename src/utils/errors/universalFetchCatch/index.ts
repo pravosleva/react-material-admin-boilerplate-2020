@@ -1,7 +1,6 @@
 import { NetworkError } from '@/utils/errors/network'
 import { HttpError } from '@/utils/errors/http'
-import { ApiError } from '@/utils/errors/api'
-import { IResponseLocalResultSuccess, IResponseLocalResultError } from '@/utils/errors/api'
+import { ApiError, IResponseLocalResultSuccess, IResponseLocalResultError } from '@/utils/errors/api'
 
 export const universalFetchCatch = (err: any): IResponseLocalResultSuccess | IResponseLocalResultError => {
   switch (true) {

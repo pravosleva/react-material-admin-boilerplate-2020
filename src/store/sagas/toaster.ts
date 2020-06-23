@@ -7,7 +7,7 @@ import {
   HIDE_TOAST_FINISH,
   REMOVE_TOAST,
   FORCE_HIDE_TOAST,
-} from '../../actions'
+} from '@/actions'
 
 export const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
 export function* asyncToastWorker({ payload }: any) {

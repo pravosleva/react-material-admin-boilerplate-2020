@@ -1,10 +1,10 @@
 /* eslint-disable no-useless-concat */
 import { put, takeLatest, call } from 'redux-saga/effects'
 import { ASYNC_LOAD_USER_INFO_DATA, setIsLoadingUserInfoData, setUserInfoData, showAsyncToast } from '@/actions'
-import { universalAxiosCatch } from '@/utils/errors'
 import { apiErrorHandler, IResponseLocalResultSuccess, IResponseLocalResultError } from '@/utils/errors/api'
 import axios from 'axios'
 import { httpErrorHandler } from '@/utils/errors/http/axios'
+import { universalAxiosCatch } from '@/utils/errors'
 
 async function fetchUserInfoData(url: string): Promise<IResponseLocalResultSuccess | IResponseLocalResultError> {
   const result = await axios({

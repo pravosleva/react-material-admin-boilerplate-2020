@@ -3,7 +3,7 @@ import { ASYNC_LOAD_USER_INFO_DATA, setIsLoadingUserInfoData, setUserInfoData, s
 import { getApiUrl } from '@/utils/getApiUrl'
 import { networkErrorHandler } from '@/utils/errors/network'
 import { apiErrorHandler, IResponseLocalResultSuccess, IResponseLocalResultError } from '@/utils/errors/api'
-import { httpErrorHandler as httpRequestErrorFetchHandler } from '@/utils/errors/http/fetch'
+import { httpErrorHandler } from '@/utils/errors/http/fetch'
 import { universalFetchCatch } from '@/utils/errors'
 
 const apiUrl = getApiUrl()
@@ -13,7 +13,7 @@ function fetchUserInfoData(url: string): Promise<IResponseLocalResultSuccess | I
     method: 'POST',
   })
     .then(networkErrorHandler)
-    .then(httpRequestErrorFetchHandler)
+    .then(httpErrorHandler)
     .then(apiErrorHandler)
     .then((data: any) => ({
       isOk: true,
