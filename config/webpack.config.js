@@ -35,7 +35,7 @@ const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false'
 // makes for a smoother build process.
 const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false'
 
-const isExtendingEslintConfig = process.env.EXTEND_ESLINT === 'true'
+// const isExtendingEslintConfig = process.env.EXTEND_ESLINT === 'true'
 
 const imageInlineSizeLimit = parseInt(process.env.IMAGE_INLINE_SIZE_LIMIT || '10000')
 
@@ -279,6 +279,7 @@ module.exports = function (webpackEnv) {
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
         '@': paths.appSrc,
+        '@assets': paths.appAssets,
         // Allows for better profiling with ReactDevTools
         ...(isEnvProductionProfile && {
           'react-dom$': 'react-dom/profiling',

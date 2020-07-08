@@ -11,7 +11,8 @@
     "strictNullChecks": false,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@assets/*": ["src/assets/*"]
     },
     "typeRoots": ["node_modules/@types"],
     "skipLibCheck": true,

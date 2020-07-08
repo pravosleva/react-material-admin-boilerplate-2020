@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useContext } from 'react'
 import { useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import clsx from 'clsx'
@@ -24,6 +24,7 @@ import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/RouterLink'
 import { routes } from '@/mui/layouts/dashboard/routes-for-menu'
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'
 import { showAsyncToast } from '@/actions'
+import { MultilingualContext } from '@/common/context/mutilingual'
 
 interface IProps {
   location: any
@@ -63,6 +64,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
     )
     handleProfileMenuClose()
   }
+  const { t, currentLang } = useContext(MultilingualContext)
 
   return (
     <div className={classes.root}>
@@ -85,7 +87,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Brand
+            {t('BRAND')} {currentLang}
           </Typography>
           <IconButton
             color="inherit"
@@ -106,7 +108,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
             <MenuItem onClick={handleProfileMenuClose}>Profile</MenuItem>
             <MenuItem onClick={handleProfileMenuClose}>My account</MenuItem>
             */}
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem onClick={handleLogout}>{t('LOGOUT')}</MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
@@ -136,7 +138,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
               key={path}
               to={path}
               icon={options.icon}
-              primary={options.text}
+              primary={t(options.text.toUpperCase().replace(' ', '_'))}
               button
               selected={isCurrentPathCb(props.location.pathname, `${path}`)}
             />

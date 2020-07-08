@@ -1,4 +1,4 @@
-# planner-frontend
+# react-material-admin-boilerplate-2020
 
 ## Development
 
@@ -33,7 +33,7 @@ _Build production to `./build`_
 
 Для данной реализации рекомендуется fetch, но можно использовать axios. В любом случае, придерживаться правил использовать только общие обработчики в `@/utils/errors`.
 
-Для однообразной проверки успешности запроса, промис должен вернуть универсальный объект типа `{ isOk: boolean, msg?: string, response?: json }` (см. [@/store/sagas/example-fetchTestData](/src/store/sagas/example-fetchTestData.ts))
+Для однообразной проверки успешности запроса, промис должен вернуть универсальный объект типа `{ isOk: boolean, msg?: string, response?: any }` (см. [@/store/sagas/example-fetchTestData](/src/store/sagas/example-fetchTestData.ts))
 
 ## Roadmap
 
@@ -54,6 +54,7 @@ _Build production to `./build`_
     - [x] fetch
     - [x] axios
   - [ ] **apiErrorHandler** Выясняем, какой ожидать формат ошибок
+- [x] Multilignual support with `react-intl-universal` and Context API
 - [ ] Login
   - [x] **/auth/login** page
   - [ ] Login mechanism
