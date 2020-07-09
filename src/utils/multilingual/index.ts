@@ -44,4 +44,12 @@ export const getDeafultLangFromCookie = () => {
 
   return langFromCookies || 'ru-RU'
 }
+
+const langCookieExpiresInDays = !!process.env.REACT_APP_LANG_COOKIE_EXPIRES_IN_DAYS
+  ? Number(process.env.REACT_APP_LANG_COOKIE_EXPIRES_IN_DAYS)
+  : 1
+
+export const setLangToCookie = (lang: string) => {
+  Cookie.set('lang', lang, { expires: langCookieExpiresInDays })
+}
 translateFnInit(getDeafultLangFromCookie())

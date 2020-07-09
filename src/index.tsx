@@ -10,20 +10,15 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '@/mui/theme'
 import { MultilingualContext } from '@/common/context/mutilingual'
-import { translateFnInit, getDeafultLangFromCookie, SUPPOER_LOCALES } from '@/utils/multilingual'
+import { translateFnInit, getDeafultLangFromCookie, SUPPOER_LOCALES, setLangToCookie } from '@/utils/multilingual'
 import intl from 'react-intl-universal'
-import Cookie from 'js-cookie'
-
-const langCookieExpiresInDays = !!process.env.REACT_APP_LANG_COOKIE_EXPIRES_IN_DAYS
-  ? Number(process.env.REACT_APP_LANG_COOKIE_EXPIRES_IN_DAYS)
-  : 1
 
 const ReactApp = () => {
   const [lang, setLang] = useState(getDeafultLangFromCookie())
   const handleSetLang = useCallback((lang) => {
     setLang(lang)
     translateFnInit(lang)
-    Cookie.set('lang', lang, { expires: langCookieExpiresInDays })
+    setLangToCookie(lang)
   }, [])
   const t = useCallback((str: string, opts?: any) => intl.get(str, opts), [])
 
