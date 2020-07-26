@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useContext, useMemo } from 'react'
 // See also: https://material-ui.com/ru/guides/composition/#caveat-with-inlining
-import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarLink/RouterLink'
+import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarElement/RouterLink'
 import Collapse from '@material-ui/core/Collapse'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'

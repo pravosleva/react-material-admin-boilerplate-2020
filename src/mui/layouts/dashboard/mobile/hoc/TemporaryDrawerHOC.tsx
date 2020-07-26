@@ -20,10 +20,10 @@ import Divider from '@material-ui/core/Divider'
 
 import { useStyles } from './styles'
 import { routes, IRouteForMenu } from '@/mui/layouts/dashboard/routes-for-menu'
-import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarLink/RouterLink'
+import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarElement/RouterLink'
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'
 import { showAsyncToast } from '@/actions'
-import { RouterSublist } from '@/mui/custom-components/ToolbarLink/RouterSublist'
+import { RouterSublist } from '@/mui/custom-components/ToolbarElement/RouterSublist'
 import { MultilingualContext } from '@/common/context/mutilingual'
 
 type TAnchor = 'top' | 'left' | 'bottom' | 'right'

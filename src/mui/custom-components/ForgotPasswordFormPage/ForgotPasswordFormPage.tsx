@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 
-import { RouterLink } from '@/mui/custom-components/ToolbarLink/RouterLink'
+import { RouterLink } from '@/mui/custom-components/ToolbarElement/RouterLink'
 import { validate } from './validate'
 // import { asyncValidate } from './asyncValidate'
 
