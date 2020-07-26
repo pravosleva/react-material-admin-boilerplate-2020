@@ -54,7 +54,6 @@ _Build production to `./build`_
     - [x] fetch
     - [x] axios
   - [ ] **apiErrorHandler** Выясняем, какой ожидать формат ошибок
-- [x] Multilignual support with `react-intl-universal` and Context API
 - [ ] Login
   - [x] **/auth/login** page
   - [ ] Login mechanism
@@ -71,7 +70,43 @@ _Build production to `./build`_
 - [ ] Create user
   - [x] **/create-user** page
   - [ ] API
-- [ ] Menu levels?
+- [x] Multilignual support with `react-intl-universal` and Context API
+- [x] [Menu levels](#menu-levels)
+
+### menu-levels
+
+```js
+// @/mui/layouts/dashboard/routes-for-menu.tsx
+
+const routes = {
+  path: '/igatec', // Optional (will be as button if !path)
+  options: {
+    text: 'IGATEC',
+    noTranslate: true,
+    icon: <WorkIcon />,
+    access: ['free'],
+  },
+  sublist: [
+    {
+      path: '/igatec/links',
+      options: {
+        text: 'Links',
+        icon: <LinkIcon />,
+        access: ['free'],
+      },
+    },
+    {
+      path: '/igatec/git-report',
+      options: {
+        text: 'Git Report',
+        noTranslate: true,
+        icon: <GitHubIcon />,
+        access: ['free'],
+      },
+    },
+  ],
+},
+```
 
 ## Envs
 
