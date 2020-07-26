@@ -71,6 +71,7 @@ const TemporaryDrawerHOCConnected: React.FC = (props: IProps) => {
             return (
               <RouterSublist
                 className={classes.listItem}
+                subclassName={classes.sublistItem}
                 key={path || i}
                 path={path}
                 icon={icon}

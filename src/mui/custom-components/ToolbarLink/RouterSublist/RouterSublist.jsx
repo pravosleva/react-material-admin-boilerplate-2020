@@ -11,6 +11,10 @@ import ExpandMore from '@material-ui/icons/ExpandMore'
 import { MultilingualContext } from '@/common/context/mutilingual'
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'
 import { withRouter } from 'react-router-dom'
+// import clsx from 'clsx'
+// import { useStyles } from './styles'
+
+// TODO: Use TypeScript!
 
 // interface IProps {
 //   to: string
@@ -24,7 +28,7 @@ import { withRouter } from 'react-router-dom'
 // }
 
 function RouterSublistWithRouter(props) {
-  const { path, primary, icon, sublist, className, location, isMobile, history, isActive } = props
+  const { path, primary, icon, sublist, className, subclassName, location, isMobile, history, isActive } = props
   const [isOpened, setIsOpened] = useState(isActive)
   const handleClick = useCallback(() => {
     setIsOpened(!isOpened)
@@ -33,7 +37,8 @@ function RouterSublistWithRouter(props) {
   const { t } = useContext(MultilingualContext)
   const isCurrentPathCb = useCallback(isCurrentPath, [])
   const isDisabled = !path && isMobile
-  const Icon = useMemo(() => (isMobile ? null : isOpened ? <ExpandLess /> : <ExpandMore />), [isOpened])
+  const Icon = useMemo(() => (isMobile ? null : isOpened ? <ExpandLess /> : <ExpandMore />), [isOpened, isMobile])
+  // const classes = useStyles()
 
   return (
     <>
@@ -60,8 +65,7 @@ function RouterSublistWithRouter(props) {
                 to={path}
                 primary={displayText}
                 icon={icon}
-                // className={classes.nested}
-                className={className}
+                className={subclassName}
                 selected={isCurrentPathCb(location.pathname, `${path}`)}
               />
             )

@@ -1,4 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
+import grey from '@material-ui/core/colors/grey'
+// See also: https://material-ui.com/ru/customization/color/
 
 export const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,5 +33,29 @@ export const useStyles = makeStyles((theme) => ({
   },
   listItem: {
     paddingLeft: theme.spacing(3),
+  },
+  sublistItem: {
+    borderLeftStyle: 'solid',
+    borderLeftColor: grey[400],
+    [theme.breakpoints.up('xs')]: {
+      paddingLeft: theme.spacing(2),
+      borderLeftWidth: theme.spacing(1),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: theme.spacing(2),
+      borderLeftWidth: theme.spacing(1),
+    },
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: theme.spacing(2),
+      borderLeftWidth: theme.spacing(1),
+    },
+    [theme.breakpoints.up('lg')]: {
+      paddingLeft: theme.spacing(2),
+      borderLeftWidth: theme.spacing(1),
+    },
+    [theme.breakpoints.up('xl')]: {
+      paddingLeft: theme.spacing(2),
+      borderLeftWidth: theme.spacing(1),
+    },
   },
 }))
