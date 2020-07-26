@@ -7,3 +7,4 @@
 
 # Ignore git hooks
 scripts/*
+build/*
