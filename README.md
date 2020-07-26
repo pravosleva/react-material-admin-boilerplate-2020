@@ -76,7 +76,7 @@ _Build production to `./build`_
 ### menu-levels
 
 ```js
-// @/mui/layouts/dashboard/routes-for-menu.tsx
+// @/mui/layouts/dashboard/toolbar-menu.tsx
 
 const routes = {
   path: '/igatec', // Optional (will be as button if !path)

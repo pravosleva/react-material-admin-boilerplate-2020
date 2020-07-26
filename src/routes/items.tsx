@@ -12,7 +12,7 @@ export const routes = {
   mainRoutes: [
     // ATTENTION!
     // Main routes (Routes for dashboard layout) AS MENU ITEMS should be set to:
-    // layouts/dashboard/routes-for-menu
+    // @/mui/layouts/dashboard/toolbar-menu
     {
       path: '/',
       exact: true,

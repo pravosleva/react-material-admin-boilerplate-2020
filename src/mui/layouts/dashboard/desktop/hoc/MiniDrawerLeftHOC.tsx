@@ -22,7 +22,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { useStyles } from './styles'
 import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarElement/RouterLink'
 import { RouterSublist } from '@/mui/custom-components/ToolbarElement/RouterSublist'
-import { routes, IRouteForMenu } from '@/mui/layouts/dashboard/routes-for-menu'
+import { toolbarMenu, IToolbarMenuItem } from '@/mui/layouts/dashboard/toolbar-menu'
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'
 import { showAsyncToast } from '@/actions'
 import { MultilingualContext } from '@/common/context/mutilingual'
@@ -70,7 +70,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
   const MemoizedList = useMemo(
     () => (
       <List>
-        {routes.map(({ path, options, sublist }: IRouteForMenu, i) => {
+        {toolbarMenu.map(({ path, options, sublist }: IToolbarMenuItem, i) => {
           const { text, noTranslate, icon } = options
           const subpaths = !!sublist ? sublist.map((s) => s.path) : []
           const isActive = subpaths.some((p) => isCurrentPathCb(location.pathname, p))
@@ -106,7 +106,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
         })}
       </List>
     ),
-    [routes, isCurrentPathCb, location]
+    [toolbarMenu, isCurrentPathCb, location]
   )
 
   return (

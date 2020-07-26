@@ -19,7 +19,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Divider from '@material-ui/core/Divider'
 
 import { useStyles } from './styles'
-import { routes, IRouteForMenu } from '@/mui/layouts/dashboard/routes-for-menu'
+import { toolbarMenu, IToolbarMenuItem } from '@/mui/layouts/dashboard/toolbar-menu'
 import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarElement/RouterLink'
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'
 import { showAsyncToast } from '@/actions'
@@ -62,7 +62,7 @@ const TemporaryDrawerHOCConnected: React.FC = (props: IProps) => {
   const MemoizedList = useMemo(
     () => (
       <List>
-        {routes.map(({ path, options, sublist }: IRouteForMenu, i) => {
+        {toolbarMenu.map(({ path, options, sublist }: IToolbarMenuItem, i) => {
           const { text, noTranslate, icon } = options
           const subpaths = !!sublist ? sublist.map((s) => s.path) : []
           const isActive = subpaths.some((p) => isCurrentPathCb(location.pathname, p))
@@ -99,7 +99,7 @@ const TemporaryDrawerHOCConnected: React.FC = (props: IProps) => {
         })}
       </List>
     ),
-    [routes, isCurrentPathCb, location]
+    [toolbarMenu, isCurrentPathCb, location]
   )
 
   const list = (anchor: TAnchor) => (

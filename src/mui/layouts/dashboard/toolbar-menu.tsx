@@ -6,7 +6,7 @@ import WorkIcon from '@material-ui/icons/Work'
 import LinkIcon from '@material-ui/icons/Link'
 import GitHubIcon from '@material-ui/icons/GitHub'
 
-export interface IRouteForMenu {
+export interface IToolbarMenuItem {
   path?: string // Required if !sublist
   options: {
     text: string
@@ -14,10 +14,10 @@ export interface IRouteForMenu {
     icon: JSX.Element
     access?: string[]
   }
-  sublist?: IRouteForMenu[]
+  sublist?: IToolbarMenuItem[]
 }
 
-export const routes: IRouteForMenu[] = [
+export const toolbarMenu: IToolbarMenuItem[] = [
   {
     path: '/',
     options: { text: 'Home', icon: <HomeSharpIcon />, access: ['free'] },
