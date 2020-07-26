@@ -1,8 +1,10 @@
 import { Home } from '@/pages/home'
-import { CreateUser } from '@/pages/create-user'
+// import { CreateUser } from '@/pages/create-user'
 import { Login } from '@/pages/auth/login'
 import { ForgotPassword } from '@/pages/auth/forgot-password'
 import { ConfirmPassword } from '@/pages/auth/confirm-password'
+import { Igatec } from '@/pages/igatec'
+import { Report } from '@/pages/igatec/report'
 
 export const routes = {
   mainRoutes: [
@@ -15,10 +17,22 @@ export const routes = {
       component: Home,
       options: { access: ['free'] },
     },
+    // {
+    //   path: '/create-user',
+    //   exact: true,
+    //   component: CreateUser,
+    //   options: { access: ['free'] },
+    // },
     {
-      path: '/create-user',
+      path: '/igatec',
       exact: true,
-      component: CreateUser,
+      component: Igatec,
+      options: { access: ['free'] },
+    },
+    {
+      path: '/igatec/report',
+      exact: true,
+      component: Report,
       options: { access: ['free'] },
     },
   ],

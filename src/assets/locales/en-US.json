@@ -2,5 +2,7 @@
   "BRAND": "Brand",
   "CREATE_USER": "Create user",
   "HOME": "Home",
-  "LOGOUT": "Logout"
+  "LOGOUT": "Logout",
+  "REPORT": "Report",
+  "IN_PROGRESS": "In progress..."
 }

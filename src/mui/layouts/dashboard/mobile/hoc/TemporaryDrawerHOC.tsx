@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useContext } from 'react'
 import { useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import clsx from 'clsx'
@@ -20,9 +20,11 @@ import Divider from '@material-ui/core/Divider'
 
 import { useStyles } from './styles'
 import { routes } from '@/mui/layouts/dashboard/routes-for-menu'
-import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/RouterLink'
+import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarLink/RouterLink'
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'
 import { showAsyncToast } from '@/actions'
+import { RouterSublist } from '@/mui/custom-components/ToolbarLink/RouterSublist'
+import { MultilingualContext } from '@/common/context/mutilingual'
 
 type TAnchor = 'top' | 'left' | 'bottom' | 'right'
 
@@ -55,6 +57,7 @@ const TemporaryDrawerHOCConnected: React.FC = (props: IProps) => {
     setState({ ...state, [anchor]: open })
   }
   const isCurrentPathCb = useCallback(isCurrentPath, [])
+  const { t } = useContext(MultilingualContext)
 
   const list = (anchor: TAnchor) => (
     <div
@@ -66,17 +69,37 @@ const TemporaryDrawerHOCConnected: React.FC = (props: IProps) => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {routes.map(({ path, options }) => (
-          <RouterLinkAsToolbarListItem
-            className={classes.listItem}
-            key={path}
-            to={path}
-            icon={options.icon}
-            primary={options.text}
-            button
-            selected={isCurrentPathCb(props.location.pathname, `${path}`)}
-          />
-        ))}
+        {routes.map(({ path, options, sublist }, i) => {
+          const { text, noTranslate, icon } = options
+          const { location } = props
+
+          if (!!sublist) {
+            return (
+              <RouterSublist
+                className={classes.listItem}
+                key={path || i}
+                icon={icon}
+                primary={noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))}
+                sublist={sublist}
+                button
+                selected={isCurrentPathCb(location.pathname, `${path}`)}
+                isMobile
+              />
+            )
+          } else {
+            return (
+              <RouterLinkAsToolbarListItem
+                className={classes.listItem}
+                key={path}
+                to={path}
+                icon={icon}
+                primary={noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))}
+                button
+                selected={isCurrentPathCb(location.pathname, `${path}`)}
+              />
+            )
+          }
+        })}
       </List>
     </div>
   )

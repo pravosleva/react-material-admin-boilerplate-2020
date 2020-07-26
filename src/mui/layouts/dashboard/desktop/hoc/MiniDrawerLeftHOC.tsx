@@ -20,7 +20,8 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 
 import { useStyles } from './styles'
-import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/RouterLink'
+import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarLink/RouterLink'
+import { RouterSublist } from '@/mui/custom-components/ToolbarLink/RouterSublist'
 import { routes } from '@/mui/layouts/dashboard/routes-for-menu'
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'
 import { showAsyncToast } from '@/actions'
@@ -47,7 +48,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
 
   // Profile menu
   const [anchorProfileMenuEl, setAnchorProfileMenuEl] = useState(null)
-  const handleProfileMenuClick = (event) => {
+  const handleProfileMenuClick = (event: React.KeyboardEvent | React.MouseEvent) => {
     setAnchorProfileMenuEl(event.currentTarget)
   }
   const handleProfileMenuClose = () => {
@@ -132,17 +133,37 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
         </div>
         <Divider />
         <List>
-          {routes.map(({ path, options }) => (
-            <RouterLinkAsToolbarListItem
-              className={classes.listItem}
-              key={path}
-              to={path}
-              icon={options.icon}
-              primary={t(options.text.toUpperCase().replace(' ', '_'))}
-              button
-              selected={isCurrentPathCb(props.location.pathname, `${path}`)}
-            />
-          ))}
+          {routes.map(({ path, options, sublist }, i) => {
+            const { text, noTranslate, icon } = options
+            const { location } = props
+
+            if (!!sublist) {
+              return (
+                <RouterSublist
+                  className={classes.listItem}
+                  key={path || i}
+                  path={path}
+                  icon={icon}
+                  primary={noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))}
+                  sublist={sublist}
+                  button
+                  selected={isCurrentPathCb(location.pathname, `${path}`)}
+                />
+              )
+            } else {
+              return (
+                <RouterLinkAsToolbarListItem
+                  className={classes.listItem}
+                  key={path}
+                  to={path}
+                  icon={icon}
+                  primary={noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))}
+                  button
+                  selected={isCurrentPathCb(location.pathname, `${path}`)}
+                />
+              )
+            }
+          })}
         </List>
       </Drawer>
       <main className={classes.content}>

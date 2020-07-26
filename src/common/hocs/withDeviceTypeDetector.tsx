@@ -20,8 +20,8 @@ const getDeviceTypeByWidth = (width: number) => {
   return type
 }
 
-export const withMyDeviceTypeDetector = (WrappedComponent) => {
-  const Wrapper = (props) => {
+export const withMyDeviceTypeDetector = (WrappedComponent: React.FC) => {
+  const Wrapper = (props: any) => {
     const dispatch = useDispatch()
     const [monitorWidth, setMonitorWidth] = useState(window.innerWidth)
     const debouncedCurrentWidth = useDebounce(monitorWidth, 500)
