@@ -3,12 +3,12 @@ import { ProTip } from '@/mui/custom-components/ProTip'
 import { Container } from '@material-ui/core'
 import { MultilingualContext } from '@/common/context/mutilingual'
 
-export const Report = () => {
+export const Links = () => {
   const { t } = useContext(MultilingualContext)
 
   return (
     <Container>
-      <h1>{t('REPORT')}</h1>
+      <h1>{t('LINKS')}</h1>
       <p>{t('IN_PROGRESS')}</p>
       <p>
         <a

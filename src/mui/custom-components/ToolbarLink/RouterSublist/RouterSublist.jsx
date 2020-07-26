@@ -24,15 +24,16 @@ import { withRouter } from 'react-router-dom'
 // }
 
 function RouterSublistWithRouter(props) {
-  const { path, primary, icon, sublist, className, location, isMobile, history } = props
-  const [isOpened, setIsOpened] = useState(false)
+  const { path, primary, icon, sublist, className, location, isMobile, history, isActive } = props
+  const [isOpened, setIsOpened] = useState(isActive)
   const handleClick = useCallback(() => {
     setIsOpened(!isOpened)
     if (!!path) history.push(path)
   }, [isOpened, history])
   const { t } = useContext(MultilingualContext)
   const isCurrentPathCb = useCallback(isCurrentPath, [])
-  const Icon = useMemo(() => (isOpened ? <ExpandLess /> : <ExpandMore />), [isOpened])
+  const isDisabled = !path && isMobile
+  const Icon = useMemo(() => (isMobile ? null : isOpened ? <ExpandLess /> : <ExpandMore />), [isOpened])
 
   return (
     <>
@@ -41,7 +42,7 @@ function RouterSublistWithRouter(props) {
         onClick={handleClick}
         className={className}
         selected={isCurrentPathCb(location.pathname, `${path}`)}
-        disabled={isMobile}
+        disabled={isDisabled}
       >
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText primary={primary} />

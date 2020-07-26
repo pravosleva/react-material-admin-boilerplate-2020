@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useContext } from 'react'
+import React, { useCallback, useState, useContext, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import clsx from 'clsx'
@@ -19,7 +19,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Divider from '@material-ui/core/Divider'
 
 import { useStyles } from './styles'
-import { routes } from '@/mui/layouts/dashboard/routes-for-menu'
+import { routes, IRouteForMenu } from '@/mui/layouts/dashboard/routes-for-menu'
 import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarLink/RouterLink'
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'
 import { showAsyncToast } from '@/actions'
@@ -58,32 +58,28 @@ const TemporaryDrawerHOCConnected: React.FC = (props: IProps) => {
   }
   const isCurrentPathCb = useCallback(isCurrentPath, [])
   const { t } = useContext(MultilingualContext)
-
-  const list = (anchor: TAnchor) => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-      })}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
+  const { location } = props
+  const MemoizedList = useMemo(
+    () => (
       <List>
-        {routes.map(({ path, options, sublist }, i) => {
+        {routes.map(({ path, options, sublist }: IRouteForMenu, i) => {
           const { text, noTranslate, icon } = options
-          const { location } = props
+          const subpaths = !!sublist ? sublist.map((s) => s.path) : []
+          const isActive = subpaths.some((p) => isCurrentPathCb(location.pathname, p))
 
           if (!!sublist) {
             return (
               <RouterSublist
                 className={classes.listItem}
                 key={path || i}
+                path={path}
                 icon={icon}
                 primary={noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))}
                 sublist={sublist}
                 button
                 selected={isCurrentPathCb(location.pathname, `${path}`)}
                 isMobile
+                isActive={isActive}
               />
             )
           } else {
@@ -101,6 +97,20 @@ const TemporaryDrawerHOCConnected: React.FC = (props: IProps) => {
           }
         })}
       </List>
+    ),
+    [routes, isCurrentPathCb, location]
+  )
+
+  const list = (anchor: TAnchor) => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+      })}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      {MemoizedList}
     </div>
   )
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useContext } from 'react'
+import React, { useCallback, useState, useContext, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import clsx from 'clsx'
@@ -22,7 +22,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { useStyles } from './styles'
 import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarLink/RouterLink'
 import { RouterSublist } from '@/mui/custom-components/ToolbarLink/RouterSublist'
-import { routes } from '@/mui/layouts/dashboard/routes-for-menu'
+import { routes, IRouteForMenu } from '@/mui/layouts/dashboard/routes-for-menu'
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'
 import { showAsyncToast } from '@/actions'
 import { MultilingualContext } from '@/common/context/mutilingual'
@@ -66,6 +66,47 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
     handleProfileMenuClose()
   }
   const { t, currentLang } = useContext(MultilingualContext)
+  const { location } = props
+  const MemoizedList = useMemo(
+    () => (
+      <List>
+        {routes.map(({ path, options, sublist }: IRouteForMenu, i) => {
+          const { text, noTranslate, icon } = options
+          const subpaths = !!sublist ? sublist.map((s) => s.path) : []
+          const isActive = subpaths.some((p) => isCurrentPathCb(location.pathname, p))
+
+          if (!!sublist) {
+            return (
+              <RouterSublist
+                className={classes.listItem}
+                key={path || i}
+                path={path}
+                icon={icon}
+                primary={noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))}
+                sublist={sublist}
+                button
+                selected={isCurrentPathCb(location.pathname, `${path}`)}
+                isActive={isActive}
+              />
+            )
+          } else {
+            return (
+              <RouterLinkAsToolbarListItem
+                className={classes.listItem}
+                key={path}
+                to={path}
+                icon={icon}
+                primary={noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))}
+                button
+                selected={isCurrentPathCb(location.pathname, `${path}`)}
+              />
+            )
+          }
+        })}
+      </List>
+    ),
+    [routes, isCurrentPathCb, location]
+  )
 
   return (
     <div className={classes.root}>
@@ -132,39 +173,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          {routes.map(({ path, options, sublist }, i) => {
-            const { text, noTranslate, icon } = options
-            const { location } = props
-
-            if (!!sublist) {
-              return (
-                <RouterSublist
-                  className={classes.listItem}
-                  key={path || i}
-                  path={path}
-                  icon={icon}
-                  primary={noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))}
-                  sublist={sublist}
-                  button
-                  selected={isCurrentPathCb(location.pathname, `${path}`)}
-                />
-              )
-            } else {
-              return (
-                <RouterLinkAsToolbarListItem
-                  className={classes.listItem}
-                  key={path}
-                  to={path}
-                  icon={icon}
-                  primary={noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))}
-                  button
-                  selected={isCurrentPathCb(location.pathname, `${path}`)}
-                />
-              )
-            }
-          })}
-        </List>
+        {MemoizedList}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />

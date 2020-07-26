@@ -3,9 +3,10 @@ import React from 'react'
 import HomeSharpIcon from '@material-ui/icons/HomeSharp'
 // import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import WorkIcon from '@material-ui/icons/Work'
-import ReportIcon from '@material-ui/icons/Report'
+import LinkIcon from '@material-ui/icons/Link'
+import GitHubIcon from '@material-ui/icons/GitHub'
 
-interface IRoute {
+export interface IRouteForMenu {
   path?: string // Required if !sublist
   options: {
     text: string
@@ -13,10 +14,10 @@ interface IRoute {
     icon: JSX.Element
     access?: string[]
   }
-  sublist?: IRoute[]
+  sublist?: IRouteForMenu[]
 }
 
-export const routes: IRoute[] = [
+export const routes: IRouteForMenu[] = [
   {
     path: '/',
     options: { text: 'Home', icon: <HomeSharpIcon />, access: ['free'] },
@@ -30,8 +31,12 @@ export const routes: IRoute[] = [
     options: { text: 'IGATEC', noTranslate: true, icon: <WorkIcon />, access: ['free'] },
     sublist: [
       {
-        path: '/igatec/report',
-        options: { text: 'Report', icon: <ReportIcon />, access: ['free'] },
+        path: '/igatec/links',
+        options: { text: 'Links', icon: <LinkIcon />, access: ['free'] },
+      },
+      {
+        path: '/igatec/git-report',
+        options: { text: 'Git Report', noTranslate: true, icon: <GitHubIcon />, access: ['free'] },
       },
     ],
   },

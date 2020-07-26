@@ -1,10 +1,12 @@
 import { Home } from '@/pages/home'
+// Material icons: https://material-ui.com/ru/components/material-icons/
 // import { CreateUser } from '@/pages/create-user'
 import { Login } from '@/pages/auth/login'
 import { ForgotPassword } from '@/pages/auth/forgot-password'
 import { ConfirmPassword } from '@/pages/auth/confirm-password'
 import { Igatec } from '@/pages/igatec'
-import { Report } from '@/pages/igatec/report'
+import { Links } from '@/pages/igatec/links'
+import { GitReport } from '@/pages/igatec/git-report'
 
 export const routes = {
   mainRoutes: [
@@ -30,9 +32,15 @@ export const routes = {
       options: { access: ['free'] },
     },
     {
-      path: '/igatec/report',
+      path: '/igatec/links',
       exact: true,
-      component: Report,
+      component: Links,
+      options: { access: ['free'] },
+    },
+    {
+      path: '/igatec/git-report',
+      exact: true,
+      component: GitReport,
       options: { access: ['free'] },
     },
   ],
