@@ -71,7 +71,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
     () => (
       <List>
         {toolbarMenu.map(({ path, options, sublist }: IToolbarMenuItem, i) => {
-          const { text, noTranslate, icon } = options
+          const { text, noTranslate, icon, title } = options
           const subpaths = !!sublist ? sublist.map((s) => s.path) : []
           const isActive = subpaths.some((p) => isCurrentPathCb(location.pathname, p))
 
@@ -88,6 +88,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
                 button
                 selected={isCurrentPathCb(location.pathname, `${path}`)}
                 isActive={isActive}
+                title={title || null}
               />
             )
           } else {
@@ -100,6 +101,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
                 primary={noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))}
                 button
                 selected={isCurrentPathCb(location.pathname, `${path}`)}
+                title={title || null}
               />
             )
           }
@@ -174,7 +176,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
           </IconButton>
         </div>
         <Divider />
-        {MemoizedList}
+        <List>{MemoizedList}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />

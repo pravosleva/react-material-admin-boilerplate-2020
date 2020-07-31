@@ -35,14 +35,14 @@ export function MUIRouterLinkAsToolbarListItem(props: IProps) {
 */
 
 export function RouterLinkAsToolbarListItem(props) {
-  const { to, primary, icon } = props
+  const { to, primary, icon, title } = props
   const CustomLink = React.useMemo(
     () => React.forwardRef((linkProps, ref) => <Link ref={ref} to={to} {...linkProps} />),
     [to]
   )
 
   return (
-    <ListItem {...props} component={CustomLink}>
+    <ListItem {...props} component={CustomLink} title={title || null}>
       <ListItemIcon>{icon}</ListItemIcon>
       <ListItemText primary={primary} />
     </ListItem>

@@ -6,8 +6,10 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import ExpandLess from '@material-ui/icons/ExpandLess'
-import ExpandMore from '@material-ui/icons/ExpandMore'
+// import ExpandLess from '@material-ui/icons/ExpandLess'
+// import ExpandMore from '@material-ui/icons/ExpandMore'
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import { MultilingualContext } from '@/common/context/mutilingual'
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'
 import { withRouter } from 'react-router-dom'
@@ -28,7 +30,7 @@ import { withRouter } from 'react-router-dom'
 // }
 
 function RouterSublistWithRouter(props) {
-  const { path, primary, icon, sublist, className, subclassName, location, isMobile, history, isActive } = props
+  const { path, primary, icon, sublist, className, subclassName, location, isMobile, history, isActive, title } = props
   const [isOpened, setIsOpened] = useState(isActive)
   const handleClick = useCallback(() => {
     setIsOpened(!isOpened)
@@ -37,7 +39,10 @@ function RouterSublistWithRouter(props) {
   const { t } = useContext(MultilingualContext)
   const isCurrentPathCb = useCallback(isCurrentPath, [])
   const isDisabled = !path && isMobile
-  const Icon = useMemo(() => (isMobile ? null : isOpened ? <ExpandLess /> : <ExpandMore />), [isOpened, isMobile])
+  const Icon = useMemo(() => (isMobile ? null : isOpened ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />), [
+    isOpened,
+    isMobile,
+  ])
   // const classes = useStyles()
 
   return (
@@ -48,6 +53,7 @@ function RouterSublistWithRouter(props) {
         className={className}
         selected={isCurrentPathCb(location.pathname, `${path}`)}
         disabled={isDisabled}
+        title={title || null}
       >
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText primary={primary} />
@@ -56,7 +62,7 @@ function RouterSublistWithRouter(props) {
       <Collapse in={isOpened || isMobile} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {sublist.map(({ path, options }) => {
-            const { text, noTranslate, icon } = options
+            const { text, noTranslate, icon, title } = options
             const displayText = noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))
 
             return (
@@ -65,8 +71,10 @@ function RouterSublistWithRouter(props) {
                 to={path}
                 primary={displayText}
                 icon={icon}
+                // className={classes.nested}
                 className={subclassName}
                 selected={isCurrentPathCb(location.pathname, `${path}`)}
+                title={title || null}
               />
             )
           })}

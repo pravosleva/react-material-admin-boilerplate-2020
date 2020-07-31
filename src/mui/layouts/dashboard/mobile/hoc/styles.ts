@@ -36,7 +36,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   sublistItem: {
     borderLeftStyle: 'solid',
-    borderLeftColor: grey[400],
+    borderLeftColor: grey[300],
+    // backgroundColor: grey[100],
+    color: '#000',
     [theme.breakpoints.up('xs')]: {
       paddingLeft: theme.spacing(2),
       borderLeftWidth: theme.spacing(1),

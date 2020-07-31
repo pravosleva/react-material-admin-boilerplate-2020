@@ -1,4 +1,4 @@
-import { HttpError } from '@/utils/errors/http/HttpError'
+import { HttpError } from '@/utils/errors/http'
 
 export const httpErrorHandler = (res: any): any | HttpError => {
   if (res.ok && res.status === 200) {

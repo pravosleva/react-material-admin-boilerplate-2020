@@ -1,4 +1,4 @@
-import { HttpError } from '@/utils/errors/http/HttpError'
+import { HttpError } from '@/utils/errors/http'
 import { AxiosResponse } from 'axios'
 
 export const httpErrorHandler = (obj: AxiosResponse): any | HttpError => {
