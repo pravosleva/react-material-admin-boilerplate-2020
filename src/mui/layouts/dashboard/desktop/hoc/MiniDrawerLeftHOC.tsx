@@ -176,7 +176,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
           </IconButton>
         </div>
         <Divider />
-        <List>{MemoizedList}</List>
+        {MemoizedList}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />

@@ -1,5 +1,9 @@
 # react-material-admin-boilerplate-2020
 
+## Preview
+
+![Demo image](./demo/demo-2020-08-01-10-49.gif)
+
 ## Development
 
 > ⚡ Правила наименования веток!  
@@ -11,7 +15,7 @@ _Local dev mode_
 
 ### `yarn build:local`
 
-_Build local prod_
+_Build to `./build` and move to `../public`_
 
 ### `yarn analyze`
 
@@ -75,11 +79,23 @@ _Build production to `./build`_
 
 ### menu-levels
 
-```js
+```tsx
 // @/mui/layouts/dashboard/toolbar-menu.tsx
 
-const routes = {
-  path: '/igatec', // Optional (will be as button if !path)
+export interface IToolbarMenuItem {
+  path?: string // Required if !sublist, will be as button (not link) if !path
+  options: {
+    text: string
+    noTranslate?: boolean
+    icon: JSX.Element
+    access?: string[]
+    title?: string
+  }
+  sublist?: IToolbarMenuItem[]
+}
+
+const toolbarMenu: IToolbarMenuItem[] = {
+  path: '/igatec',
   options: {
     text: 'IGATEC',
     noTranslate: true,
@@ -105,7 +121,7 @@ const routes = {
       },
     },
   ],
-},
+}
 ```
 
 ## Envs
@@ -125,4 +141,4 @@ Files on the left have more priority than files on the right:
 - React / Redux
 - Redux-saga
 - SCSS
-- material-ui
+- Material-UI
