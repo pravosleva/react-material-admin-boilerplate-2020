@@ -10,11 +10,16 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '@/mui/theme'
 import { MultilingualContext } from '@/common/context/mutilingual'
-import { translateFnInit, getDeafultLangFromCookie, SUPPOER_LOCALES, setLangToCookie } from '@/utils/multilingual'
+import {
+  translateFnInit,
+  getDeafultLangFromCookieOrNavigator,
+  SUPPOER_LOCALES as suppoerLocales,
+  setLangToCookie,
+} from '@/utils/multilingual'
 import intl from 'react-intl-universal'
 
 const ReactApp = () => {
-  const [lang, setLang] = useState(getDeafultLangFromCookie())
+  const [lang, setLang] = useState(getDeafultLangFromCookieOrNavigator())
   const handleSetLang = useCallback((lang) => {
     setLang(lang)
     translateFnInit(lang)
@@ -29,7 +34,12 @@ const ReactApp = () => {
       <BrowserRouter>
         <Provider store={store}>
           <MultilingualContext.Provider
-            value={{ currentLang: lang, setCurrentLang: handleSetLang, t, suppoerLocales: SUPPOER_LOCALES }}
+            value={{
+              currentLang: lang,
+              setCurrentLang: handleSetLang,
+              t,
+              suppoerLocales,
+            }}
           >
             <Toaster />
             <App />

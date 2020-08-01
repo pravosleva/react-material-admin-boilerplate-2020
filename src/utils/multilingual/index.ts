@@ -37,12 +37,20 @@ export const translateFnInit = (lang?: string) => {
     })
   return (str: string): string => intl.get(str)
 }
-export const getDeafultLangFromCookie = () => {
-  let langFromCookies: string
+export const getDeafultLangFromCookieOrNavigator = () => {
+  let detectedLang: string
 
-  if (typeof window) langFromCookies = Cookie.get('lang')
+  if (typeof window) {
+    detectedLang = Cookie.get('lang')
+    if (!detectedLang && !!navigator) {
+      const fromNavigator = navigator.language // || navigator.userLanguage
+      const hasInSuppoerLocales = SUPPOER_LOCALES.some((l) => l.value === fromNavigator)
 
-  return langFromCookies || 'ru-RU'
+      if (hasInSuppoerLocales) detectedLang = fromNavigator
+    }
+  }
+
+  return detectedLang || 'ru-RU'
 }
 
 const langCookieExpiresInDays = !!process.env.REACT_APP_LANG_COOKIE_EXPIRES_IN_DAYS
@@ -52,4 +60,4 @@ const langCookieExpiresInDays = !!process.env.REACT_APP_LANG_COOKIE_EXPIRES_IN_D
 export const setLangToCookie = (lang: string) => {
   Cookie.set('lang', lang, { expires: langCookieExpiresInDays })
 }
-translateFnInit(getDeafultLangFromCookie())
+translateFnInit(getDeafultLangFromCookieOrNavigator())
