@@ -11,14 +11,13 @@ import { MultilingualContext } from '@/common/context/mutilingual'
 //   },
 // }))
 
-export const Igatec = () => {
+export const Training = () => {
   const { t } = useContext(MultilingualContext)
   // const classes = useStyles()
 
   return (
     <Container>
-      <h1>IGATEC</h1>
-      <p>{t('IN_PROGRESS')}</p>
+      <h1>{t('TRAINING')}</h1>
       <ProTip />
     </Container>
   )

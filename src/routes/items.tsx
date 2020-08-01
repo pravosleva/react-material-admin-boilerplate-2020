@@ -4,9 +4,9 @@ import { Home } from '@/pages/home'
 import { Login } from '@/pages/auth/login'
 import { ForgotPassword } from '@/pages/auth/forgot-password'
 import { ConfirmPassword } from '@/pages/auth/confirm-password'
-import { Igatec } from '@/pages/igatec'
-import { Links } from '@/pages/igatec/links'
-import { GitReport } from '@/pages/igatec/git-report'
+import { Training } from '@/pages/training'
+import { Links } from '@/pages/training/use-reducer'
+// import { GitReport } from '@/pages/training/git-report'
 
 export const routes = {
   mainRoutes: [
@@ -26,23 +26,23 @@ export const routes = {
     //   options: { access: ['free'] },
     // },
     {
-      path: '/igatec',
+      path: '/training',
       exact: true,
-      component: Igatec,
+      component: Training,
       options: { access: ['free'] },
     },
     {
-      path: '/igatec/links',
+      path: '/training/use-reducer',
       exact: true,
       component: Links,
       options: { access: ['free'] },
     },
-    {
-      path: '/igatec/git-report',
-      exact: true,
-      component: GitReport,
-      options: { access: ['free'] },
-    },
+    // {
+    //   path: '/training/git-report',
+    //   exact: true,
+    //   component: GitReport,
+    //   options: { access: ['free'] },
+    // },
   ],
   authRoutes: [
     {

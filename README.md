@@ -86,8 +86,8 @@ export interface IToolbarMenuItem {
   path?: string // Required if !sublist, will be as button (not link) if !path
   options: {
     text: string
-    noTranslate?: boolean
     icon: JSX.Element
+    noTranslate?: boolean
     access?: string[]
     title?: string
   }
@@ -95,28 +95,20 @@ export interface IToolbarMenuItem {
 }
 
 const toolbarMenu: IToolbarMenuItem[] = {
-  path: '/igatec',
+  path: '/training',
   options: {
-    text: 'IGATEC',
-    noTranslate: true,
+    text: 'TRAINING',
     icon: <WorkIcon />,
     access: ['free'],
   },
   sublist: [
     {
-      path: '/igatec/links',
+      path: '/training/use-reducer',
       options: {
-        text: 'Links',
-        icon: <LinkIcon />,
-        access: ['free'],
-      },
-    },
-    {
-      path: '/igatec/git-report',
-      options: {
-        text: 'Git Report',
+        text: 'useReducer',
+        title: 'React hooks | useReducer',
         noTranslate: true,
-        icon: <GitHubIcon />,
+        icon: <LinkIcon />,
         access: ['free'],
       },
     },

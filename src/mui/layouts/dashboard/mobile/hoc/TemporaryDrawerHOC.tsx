@@ -57,7 +57,7 @@ const TemporaryDrawerHOCConnected: React.FC = (props: IProps) => {
     setState({ ...state, [anchor]: open })
   }
   const isCurrentPathCb = useCallback(isCurrentPath, [])
-  const { t } = useContext(MultilingualContext)
+  const { t, currentLang } = useContext(MultilingualContext)
   const { location } = props
   const MemoizedList = useMemo(
     () => (
@@ -99,7 +99,7 @@ const TemporaryDrawerHOCConnected: React.FC = (props: IProps) => {
         })}
       </List>
     ),
-    [toolbarMenu, isCurrentPathCb, location]
+    [toolbarMenu, isCurrentPathCb, location, currentLang]
   )
 
   const list = (anchor: TAnchor) => (

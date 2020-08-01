@@ -29,34 +29,34 @@ export const toolbarMenu: IToolbarMenuItem[] = [
   //   options: { text: 'Create user', icon: <PersonAddIcon />, access: ['free'] },
   // },
   {
-    path: '/igatec', // Optional (will be as button if !path)
+    path: '/training', // Optional (will be as button if !path)
     options: {
-      text: 'Submenu 1',
+      text: 'TRAINING',
       title: 'Submenu with main route',
-      noTranslate: true,
       icon: <ListAltIcon />,
       access: ['free'],
     },
     sublist: [
       {
-        path: '/igatec/links',
+        path: '/training/use-reducer',
         options: {
-          text: 'Links',
-          title: 'Submenu item',
+          text: 'useReducer',
+          title: 'React hooks | useReducer',
+          noTranslate: true,
           icon: <LinkIcon />,
           access: ['free'],
         },
       },
-      {
-        path: '/igatec/git-report',
-        options: {
-          text: 'Git Report',
-          title: 'Submenu item',
-          noTranslate: true,
-          icon: <GitHubIcon />,
-          access: ['free'],
-        },
-      },
+      // {
+      //   path: '/training/git-report',
+      //   options: {
+      //     text: 'Git Report',
+      //     title: 'Submenu item',
+      //     noTranslate: true,
+      //     icon: <GitHubIcon />,
+      //     access: ['free'],
+      //   },
+      // },
     ],
   },
   {

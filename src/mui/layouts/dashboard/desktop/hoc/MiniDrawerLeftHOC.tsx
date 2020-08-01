@@ -108,7 +108,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
         })}
       </List>
     ),
-    [toolbarMenu, isCurrentPathCb, location]
+    [toolbarMenu, isCurrentPathCb, location, currentLang]
   )
 
   return (
