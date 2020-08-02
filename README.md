@@ -2,7 +2,7 @@
 
 ## Preview
 
-![Demo image](./demo/demo-2020-08-01-10-49.gif)
+![Demo image](./demo/demo-2020-08-02-05-25.gif)
 
 ## Development
 
