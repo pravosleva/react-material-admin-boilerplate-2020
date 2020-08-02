@@ -12,7 +12,7 @@ export interface IRouterLink {
 
 export function RouterLink(props: IRouterLink) {
   const { to, label, arrowLeft, arrowRight } = props
-  const CustomLink = React.forwardRef((linkProps, ref) => <Link to={to} {...linkProps} />)
+  const CustomLink = React.forwardRef((linkProps, _ref) => <Link to={to} {...linkProps} />)
 
   return (
     <MUILink href={to} variant="body2" component={CustomLink}>

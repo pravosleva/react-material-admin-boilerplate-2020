@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import grey from '@material-ui/core/colors/grey'
 // See also: https://material-ui.com/ru/customization/color/
 
-const drawerWidth = 240
+const drawerWidth = 250
 export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',

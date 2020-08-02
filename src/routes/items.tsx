@@ -1,12 +1,10 @@
 import { Home } from '@/pages/home'
 // Material icons: https://material-ui.com/ru/components/material-icons/
-// import { CreateUser } from '@/pages/create-user'
 import { Login } from '@/pages/auth/login'
 import { ForgotPassword } from '@/pages/auth/forgot-password'
 import { ConfirmPassword } from '@/pages/auth/confirm-password'
 import { Training } from '@/pages/training'
-import { Links } from '@/pages/training/use-reducer'
-// import { GitReport } from '@/pages/training/git-report'
+import { UseReducer } from '@/pages/training/use-reducer'
 
 export const routes = {
   mainRoutes: [
@@ -34,15 +32,9 @@ export const routes = {
     {
       path: '/training/use-reducer',
       exact: true,
-      component: Links,
+      component: UseReducer,
       options: { access: ['free'] },
     },
-    // {
-    //   path: '/training/git-report',
-    //   exact: true,
-    //   component: GitReport,
-    //   options: { access: ['free'] },
-    // },
   ],
   authRoutes: [
     {

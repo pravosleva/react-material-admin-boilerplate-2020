@@ -1,10 +1,8 @@
 import React from 'react'
 // Material icons: https://material-ui.com/ru/components/material-icons/
 import HomeSharpIcon from '@material-ui/icons/HomeSharp'
-// import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import ListAltIcon from '@material-ui/icons/ListAlt'
-import LinkIcon from '@material-ui/icons/Link'
-import GitHubIcon from '@material-ui/icons/GitHub'
+import BookmarkIcon from '@material-ui/icons/Bookmark'
 import BlockIcon from '@material-ui/icons/Block'
 
 export interface IToolbarMenuItem {
@@ -22,7 +20,11 @@ export interface IToolbarMenuItem {
 export const toolbarMenu: IToolbarMenuItem[] = [
   {
     path: '/',
-    options: { text: 'Home', icon: <HomeSharpIcon />, access: ['free'] },
+    options: {
+      text: 'Home',
+      icon: <HomeSharpIcon />,
+      access: ['free'],
+    },
   },
   // {
   //   path: '/create-user',
@@ -43,25 +45,15 @@ export const toolbarMenu: IToolbarMenuItem[] = [
           text: 'useReducer',
           title: 'React hooks | useReducer',
           noTranslate: true,
-          icon: <LinkIcon />,
+          icon: <BookmarkIcon />,
           access: ['free'],
         },
       },
-      // {
-      //   path: '/training/git-report',
-      //   options: {
-      //     text: 'Git Report',
-      //     title: 'Submenu item',
-      //     noTranslate: true,
-      //     icon: <GitHubIcon />,
-      //     access: ['free'],
-      //   },
-      // },
     ],
   },
   {
     options: {
-      text: 'Submenu 2',
+      text: 'Submenu as btn',
       title: 'Submenu without main route',
       noTranslate: true,
       icon: <ListAltIcon />,
