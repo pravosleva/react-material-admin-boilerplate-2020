@@ -36,7 +36,7 @@ export interface ReviewsPayloadModel {
 export const resetReviewItems = () => {
   return {
     type: SET_REVIEW_ITEMS,
-    payload: [],
+    payload: [] as any,
   }
 }
 

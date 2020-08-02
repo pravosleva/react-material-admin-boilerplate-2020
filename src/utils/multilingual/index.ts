@@ -4,7 +4,13 @@ import enUS from '@assets/locales/en-US.json'
 import ruRU from '@assets/locales/ru-RU.json'
 // Others...
 
-export const SUPPOER_LOCALES = [
+interface ILang {
+  label: string
+  name: string
+  value: string
+}
+
+export const SUPPOER_LOCALES: ILang[] = [
   {
     label: 'RU',
     name: 'Русский',
@@ -38,7 +44,7 @@ export const translateFnInit = (lang?: string) => {
   return (str: string): string => intl.get(str)
 }
 export const getDeafultLangFromCookieOrNavigator = () => {
-  let detectedLang: string
+  let detectedLang: string | undefined
 
   if (typeof window) {
     detectedLang = Cookie.get('lang')
