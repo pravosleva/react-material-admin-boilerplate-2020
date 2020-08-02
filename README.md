@@ -76,6 +76,11 @@ _Build production to `./build`_
   - [ ] API
 - [x] Multilignual support with `react-intl-universal` and Context API
 - [x] [Menu levels](#menu-levels)
+- [ ] Training
+  - [x] `useContext`
+  - [x] `useReducer`
+  - [x] `useRef` [like this](https://www.youtube.com/watch?v=t2ypzz6gJm0)
+  - [ ] `useEffect` features [like this](https://www.youtube.com/watch?v=j1ZRyw7OtZs&list=RDCMUC-8QAzbLcRglXeN_MY9blyw&index=1)
 
 ### menu-levels
 

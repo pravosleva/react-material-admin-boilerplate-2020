@@ -49,6 +49,16 @@ export const toolbarMenu: IToolbarMenuItem[] = [
           access: ['free'],
         },
       },
+      {
+        path: '/training/use-ref',
+        options: {
+          text: 'useRef',
+          title: 'React hooks | useRef',
+          noTranslate: true,
+          icon: <BookmarkIcon />,
+          access: ['free'],
+        },
+      },
     ],
   },
   {

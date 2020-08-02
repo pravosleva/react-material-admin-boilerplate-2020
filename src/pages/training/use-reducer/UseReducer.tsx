@@ -3,10 +3,9 @@ import { ProTip } from '@/mui/custom-components/ProTip'
 import { Container } from '@material-ui/core'
 import { MultilingualContext } from '@/common/context/mutilingual'
 import Button from '@material-ui/core/Button'
-import { makeStyles } from '@material-ui/core/styles'
+import { useStyles } from './useStyles'
 import ReactJson from 'react-json-view'
 import Grid from '@material-ui/core/Grid'
-// import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import PlusOneIcon from '@material-ui/icons/PlusOne'
 import ExposureNeg1Icon from '@material-ui/icons/ExposureNeg1'
@@ -14,48 +13,6 @@ import TextField from '@material-ui/core/TextField'
 import { Link } from 'react-router-dom'
 import YouTube from 'react-youtube'
 import clsx from 'clsx'
-import { useSelector } from 'react-redux'
-import { IRootState } from '@/store/IRootState'
-
-const useStyles = makeStyles((theme) => ({
-  title: {
-    marginBottom: theme.spacing(4),
-  },
-  paper: {
-    padding: theme.spacing(2),
-  },
-  buttonBox: {
-    marginTop: theme.spacing(1),
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gridColumnGap: theme.spacing(1),
-    gridRowGap: theme.spacing(1),
-  },
-  input: {
-    // margin: theme.spacing(1),
-    width: '100%',
-  },
-  noTextDecoration: {
-    textDecoration: 'none',
-    color: theme.palette.primary.main,
-  },
-  reactYoutubeContainer: {
-    // display: 'flex',
-    // justifyContent: 'center',
-    position: 'relative',
-    paddingBottom: '56.25%' /* 16:9 */,
-    paddingTop: '25px',
-    height: '0',
-    overflow: 'hidden',
-  },
-  reactYoutube: {
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    width: '100%',
-    height: '100%',
-  },
-}))
 
 interface IState {
   value: number
@@ -96,22 +53,12 @@ export const UseReducer = () => {
   }, [dispatch])
   const classes = useStyles()
   const isErrored = useMemo(() => count.name.length > 4, [count.name])
-  const handleChangeName = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    dispatch({ type: 'CHANGE_NAME', name: e.target.value })
-  }
-  // const isDeviceTypeDetected = useSelector((state: IRootState) => state.myDevice.isDetected)
-  const deviceType = useSelector((state: IRootState) => state.myDevice.type)
-  const getSizesByDeviseType = (type: string) => {
-    switch (type) {
-      case 'mobile':
-        return { width: '100%', height: 'auto' }
-      default:
-        // return { width: '640', height: '390' }
-        return { width: '100%', height: 'auto' }
-    }
-  }
-
-  const reactYoutubeOpts = getSizesByDeviseType(deviceType)
+  const handleChangeName = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+      dispatch({ type: 'CHANGE_NAME', name: e.target.value })
+    },
+    [dispatch]
+  )
 
   return (
     <Container>
@@ -185,7 +132,7 @@ export const UseReducer = () => {
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
           <Paper className={clsx(classes.paper, classes.reactYoutubeContainer)}>
-            <YouTube videoId="wcRawY6aJaw" opts={reactYoutubeOpts} className={classes.reactYoutube} />
+            <YouTube videoId="wcRawY6aJaw" className={classes.reactYoutube} />
           </Paper>
         </Grid>
       </Grid>
