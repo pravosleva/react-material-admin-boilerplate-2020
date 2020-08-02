@@ -12,6 +12,10 @@ import PlusOneIcon from '@material-ui/icons/PlusOne'
 import ExposureNeg1Icon from '@material-ui/icons/ExposureNeg1'
 import TextField from '@material-ui/core/TextField'
 import { Link } from 'react-router-dom'
+import YouTube from 'react-youtube'
+import clsx from 'clsx'
+import { useSelector } from 'react-redux'
+import { IRootState } from '@/store/IRootState'
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -34,6 +38,22 @@ const useStyles = makeStyles((theme) => ({
   noTextDecoration: {
     textDecoration: 'none',
     color: theme.palette.primary.main,
+  },
+  reactYoutubeContainer: {
+    // display: 'flex',
+    // justifyContent: 'center',
+    position: 'relative',
+    paddingBottom: '56.25%' /* 16:9 */,
+    paddingTop: '25px',
+    height: '0',
+    overflow: 'hidden',
+  },
+  reactYoutube: {
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100%',
   },
 }))
 
@@ -79,6 +99,19 @@ export const UseReducer = () => {
   const handleChangeName = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     dispatch({ type: 'CHANGE_NAME', name: e.target.value })
   }
+  // const isDeviceTypeDetected = useSelector((state: IRootState) => state.myDevice.isDetected)
+  const deviceType = useSelector((state: IRootState) => state.myDevice.type)
+  const getSizesByDeviseType = (type: string) => {
+    switch (type) {
+      case 'mobile':
+        return { width: '100%', height: 'auto' }
+      default:
+        // return { width: '640', height: '390' }
+        return { width: '100%', height: 'auto' }
+    }
+  }
+
+  const reactYoutubeOpts = getSizesByDeviseType(deviceType)
 
   return (
     <Container>
@@ -148,6 +181,11 @@ export const UseReducer = () => {
         <Grid item xs={12} sm={6} md={8} lg={8} xl={10}>
           <Paper className={classes.paper}>
             <ReactJson src={count} />
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+          <Paper className={clsx(classes.paper, classes.reactYoutubeContainer)}>
+            <YouTube videoId="wcRawY6aJaw" opts={reactYoutubeOpts} className={classes.reactYoutube} />
           </Paper>
         </Grid>
       </Grid>
