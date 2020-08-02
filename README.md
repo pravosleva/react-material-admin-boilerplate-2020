@@ -75,6 +75,8 @@ _Build production to `./build`_
   - [x] **/create-user** page
   - [ ] API
 - [x] Multilignual support with `react-intl-universal` & Context API
+  - [x] From cookies
+  - [x] From navigator (if supported)
 - [x] [Menu levels](#menu-levels)
 - [ ] Training
   - [x] `useContext`

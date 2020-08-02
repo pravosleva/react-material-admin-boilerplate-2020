@@ -20,7 +20,7 @@ interface IState {
 }
 interface IAction {
   type: 'INC' | 'DEC' | 'CHANGE_NAME' | 'RESET'
-  name?: string
+  payload?: string
 }
 
 const initialState = { value: 0, name: '' }
@@ -33,7 +33,7 @@ function reducer(state: IState, action: IAction): IState {
     case 'RESET':
       return initialState
     case 'CHANGE_NAME':
-      return { ...state, name: action.name }
+      return { ...state, name: action.payload }
     default:
       return state
   }
@@ -55,7 +55,7 @@ export const UseReducer = () => {
   const isErrored = useMemo(() => count.name.length > 4, [count.name])
   const handleChangeName = useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-      dispatch({ type: 'CHANGE_NAME', name: e.target.value })
+      dispatch({ type: 'CHANGE_NAME', payload: e.target.value })
     },
     [dispatch]
   )
@@ -87,8 +87,6 @@ export const UseReducer = () => {
             />
             <div className={classes.buttonBox}>
               <Button
-                // type="submit"
-                // fullWidth
                 variant="contained"
                 fullWidth
                 color="primary"
@@ -99,8 +97,6 @@ export const UseReducer = () => {
                 <PlusOneIcon />
               </Button>
               <Button
-                // type="submit"
-                // fullWidth
                 variant="contained"
                 fullWidth
                 color="primary"
@@ -110,16 +106,7 @@ export const UseReducer = () => {
               >
                 <ExposureNeg1Icon />
               </Button>
-              <Button
-                // type="submit"
-                // fullWidth
-                variant="contained"
-                fullWidth
-                color="primary"
-                // disabled={isDisabled}
-                onClick={handleReset}
-                title="RESET"
-              >
+              <Button variant="contained" fullWidth color="primary" onClick={handleReset} title="RESET">
                 RESET
               </Button>
             </div>
