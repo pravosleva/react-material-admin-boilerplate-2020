@@ -15,7 +15,7 @@ _Local dev mode_
 
 ### `yarn build:local`
 
-_Build to `./build` and move to `../public`_
+_Build to `./build` and copy to `../public`_
 
 ### `yarn analyze`
 
@@ -51,7 +51,7 @@ _Build production to `./build`_
     - [x] mobile
   - [x] Auth layout
 - [x] Test api Docker container
-- [ ] Swagger?
+- [ ] _Where is the Swagger?_
 - [ ] Error handlers
   - [x] **networkErrorHandler**
   - [x] **httpErrorHandler**
@@ -74,7 +74,7 @@ _Build production to `./build`_
 - [ ] Create user
   - [x] **/create-user** page
   - [ ] API
-- [x] Multilignual support with `react-intl-universal` and Context API
+- [x] Multilignual support with `react-intl-universal` & Context API
 - [x] [Menu levels](#menu-levels)
 - [ ] Training
   - [x] `useContext`
@@ -99,26 +99,38 @@ export interface IToolbarMenuItem {
   sublist?: IToolbarMenuItem[]
 }
 
-const toolbarMenu: IToolbarMenuItem[] = {
-  path: '/training',
-  options: {
-    text: 'TRAINING',
-    icon: <WorkIcon />,
-    access: ['free'],
-  },
-  sublist: [
-    {
-      path: '/training/use-reducer',
-      options: {
-        text: 'useReducer',
-        title: 'React hooks | useReducer',
-        noTranslate: true,
-        icon: <LinkIcon />,
-        access: ['free'],
-      },
+const toolbarMenu: IToolbarMenuItem[] = [
+  {
+    path: '/training',
+    options: {
+      text: 'TRAINING',
+      icon: <ListAltIcon />,
+      access: ['free'],
     },
-  ],
-}
+    sublist: [
+      {
+        path: '/training/use-reducer',
+        options: {
+          text: 'useReducer',
+          title: 'React hooks | useReducer',
+          noTranslate: true,
+          icon: <UseReduser />,
+          access: ['free'],
+        },
+      },
+      {
+        path: '/training/use-ref',
+        options: {
+          text: 'useRef',
+          title: 'React hooks | useRef',
+          noTranslate: true,
+          icon: <UseRef />,
+          access: ['free'],
+        },
+      },
+    ],
+  },
+]
 ```
 
 ## Envs
