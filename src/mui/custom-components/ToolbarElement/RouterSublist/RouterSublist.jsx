@@ -13,7 +13,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import { MultilingualContext } from '@/common/context/mutilingual'
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'
 import { withRouter } from 'react-router-dom'
-// import clsx from 'clsx'
+import clsx from 'clsx'
 // import { useStyles } from './styles'
 
 // TODO: Use TypeScript!
@@ -30,7 +30,20 @@ import { withRouter } from 'react-router-dom'
 // }
 
 function RouterSublistWithRouter(props) {
-  const { path, primary, icon, sublist, className, subclassName, location, isMobile, history, isActive, title } = props
+  const {
+    path,
+    primary,
+    icon,
+    sublist,
+    className,
+    subclassName,
+    location,
+    isMobile,
+    history,
+    isActive,
+    title,
+    subclassNameLast,
+  } = props
   const [isOpened, setIsOpened] = useState(isActive)
   const handleClick = useCallback(() => {
     setIsOpened(!isOpened)
@@ -61,7 +74,7 @@ function RouterSublistWithRouter(props) {
       </ListItem>
       <Collapse in={isOpened || isMobile} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {sublist.map(({ path, options }) => {
+          {sublist.map(({ path, options }, i, a) => {
             const { text, noTranslate, icon, title } = options
             const displayText = noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))
 
@@ -71,8 +84,7 @@ function RouterSublistWithRouter(props) {
                 to={path}
                 primary={displayText}
                 icon={icon}
-                // className={classes.nested}
-                className={subclassName}
+                className={i === a.length - 1 ? clsx(subclassName, subclassNameLast) : subclassName}
                 selected={isCurrentPathCb(location.pathname, `${path}`)}
                 title={title || null}
               />

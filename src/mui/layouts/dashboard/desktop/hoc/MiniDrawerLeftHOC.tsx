@@ -80,6 +80,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
               <RouterSublist
                 className={classes.listItem}
                 subclassName={classes.sublistItem}
+                subclassNameLast={classes.sublistItemLast}
                 key={path || i}
                 path={path}
                 icon={icon}

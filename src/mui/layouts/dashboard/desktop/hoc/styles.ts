@@ -108,4 +108,7 @@ export const useStyles = makeStyles((theme) => ({
       borderLeftWidth: theme.spacing(1),
     },
   },
+  sublistItemLast: {
+    borderBottomLeftRadius: '8px',
+  },
 }))
