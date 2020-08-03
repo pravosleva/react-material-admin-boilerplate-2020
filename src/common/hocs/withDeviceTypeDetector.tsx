@@ -6,9 +6,10 @@ import { defaultTheme } from '@/mui/theme'
 
 const getDeviceTypeByWidth = (width: number) => {
   const {
-    breakpoints: { values },
+    breakpoints: {
+      values: { xs, sm, md, lg /* xl */ },
+    },
   } = defaultTheme
-  const { xs, sm, md, lg /* xl */ } = values
 
   let type = 'desktop'
 
