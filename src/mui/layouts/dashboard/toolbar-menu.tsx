@@ -59,6 +59,15 @@ export const toolbarMenu: IToolbarMenuItem[] = [
           access: ['free'],
         },
       },
+      {
+        path: '/training/custom-hook',
+        options: {
+          text: 'Custom hook',
+          title: 'React hooks | Custom hook',
+          icon: <BookmarkIcon />,
+          access: ['free'],
+        },
+      },
     ],
   },
   {

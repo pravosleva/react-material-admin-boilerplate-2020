@@ -6,6 +6,7 @@ import { ConfirmPassword } from '@/pages/auth/confirm-password'
 import { Training } from '@/pages/training'
 import { UseReducer } from '@/pages/training/use-reducer'
 import { UseRef } from '@/pages/training/use-ref'
+import { CustomHook } from '@/pages/training/custom-hook'
 
 export const routes = {
   mainRoutes: [
@@ -40,6 +41,12 @@ export const routes = {
       path: '/training/use-ref',
       exact: true,
       component: UseRef,
+      options: { access: ['free'] },
+    },
+    {
+      path: '/training/custom-hook',
+      exact: true,
+      component: CustomHook,
       options: { access: ['free'] },
     },
   ],

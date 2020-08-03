@@ -82,6 +82,7 @@ _Build production to `./build`_
   - [x] `useContext`
   - [x] `useReducer`
   - [x] `useRef` [like this](https://www.youtube.com/watch?v=t2ypzz6gJm0)
+  - [x] Custom hook
   - [ ] `useEffect` features [like this](https://www.youtube.com/watch?v=j1ZRyw7OtZs&list=RDCMUC-8QAzbLcRglXeN_MY9blyw&index=1)
 
 ### menu-levels
@@ -116,7 +117,7 @@ const toolbarMenu: IToolbarMenuItem[] = [
           text: 'useReducer',
           title: 'React hooks | useReducer',
           noTranslate: true,
-          icon: <UseReduser />,
+          icon: <BookmarkIcon />,
           access: ['free'],
         },
       },
@@ -126,7 +127,7 @@ const toolbarMenu: IToolbarMenuItem[] = [
           text: 'useRef',
           title: 'React hooks | useRef',
           noTranslate: true,
-          icon: <UseRef />,
+          icon: <BookmarkIcon />,
           access: ['free'],
         },
       },
