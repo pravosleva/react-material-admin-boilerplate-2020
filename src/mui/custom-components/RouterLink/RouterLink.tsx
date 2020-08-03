@@ -21,7 +21,7 @@ export function RouterLink(props: IRouterLink) {
     <MUILink href={to} variant="body2" component={CustomLink}>
       {arrowLeft && <i className={clsx('fas fa-arrow-left', classes.rightSpace)}></i>}
       {label}
-      {arrowRight && <i className={clsx('fas fa-arrow-right', classes.rightSpace)}></i>}
+      {arrowRight && <i className={clsx('fas fa-arrow-right', classes.leftSpace)}></i>}
     </MUILink>
   )
 }
