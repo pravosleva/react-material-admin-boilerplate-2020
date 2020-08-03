@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import { withMyDeviceTypeDetector } from '@/common/hocs/withDeviceTypeDetector'
 import { asyncLoadUserInfoData, asyncLoadTestData } from '@/actions'
 import { NotFound } from '@/pages/not-found'
-import { CustomFullScreenLoader } from '@/mui/custom-components/Loader'
+import { CustomFullScreenLoader as FullScreenLoader } from '@/mui/custom-components/Loader'
 import { MiniDrawerLeftHOC as MiniDrawerLeftDesktop } from '@/mui/layouts/dashboard/desktop'
 import { TemporaryDrawerHOC as TemporaryDrawerMobile } from '@/mui/layouts/dashboard/mobile'
 import { FullScreenHOC as AuthFullScreenDesktop } from '@/mui/layouts/auth/desktop'
@@ -64,7 +64,7 @@ const renderAuthMobile = () => (
 
 // 3. UNDEFINED DEVICE TYPE LAYOUT
 const renderUndefinedDeviceType = ({ deviceType }) => (
-  <CustomFullScreenLoader permanentMessage={{ text: `Device type ${deviceType} not supported yet`, type: 'warning' }} />
+  <FullScreenLoader permanentMessage={{ text: `Device type ${deviceType} not supported yet`, type: 'warning' }} />
 )
 
 class ConnectedApp extends React.Component {
@@ -100,7 +100,7 @@ class ConnectedApp extends React.Component {
           return renderUndefinedDeviceType({ deviceType })
       }
     } else {
-      return <CustomFullScreenLoader />
+      return <FullScreenLoader />
     }
   }
 }

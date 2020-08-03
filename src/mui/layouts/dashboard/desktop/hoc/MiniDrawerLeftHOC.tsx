@@ -20,7 +20,7 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 
 import { useStyles } from './styles'
-import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarElement/RouterLink'
+import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarElement/RouterLinkAsToolbarListItem'
 import { RouterSublist } from '@/mui/custom-components/ToolbarElement/RouterSublist'
 import { toolbarMenu, IToolbarMenuItem } from '@/mui/layouts/dashboard/toolbar-menu'
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'

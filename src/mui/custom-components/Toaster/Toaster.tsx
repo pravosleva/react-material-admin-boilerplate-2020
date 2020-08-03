@@ -2,12 +2,11 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { TToast, IToast, forceHideToast } from '@/actions'
 import cn from 'classnames'
-
 import styles from './Toaster.module.scss'
 
-type FontAwesomeClassNamesAsMsgType = 'fa-ban' | 'fa-exclamation-triangle' | 'fa-info-circle'
+type TFontAwesomeClassNamesAsMsgType = 'fa-ban' | 'fa-exclamation-triangle' | 'fa-info-circle'
 
-const getFontAwesomeClassNameByType = (type: TToast): FontAwesomeClassNamesAsMsgType => {
+const getFontAwesomeClassNameByType = (type: TToast): TFontAwesomeClassNamesAsMsgType => {
   switch (type) {
     case 'error':
       return 'fa-ban'

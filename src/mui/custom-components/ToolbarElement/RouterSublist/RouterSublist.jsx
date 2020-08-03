@@ -1,20 +1,17 @@
 import React, { useState, useCallback, useContext, useMemo } from 'react'
 // See also: https://material-ui.com/ru/guides/composition/#caveat-with-inlining
-import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarElement/RouterLink'
+import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarElement/RouterLinkAsToolbarListItem'
 import Collapse from '@material-ui/core/Collapse'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-// import ExpandLess from '@material-ui/icons/ExpandLess'
-// import ExpandMore from '@material-ui/icons/ExpandMore'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import { MultilingualContext } from '@/common/context/mutilingual'
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'
 import { withRouter } from 'react-router-dom'
 import clsx from 'clsx'
-// import { useStyles } from './styles'
 
 // TODO: Use TypeScript!
 
@@ -56,7 +53,6 @@ function RouterSublistWithRouter(props) {
     isOpened,
     isMobile,
   ])
-  // const classes = useStyles()
 
   return (
     <>
@@ -64,7 +60,7 @@ function RouterSublistWithRouter(props) {
         button
         onClick={handleClick}
         className={className}
-        selected={isCurrentPathCb(location.pathname, `${path}`)}
+        selected={isCurrentPathCb(location.pathname, `${path}`) || isActive}
         disabled={isDisabled}
         title={title || null}
       >

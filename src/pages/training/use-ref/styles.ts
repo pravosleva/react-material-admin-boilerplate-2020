@@ -30,6 +30,7 @@ export const useStyles = makeStyles((theme) => ({
     paddingTop: '25px',
     height: '0',
     overflow: 'hidden',
+    backgroundColor: '#000',
   },
   reactYoutube: {
     position: 'absolute',

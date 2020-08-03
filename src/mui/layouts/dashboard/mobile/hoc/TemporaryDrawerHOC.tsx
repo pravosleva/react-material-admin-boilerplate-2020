@@ -20,7 +20,7 @@ import Divider from '@material-ui/core/Divider'
 
 import { useStyles } from './styles'
 import { toolbarMenu, IToolbarMenuItem } from '@/mui/layouts/dashboard/toolbar-menu'
-import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarElement/RouterLink'
+import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarElement/RouterLinkAsToolbarListItem'
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'
 import { showAsyncToast } from '@/actions'
 import { RouterSublist } from '@/mui/custom-components/ToolbarElement/RouterSublist'

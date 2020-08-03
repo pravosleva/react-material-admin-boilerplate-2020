@@ -23,11 +23,12 @@ export const SUPPOER_LOCALES: ILang[] = [
   },
   // Others...
 ]
+const defaultLang = 'ru-RU'
 
 export const translateFnInit = (lang?: string) => {
   intl
     .init({
-      currentLocale: lang || 'ru-RU',
+      currentLocale: lang || defaultLang,
       locales: {
         'ru-RU': ruRU,
         'en-US': enUS,
@@ -45,18 +46,19 @@ export const translateFnInit = (lang?: string) => {
 }
 export const getDeafultLangFromCookieOrNavigator = () => {
   let detectedLang: string | undefined
+  const hasInSuppoerLocales = (value: string): boolean => SUPPOER_LOCALES.some((l) => l.value === value)
 
-  if (typeof window) {
+  if (!!window) {
     detectedLang = Cookie.get('lang')
+    if (!hasInSuppoerLocales(detectedLang)) detectedLang = undefined
     if (!detectedLang && !!navigator) {
-      const fromNavigator = navigator.language // || navigator.userLanguage
-      const hasInSuppoerLocales = SUPPOER_LOCALES.some((l) => l.value === fromNavigator)
+      const fromNavigator = navigator.language // || navigator.userLanguage?
 
-      if (hasInSuppoerLocales) detectedLang = fromNavigator
+      if (hasInSuppoerLocales(fromNavigator)) detectedLang = fromNavigator
     }
   }
 
-  return detectedLang || 'ru-RU'
+  return detectedLang || defaultLang
 }
 
 const langCookieExpiresInDays = !!process.env.REACT_APP_LANG_COOKIE_EXPIRES_IN_DAYS

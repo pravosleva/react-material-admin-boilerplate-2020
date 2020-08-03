@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-
 import { setDeviceType } from '@/actions/myDevice'
 import { useDebounce } from '@/common/hooks/useDebounce'
 import { defaultTheme } from '@/mui/theme'

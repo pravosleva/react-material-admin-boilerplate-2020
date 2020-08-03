@@ -14,6 +14,7 @@ import { asyncValidate } from './asyncValidate'
 const validate = (values) => {
   const errors = {}
   const requiredFields = ['firstName', 'lastName', 'email', 'favoriteColor', 'notes']
+
   requiredFields.forEach((field) => {
     if (!values[field]) {
       errors[field] = 'Required'
@@ -81,51 +82,48 @@ const renderSelectField = ({ input, label, meta: { touched, error }, children, .
   </FormControl>
 )
 
-const MaterialUiForm = (props) => {
-  const { onSubmit, pristine, reset, submitting, classes } = props
-  return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <Field name="firstName" component={renderTextField} label="First Name" />
-      </div>
-      <div>
-        <Field name="lastName" component={renderTextField} label="Last Name" />
-      </div>
-      <div>
-        <Field name="email" component={renderTextField} label="Email" />
-      </div>
-      <div>
-        <Field name="sex" component={radioButton}>
-          <Radio value="male" label="male" />
-          <Radio value="female" label="female" />
-        </Field>
-      </div>
-      <div>
-        <Field classes={classes} name="favoriteColor" component={renderSelectField} label="Favorite Color">
-          <option value="" />
-          <option value={'ff0000'}>Red</option>
-          <option value={'00ff00'}>Green</option>
-          <option value={'0000ff'}>Blue</option>
-        </Field>
-      </div>
-      <div>
-        <Field name="employed" component={renderCheckbox} label="Employed" />
-      </div>
-      <div />
-      <div>
-        <Field name="notes" component={renderTextField} label="Notes" multiline rowsMax="4" margin="normal" />
-      </div>
-      <div>
-        <button type="submit" disabled={pristine || submitting}>
-          Submit
-        </button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>
-          Clear Values
-        </button>
-      </div>
-    </form>
-  )
-}
+const MaterialUiForm = ({ onSubmit, pristine, reset, submitting, classes }) => (
+  <form onSubmit={onSubmit}>
+    <div>
+      <Field name="firstName" component={renderTextField} label="First Name" />
+    </div>
+    <div>
+      <Field name="lastName" component={renderTextField} label="Last Name" />
+    </div>
+    <div>
+      <Field name="email" component={renderTextField} label="Email" />
+    </div>
+    <div>
+      <Field name="sex" component={radioButton}>
+        <Radio value="male" label="male" />
+        <Radio value="female" label="female" />
+      </Field>
+    </div>
+    <div>
+      <Field classes={classes} name="favoriteColor" component={renderSelectField} label="Favorite Color">
+        <option value="" />
+        <option value={'ff0000'}>Red</option>
+        <option value={'00ff00'}>Green</option>
+        <option value={'0000ff'}>Blue</option>
+      </Field>
+    </div>
+    <div>
+      <Field name="employed" component={renderCheckbox} label="Employed" />
+    </div>
+    <div />
+    <div>
+      <Field name="notes" component={renderTextField} label="Notes" multiline rowsMax="4" margin="normal" />
+    </div>
+    <div>
+      <button type="submit" disabled={pristine || submitting}>
+        Submit
+      </button>
+      <button type="button" disabled={pristine || submitting} onClick={reset}>
+        Clear Values
+      </button>
+    </div>
+  </form>
+)
 
 export const MUILoginForm = reduxForm({
   form: 'MaterialUiForm', // a unique identifier for this form
