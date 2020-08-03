@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useContext, useMemo } from 'react'
+import React, { useState, useContext, useMemo, useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import clsx from 'clsx'
@@ -18,7 +18,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
-
 import { useStyles } from './styles'
 import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarElement/RouterLinkAsToolbarListItem'
 import { RouterSublist } from '@/mui/custom-components/ToolbarElement/RouterSublist'
@@ -26,13 +25,14 @@ import { toolbarMenu, IToolbarMenuItem } from '@/mui/layouts/dashboard/toolbar-m
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'
 import { showAsyncToast } from '@/actions'
 import { MultilingualContext } from '@/common/context/mutilingual'
+import { getModifiedPhraseForTranslate } from '@/utils/multilingual/getModifiedPhraseForTranslate'
 
 interface IProps {
   location: any
   children: React.Component
 }
 
-const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
+const MiniDrawerLeftHOCWithRouter: React.FC = ({ location, children }: IProps) => {
   const classes = useStyles()
   const theme = useTheme()
 
@@ -44,7 +44,6 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
   const handleDrawerClose = () => {
     setIsToolbarOpen(false)
   }
-  const isCurrentPathCb = useCallback(isCurrentPath, [])
 
   // Profile menu
   const [anchorProfileMenuEl, setAnchorProfileMenuEl] = useState(null)
@@ -66,14 +65,13 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
     handleProfileMenuClose()
   }
   const { t, currentLang } = useContext(MultilingualContext)
-  const { location } = props
   const MemoizedList = useMemo(
     () => (
       <List>
         {toolbarMenu.map(({ path, options, sublist }: IToolbarMenuItem, i) => {
           const { text, noTranslate, icon, title } = options
           const subpaths = !!sublist ? sublist.map((s) => s.path) : []
-          const isActive = subpaths.some((p) => isCurrentPathCb(location.pathname, p))
+          const isActive = subpaths.some((p) => isCurrentPath(location.pathname, p))
 
           if (!!sublist) {
             return (
@@ -84,10 +82,10 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
                 key={path || i}
                 path={path}
                 icon={icon}
-                primary={noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))}
+                primary={noTranslate ? text : t(getModifiedPhraseForTranslate(text))}
                 sublist={sublist}
                 button
-                selected={isCurrentPathCb(location.pathname, `${path}`)}
+                selected={isCurrentPath(location.pathname, `${path}`)}
                 isActive={isActive}
                 title={title || null}
               />
@@ -99,9 +97,9 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
                 key={path}
                 to={path}
                 icon={icon}
-                primary={noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))}
+                primary={noTranslate ? text : t(getModifiedPhraseForTranslate(text))}
                 button
-                selected={isCurrentPathCb(location.pathname, `${path}`)}
+                selected={isCurrentPath(location.pathname, `${path}`)}
                 title={title || null}
               />
             )
@@ -109,7 +107,7 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
         })}
       </List>
     ),
-    [toolbarMenu, isCurrentPathCb, location, currentLang]
+    [isCurrentPath, location.pathname, currentLang]
   )
 
   return (
@@ -181,10 +179,10 @@ const MiniDrawerLeftHOCConnected: React.FC = (props: IProps) => {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {props.children}
+        {children}
       </main>
     </div>
   )
 }
 
-export const MiniDrawerLeftHOC = withRouter(MiniDrawerLeftHOCConnected)
+export const MiniDrawerLeftHOC = withRouter(MiniDrawerLeftHOCWithRouter)

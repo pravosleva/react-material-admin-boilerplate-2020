@@ -13,6 +13,7 @@ export interface IToolbarMenuItem {
     icon: JSX.Element
     access?: string[]
     title?: string
+    description?: string
   }
   sublist?: IToolbarMenuItem[]
 }
@@ -43,17 +44,18 @@ export const toolbarMenu: IToolbarMenuItem[] = [
         path: '/training/use-reducer',
         options: {
           text: 'useReducer',
-          title: 'React hooks | useReducer',
+          title: 'React hooks',
           noTranslate: true,
           icon: <BookmarkIcon />,
           access: ['free'],
+          description: 'TRAINING_USE-REDUCER@DESCRIPTION',
         },
       },
       {
         path: '/training/use-ref',
         options: {
           text: 'useRef',
-          title: 'React hooks | useRef',
+          title: 'React hooks',
           noTranslate: true,
           icon: <BookmarkIcon />,
           access: ['free'],
@@ -63,7 +65,6 @@ export const toolbarMenu: IToolbarMenuItem[] = [
         path: '/training/custom-hook',
         options: {
           text: 'Custom hook',
-          title: 'React hooks | Custom hook',
           icon: <BookmarkIcon />,
           access: ['free'],
         },

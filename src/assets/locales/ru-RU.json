@@ -2,12 +2,15 @@
   "BRAND": "Бренд",
   "CREATE_USER": "Создать польз.",
   "CUSTOM_HOOK": "Кастомный хук",
+  "DESCRIPTION_IN_PROGRESS": "Описание в разработке...",
   "HOME": "Главная",
   "IN_PROGRESS": "В разработке...",
   "LINKS": "Ссылки",
   "LOGOUT": "Выход",
+  "READ_MORE": "Перейти",
   "REPORT": "Отчет",
   "RESET": "Сбросить",
   "SUBMIT": "Отправить",
-  "TRAINING": "Тренировка"
+  "TRAINING": "Тренировка",
+  "TRAINING_USE-REDUCER@DESCRIPTION": "Это простой пример использования `useReducer`"
 }

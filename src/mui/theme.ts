@@ -1,5 +1,5 @@
 import red from '@material-ui/core/colors/red'
-import { createMuiTheme, ThemeOptions, Theme } from '@material-ui/core/styles'
+import { createMuiTheme, ThemeOptions, Theme, withStyles } from '@material-ui/core/styles'
 // import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 // See also: https://material-ui.com/guides/typescript/#customization-of-theme
 
@@ -30,5 +30,25 @@ export const defaultTheme = {
     },
   },
 }
+
+export const GlobalCss = withStyles({
+  // @global is handled by jss-plugin-global.
+  '@global': {
+    // You should target [class*="MuiButton-root"] instead if you nest themes.
+    // '.MuiButton-root': {}
+    // See also: https://material-ui.com/ru/customization/components/
+    code: {
+      background: 'rgba(250, 239, 240, 0.78)',
+      boxShadow: '0px 0px 3px rgba(0, 0, 0, 0.2)',
+      color: '#b44437',
+      padding: '3px 4px',
+      borderRadius: '5px',
+      margin: '0 1px',
+      fontSize: '0.9em',
+      fontWeight: '500',
+      letterSpacing: '0.3px',
+    },
+  },
+})(() => null)
 
 export const theme = createMuiTheme(defaultTheme)

@@ -37,12 +37,13 @@ _Build production to `./build`_
 
 Для данной реализации рекомендуется fetch, но можно использовать axios. В любом случае, придерживаться правил использовать только общие обработчики в `@/utils/errors`.
 
-Для однообразной проверки успешности запроса, промис должен вернуть универсальный объект типа `{ isOk: boolean, msg?: string, response?: any }` (см. [@/store/sagas/example-fetchTestData](/src/store/sagas/example-fetchTestData.ts))
+Для однообразной проверки успешности запроса, Promise should be resolved: `{ isOk: true, response: any }` or rejected: `{ isOk: false, msg: string }` (см. [@/store/sagas/example-fetchTestData](/src/store/sagas/example-fetchTestData.ts))
 
 ## Roadmap
 
 - [x] App structure (dev & building like CRA)
 - [x] Stack scaffolding
+- [x] [Environment variables](#environment-variables)
 - [x] `postbuild.local.prod.sh`
 - [x] Git hooks
 - [x] Styled layouts with material design
@@ -77,7 +78,7 @@ _Build production to `./build`_
 - [x] Multilignual support with `react-intl-universal` & Context API
   - [x] From cookies
   - [x] From navigator (if supported)
-- [x] [Menu levels](#menu-levels)
+- [x] [Toolbar menu levels](#toolbar-menu-levels)
 - [ ] Training
   - [x] `useContext`
   - [x] `useReducer`
@@ -85,7 +86,7 @@ _Build production to `./build`_
   - [x] Custom hook
   - [ ] `useEffect` features [like this](https://www.youtube.com/watch?v=j1ZRyw7OtZs&list=RDCMUC-8QAzbLcRglXeN_MY9blyw&index=1)
 
-### menu-levels
+### toolbar-menu-levels
 
 ```tsx
 // @/mui/layouts/dashboard/toolbar-menu.tsx
@@ -136,7 +137,7 @@ const toolbarMenu: IToolbarMenuItem[] = [
 ]
 ```
 
-## Envs
+## environment-variables
 
 Each env variable should have `REACT_APP_` prefix.
 

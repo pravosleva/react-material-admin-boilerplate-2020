@@ -5,7 +5,6 @@ import clsx from 'clsx'
 import { useTheme } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
-// import Divider from '@material-ui/core/Divider'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -17,7 +16,6 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import Divider from '@material-ui/core/Divider'
-
 import { useStyles } from './styles'
 import { toolbarMenu, IToolbarMenuItem } from '@/mui/layouts/dashboard/toolbar-menu'
 import { RouterLinkAsToolbarListItem } from '@/mui/custom-components/ToolbarElement/RouterLinkAsToolbarListItem'
@@ -33,7 +31,7 @@ interface IProps {
   children: React.Component
 }
 
-const TemporaryDrawerHOCConnected: React.FC = (props: IProps) => {
+const TemporaryDrawerHOCConnected: React.FC = ({ location, children }: IProps) => {
   const classes = useStyles()
   const theme = useTheme()
 
@@ -56,16 +54,14 @@ const TemporaryDrawerHOCConnected: React.FC = (props: IProps) => {
 
     setState({ ...state, [anchor]: open })
   }
-  const isCurrentPathCb = useCallback(isCurrentPath, [])
   const { t, currentLang } = useContext(MultilingualContext)
-  const { location } = props
   const MemoizedList = useMemo(
     () => (
       <List>
         {toolbarMenu.map(({ path, options, sublist }: IToolbarMenuItem, i) => {
           const { text, noTranslate, icon } = options
           const subpaths = !!sublist ? sublist.map((s) => s.path) : []
-          const isActive = subpaths.some((p) => isCurrentPathCb(location.pathname, p))
+          const isActive = subpaths.some((p) => isCurrentPath(location.pathname, p))
 
           if (!!sublist) {
             return (
@@ -78,7 +74,7 @@ const TemporaryDrawerHOCConnected: React.FC = (props: IProps) => {
                 primary={noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))}
                 sublist={sublist}
                 button
-                selected={isCurrentPathCb(location.pathname, `${path}`)}
+                selected={isCurrentPath(location.pathname, `${path}`)}
                 isMobile
                 isActive={isActive}
               />
@@ -92,14 +88,14 @@ const TemporaryDrawerHOCConnected: React.FC = (props: IProps) => {
                 icon={icon}
                 primary={noTranslate ? text : t(text.toUpperCase().replace(' ', '_'))}
                 button
-                selected={isCurrentPathCb(location.pathname, `${path}`)}
+                selected={isCurrentPath(location.pathname, `${path}`)}
               />
             )
           }
         })}
       </List>
     ),
-    [toolbarMenu, isCurrentPathCb, location, currentLang]
+    [toolbarMenu, location.pathname, currentLang]
   )
 
   const list = (anchor: TAnchor) => (
@@ -196,7 +192,7 @@ const TemporaryDrawerHOCConnected: React.FC = (props: IProps) => {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {props.children}
+        {children}
       </main>
     </div>
   )
