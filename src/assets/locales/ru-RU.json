@@ -1,8 +1,10 @@
 {
+  "TRAINING_ABORT-CONTROLLER@DESCRIPTION": "Это простая демонстрация `AbortController`. Запрос будет сброшен, если вы перейдете на другой роут раньше, чем будет получен ответ от сервера.",
   "BRAND": "Бренд",
   "CREATE_USER": "Создать польз.",
   "CUSTOM_HOOK": "Кастомный хук",
   "DESCRIPTION_IN_PROGRESS": "Описание в разработке...",
+  "DESCRIPTION_NOT_FOUND": "Описание не найдено",
   "HOME": "Главная",
   "IN_PROGRESS": "В разработке...",
   "LINKS": "Ссылки",

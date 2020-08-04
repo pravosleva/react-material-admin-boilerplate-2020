@@ -69,6 +69,16 @@ export const toolbarMenu: IToolbarMenuItem[] = [
           access: ['free'],
         },
       },
+      {
+        path: '/training/abort-controller',
+        options: {
+          text: 'AbortController',
+          noTranslate: true,
+          icon: <BookmarkIcon />,
+          access: ['free'],
+          description: 'TRAINING_ABORT-CONTROLLER@DESCRIPTION',
+        },
+      },
     ],
   },
   {

@@ -1,8 +1,10 @@
 {
+  "TRAINING_ABORT-CONTROLLER@DESCRIPTION": "This is a `AbortController` demonstration. The request will be dropped if you switch to another route before the response from the server is received.",
   "BRAND": "Brand",
   "CREATE_USER": "Create user",
   "CUSTOM_HOOK": "Custom hook",
   "DESCRIPTION_IN_PROGRESS": "Description in progress...",
+  "DESCRIPTION_NOT_FOUND": "Description not found",
   "HOME": "Home",
   "IN_PROGRESS": "In progress...",
   "LINKS": "Links",

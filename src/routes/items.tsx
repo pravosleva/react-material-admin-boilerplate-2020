@@ -7,6 +7,7 @@ import { Training } from '@/pages/training'
 import { UseReducer } from '@/pages/training/use-reducer'
 import { UseRef } from '@/pages/training/use-ref'
 import { CustomHook } from '@/pages/training/custom-hook'
+import { AbortController } from '@/pages/training/abort-controller'
 
 export const routes = {
   mainRoutes: [
@@ -47,6 +48,12 @@ export const routes = {
       path: '/training/custom-hook',
       exact: true,
       component: CustomHook,
+      options: { access: ['free'] },
+    },
+    {
+      path: '/training/abort-controller',
+      exact: true,
+      component: AbortController,
       options: { access: ['free'] },
     },
   ],
