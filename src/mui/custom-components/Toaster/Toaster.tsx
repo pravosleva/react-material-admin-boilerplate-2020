@@ -4,7 +4,7 @@ import { TToast, IToast, forceHideToast } from '@/actions'
 import cn from 'classnames'
 import styles from './Toaster.module.scss'
 
-type TFontAwesomeClassNamesAsMsgType = 'fa-ban' | 'fa-exclamation-triangle' | 'fa-info-circle'
+type TFontAwesomeClassNamesAsMsgType = 'fa-ban' | 'fa-exclamation-triangle' | 'fa-info-circle' | 'fa-check-circle'
 
 const getFontAwesomeClassNameByType = (type: TToast): TFontAwesomeClassNamesAsMsgType => {
   switch (type) {
@@ -12,8 +12,9 @@ const getFontAwesomeClassNameByType = (type: TToast): TFontAwesomeClassNamesAsMs
       return 'fa-ban'
     case 'warning':
       return 'fa-exclamation-triangle'
+    case 'success':
+      return 'fa-check-circle'
     case 'info':
-      return 'fa-info-circle'
     case 'default':
     default:
       return 'fa-info-circle'

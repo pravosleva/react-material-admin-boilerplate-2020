@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ProTip } from '@/mui/custom-components/ProTip'
 import { Container } from '@material-ui/core'
 import { MultilingualContext } from '@/common/context/mutilingual'
@@ -14,6 +14,8 @@ import { showAsyncToast } from '@/actions'
 import { toolbarMenu, IToolbarMenuItem } from '@/mui/layouts/dashboard/toolbar-menu'
 import ReactMarkdown from 'react-markdown'
 import { getReadableCamelCase } from '@/utils/getReadableCamelCase'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
 
 const toolbarMenuItem: IToolbarMenuItem = toolbarMenu.find(({ path }) => path === '/training')
 const { sublist } = toolbarMenuItem
@@ -25,28 +27,52 @@ export const AbortController = () => {
   const { t } = useContext(MultilingualContext)
   const classes = useStyles()
   const dispatch = useDispatch()
-  const cbSuccess = (length: number) => {
+  const onSuccess = (length: number) => {
     dispatch(
       showAsyncToast({
         text: `${length} items received`,
+        type: 'success',
+        delay: 5000,
+      })
+    )
+  }
+  const onFail = (error: any) => {
+    dispatch(
+      showAsyncToast({
+        text: error.message ? `${getReadableCamelCase(error.name)}: ${error.message}` : 'Error could not be handled',
+        type: 'error',
+        delay: 5000,
+      })
+    )
+  }
+  const onCall = (aborted: boolean) => {
+    dispatch(
+      showAsyncToast({
+        text: `Called... aborted is ${JSON.stringify(aborted)}`,
         type: 'info',
         delay: 5000,
       })
     )
   }
-  const cbFail = (error: any) => {
+  const onAbortIfRequestStarted = () => {
     dispatch(
       showAsyncToast({
-        text: error.message ? `${getReadableCamelCase(error.name)}: ${error.message}` : 'Error could not be handled',
+        text: 'Started request aborted...',
         type: 'warning',
         delay: 5000,
       })
     )
   }
-  const [testData, isLoaded]: [IDataItem[], boolean] = useRemoteTestData({
+  const [url, setUrl] = useState<string>('https://jsonplaceholder.typicode.com/users')
+  const [testData, isLoaded, isLoading]: [IDataItem[], boolean, boolean] = useRemoteTestData({
+    url,
     accessToken: '123',
-    cbSuccess,
-    cbFail,
+    onSuccess,
+    onFail,
+    onCall,
+    onAbortIfRequestStarted,
+    debounce: 1000,
+    // isForceAborted,
   })
 
   return (
@@ -59,6 +85,36 @@ export const AbortController = () => {
       </h1>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <Paper className={classes.paper}>
+            <TextField
+              className={classes.input}
+              // fullWidth
+              variant="outlined"
+              label="URL"
+              placeholder="URL"
+              // error={isErrored}
+              // helperText={isErrored && 'No more than 4 symbols'}
+              autoFocus={true}
+              inputProps={{
+                onChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => setUrl(e.target.value),
+                value: url,
+              }}
+            />
+            <div className={classes.buttonBox}>
+              <Button
+                variant="contained"
+                fullWidth
+                color="primary"
+                // onClick={() => setIsForceAborted(true)}
+                title="Abort"
+                disabled={isLoaded}
+              >
+                Abort
+              </Button>
+            </div>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <Paper className={clsx(classes.paper, classes.code)}>
             {!!description ? <ReactMarkdown source={t(description)} /> : <em>{t('DESCRIPTION_NOT_FOUND')}</em>}
           </Paper>
@@ -69,7 +125,9 @@ export const AbortController = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
-          <Paper className={clsx(classes.paper)}>{t('IN_PROGRESS')}</Paper>
+          <Paper className={clsx(classes.paper)}>
+            <ReactJson src={{ isLoaded, isLoading }} />
+          </Paper>
         </Grid>
       </Grid>
       <ProTip />
