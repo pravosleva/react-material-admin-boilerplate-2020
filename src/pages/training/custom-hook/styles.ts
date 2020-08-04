@@ -12,7 +12,6 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   inputGrid: {
-    marginTop: theme.spacing(1),
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     gridColumnGap: theme.spacing(1),

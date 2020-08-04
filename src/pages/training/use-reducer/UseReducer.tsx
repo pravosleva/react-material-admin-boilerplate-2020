@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useMemo, useCallback } from 'react'
+import React, { useContext, useReducer, useMemo, useCallback, useEffect, useState } from 'react'
 import { ProTip } from '@/mui/custom-components/ProTip'
 import { Container } from '@material-ui/core'
 import { MultilingualContext } from '@/common/context/mutilingual'
@@ -13,6 +13,10 @@ import TextField from '@material-ui/core/TextField'
 import { Link } from 'react-router-dom'
 import YouTube from 'react-youtube'
 import clsx from 'clsx'
+import Prism from 'prismjs'
+import ReactMarkdown from 'react-markdown'
+// @ts-ignore Cannot find module './CODE_SAMPLES.md' or its corresponding type declarations.
+import codeSamplesMD from './CODE_SAMPLES.md'
 
 interface IState {
   value: number
@@ -59,6 +63,21 @@ export const UseReducer = () => {
     },
     [dispatch]
   )
+  const [codeSamples, setCodeSamples] = useState('')
+  const [isCodeSamplesLoaded, setIsCodeSamplesLoaded] = useState(false)
+  useEffect(() => {
+    fetch(codeSamplesMD)
+      .then((res) => res.text())
+      .then((md) => {
+        setCodeSamples(md)
+        setIsCodeSamplesLoaded(true)
+        // You can call the Prism.js API here
+        // Use setTimeout to push onto callback queue so it runs after the DOM is updated
+        setTimeout(() => {
+          Prism.highlightAll()
+        }, 0)
+      })
+  }, [])
 
   return (
     <Container>
@@ -117,7 +136,12 @@ export const UseReducer = () => {
             <ReactJson src={count} />
           </Paper>
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+          <Paper className={classes.paper}>
+            {isCodeSamplesLoaded ? <ReactMarkdown source={codeSamples} /> : <h1>Pleace wait...</h1>}
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
           <Paper className={clsx(classes.paper, classes.reactYoutubeContainer)}>
             <YouTube videoId="wcRawY6aJaw" className={classes.reactYoutube} />
           </Paper>

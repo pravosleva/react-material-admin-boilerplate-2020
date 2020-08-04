@@ -39,7 +39,7 @@ export const GlobalCss = withStyles({
     // See also: https://material-ui.com/ru/customization/components/
     code: {
       background: 'rgba(250, 239, 240, 0.78)',
-      boxShadow: '0px 0px 3px rgba(0, 0, 0, 0.2)',
+      // boxShadow: '0px 0px 3px rgba(0, 0, 0, 0.2)',
       color: '#b44437',
       padding: '3px 4px',
       borderRadius: '5px',
@@ -47,6 +47,25 @@ export const GlobalCss = withStyles({
       fontSize: '0.9em',
       fontWeight: '500',
       letterSpacing: '0.3px',
+    },
+    // Prism settings:
+    'div.code-toolbar': {
+      maxWidth: 'calc(100vw - 76px)',
+    },
+    'pre.language-js': {
+      margin: 0,
+    },
+    'pre.language-css': {
+      margin: 0,
+    },
+    'pre.language-html': {
+      margin: 0,
+    },
+    'pre.language-json': {
+      margin: 0,
+    },
+    'pre.language-bash': {
+      margin: 0,
     },
   },
 })(() => null)
