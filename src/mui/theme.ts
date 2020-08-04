@@ -48,25 +48,6 @@ export const GlobalCss = withStyles({
       fontWeight: '500',
       letterSpacing: '0.3px',
     },
-    // Prism settings:
-    'div.code-toolbar': {
-      maxWidth: 'calc(100vw - 76px)',
-    },
-    'pre.language-js': {
-      margin: 0,
-    },
-    'pre.language-css': {
-      margin: 0,
-    },
-    'pre.language-html': {
-      margin: 0,
-    },
-    'pre.language-json': {
-      margin: 0,
-    },
-    'pre.language-bash': {
-      margin: 0,
-    },
   },
 })(() => null)
 

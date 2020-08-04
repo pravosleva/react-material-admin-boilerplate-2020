@@ -1,0 +1,23 @@
+@import 'prismjs-material-theme/sass/oceanic';
+
+$xs: 0;
+$sm: 600;
+$md: 960;
+$lg: 1280;
+$xl: 1920;
+
+div.code-toolbar,
+pre[class*='language-'] {
+  max-width: calc(100vw - 76px);
+  @media (min-width: #{$sm}px) and (max-width: #{$md}px) {
+    max-width: calc(100vw - 76px - 89px);
+  }
+}
+
+div.code-toolbar,
+pre[class*='language-'] {
+  border-radius: 8px;
+}
+pre[class*='language-'] {
+  margin: 0;
+}

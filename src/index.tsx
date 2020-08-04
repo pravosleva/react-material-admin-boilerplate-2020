@@ -18,6 +18,7 @@ import {
   setLangToCookie,
 } from '@/utils/multilingual'
 import intl from 'react-intl-universal'
+import './prismjs.scss'
 
 const ReactApp = () => {
   const [lang, setLang] = useState(getDeafultLangFromCookieOrNavigator())

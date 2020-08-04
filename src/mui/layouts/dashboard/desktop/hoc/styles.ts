@@ -69,7 +69,12 @@ export const useStyles = makeStyles((theme) => ({
   },
   listItem: {
     color: '#000',
-    paddingLeft: theme.spacing(3),
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: theme.spacing(2),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: theme.spacing(3),
+    },
   },
   sublistItem: {
     borderLeftStyle: 'solid',
