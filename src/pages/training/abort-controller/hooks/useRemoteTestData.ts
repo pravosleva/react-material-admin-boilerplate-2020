@@ -1,14 +1,16 @@
 import { useState, useEffect, useRef } from 'react'
+import { httpErrorHandler } from '@/utils/errors/http/fetch'
 
 export interface IDataRequestProps {
   url: string
   accessToken: string
   onCall?: () => void
-  onAbortIfRequestStarted?: (startedValue: boolean) => void
+  onAbortIfRequestStarted?: (startedReqWasAborted: boolean) => void
   onSuccess?: (length: number) => void
   onFail?: (err: any) => void
   debounce?: number
   // shouldBeAborted?: boolean
+  isActiveDelay?: boolean
 }
 export interface IDataItem {
   [x: string]: any
@@ -24,6 +26,7 @@ export function useRemoteTestData({
   onSuccess,
   onFail,
   debounce = 0,
+  isActiveDelay,
 }: // shouldBeAborted,
 IDataRequestProps): [IDataItem[], boolean, boolean] | null {
   const [dataFromServer, setDataFromServer] = useState<IDataItem[] | null>(null)
@@ -34,6 +37,7 @@ IDataRequestProps): [IDataItem[], boolean, boolean] | null {
   useEffect(() => {
     stratedImperativeRef.current = false
     const abortController = new AbortController()
+    setIsLoading(false)
 
     const fetchData = () => {
       if (!!window) {
@@ -45,15 +49,14 @@ IDataRequestProps): [IDataItem[], boolean, boolean] | null {
           .fetch(url, {
             // headers: { Authorization: `Bearer ${accessToken}` },
             method: 'GET',
-            // mode: 'cors',
+            mode: 'cors',
             signal: abortController.signal,
           })
-          // Custom delay for demonstration:
-          .then(async (smth) => {
-            await delay(5000)
-            return smth
+          .then(async (res: Response) => {
+            if (isActiveDelay) await delay(5000)
+            return res
           })
-          .then((res: Response) => res.json())
+          .then(httpErrorHandler) // .then((res: Response) => res.json())
           .then((resData: IDataItem[]) => {
             if (!Array.isArray(resData)) {
               setIsLoaded(false)
@@ -83,7 +86,7 @@ IDataRequestProps): [IDataItem[], boolean, boolean] | null {
         onAbortIfRequestStarted(stratedImperativeRef.current)
       }
     }
-  }, [accessToken, url, debounce])
+  }, [accessToken, url, debounce, isActiveDelay, onCall, onAbortIfRequestStarted])
 
   return [dataFromServer, isLoaded, isLoading]
 }

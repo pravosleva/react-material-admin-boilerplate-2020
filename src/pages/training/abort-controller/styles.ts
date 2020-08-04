@@ -7,13 +7,19 @@ export const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
   },
-  buttonBox: {
-    marginTop: theme.spacing(1),
+  gridBox: {
+    // marginTop: theme.spacing(1),
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     gridColumnGap: theme.spacing(1),
-    gridRowGap: theme.spacing(1),
+    gridRowGap: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      gridTemplateColumns: '1fr',
+      gridColumnGap: theme.spacing(2),
+      gridRowGap: theme.spacing(2),
+    },
   },
+  switchersBox: {},
   input: {
     width: '100%',
   },
@@ -23,5 +29,10 @@ export const useStyles = makeStyles((theme) => ({
   noTextDecoration: {
     textDecoration: 'none',
     color: theme.palette.primary.main,
+  },
+  badgeBox: {
+    '& > *': {
+      margin: theme.spacing(2),
+    },
   },
 }))
