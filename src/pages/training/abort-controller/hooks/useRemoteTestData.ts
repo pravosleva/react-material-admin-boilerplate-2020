@@ -3,12 +3,12 @@ import { useState, useEffect, useRef } from 'react'
 export interface IDataRequestProps {
   url: string
   accessToken: string
-  onCall?: (aborted: boolean) => void
-  onAbortIfRequestStarted?: () => void
+  onCall?: () => void
+  onAbortIfRequestStarted?: (startedValue: boolean) => void
   onSuccess?: (length: number) => void
   onFail?: (err: any) => void
   debounce?: number
-  // isForceAborted?: boolean
+  // shouldBeAborted?: boolean
 }
 export interface IDataItem {
   [x: string]: any
@@ -24,7 +24,8 @@ export function useRemoteTestData({
   onSuccess,
   onFail,
   debounce = 0,
-}: IDataRequestProps): [IDataItem[], boolean, boolean] | null {
+}: // shouldBeAborted,
+IDataRequestProps): [IDataItem[], boolean, boolean] | null {
   const [dataFromServer, setDataFromServer] = useState<IDataItem[] | null>(null)
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -39,7 +40,7 @@ export function useRemoteTestData({
         setIsLoading(true)
         setIsLoaded(false)
         stratedImperativeRef.current = true
-        if (!!onCall) onCall(abortController.signal.aborted)
+        if (!!onCall) onCall()
         window
           .fetch(url, {
             // headers: { Authorization: `Bearer ${accessToken}` },
@@ -54,6 +55,11 @@ export function useRemoteTestData({
           })
           .then((res: Response) => res.json())
           .then((resData: IDataItem[]) => {
+            if (!Array.isArray(resData)) {
+              setIsLoaded(false)
+              setIsLoading(false)
+              throw new Error('Data is not correct')
+            }
             setDataFromServer(resData)
             setIsLoaded(true)
             setIsLoading(false)
@@ -73,11 +79,11 @@ export function useRemoteTestData({
       clearTimeout(debouncedHandler)
       abortController.abort()
 
-      if (stratedImperativeRef.current && !!onAbortIfRequestStarted) {
-        onAbortIfRequestStarted()
+      if (!!stratedImperativeRef.current && !!onAbortIfRequestStarted) {
+        onAbortIfRequestStarted(stratedImperativeRef.current)
       }
     }
-  }, [accessToken, url])
+  }, [accessToken, url, debounce])
 
   return [dataFromServer, isLoaded, isLoading]
 }

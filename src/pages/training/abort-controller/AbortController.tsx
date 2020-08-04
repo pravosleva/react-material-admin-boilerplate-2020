@@ -27,7 +27,11 @@ export const AbortController = () => {
   const { t } = useContext(MultilingualContext)
   const classes = useStyles()
   const dispatch = useDispatch()
+  const [debounce, setDebounce] = useState<number>(1000)
+  // const [shouldBeAborted, setShouldBeAborted] = useState(false)
   const onSuccess = (length: number) => {
+    // Additional trigger for demo?
+    // setShouldBeAborted(true)
     dispatch(
       showAsyncToast({
         text: `${length} items received`,
@@ -45,19 +49,19 @@ export const AbortController = () => {
       })
     )
   }
-  const onCall = (aborted: boolean) => {
+  const onCall = () => {
     dispatch(
       showAsyncToast({
-        text: `Called... aborted is ${JSON.stringify(aborted)}`,
+        text: 'Called...',
         type: 'info',
         delay: 5000,
       })
     )
   }
-  const onAbortIfRequestStarted = () => {
+  const onAbortIfRequestStarted = (startedValue: boolean) => {
     dispatch(
       showAsyncToast({
-        text: 'Started request aborted...',
+        text: `Started request aborted... ${String(startedValue)}`,
         type: 'warning',
         delay: 5000,
       })
@@ -71,8 +75,8 @@ export const AbortController = () => {
     onFail,
     onCall,
     onAbortIfRequestStarted,
-    debounce: 1000,
-    // isForceAborted,
+    debounce,
+    // shouldBeAborted,
   })
 
   return (
@@ -86,31 +90,57 @@ export const AbortController = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <Paper className={classes.paper}>
-            <TextField
-              className={classes.input}
-              // fullWidth
-              variant="outlined"
-              label="URL"
-              placeholder="URL"
-              // error={isErrored}
-              // helperText={isErrored && 'No more than 4 symbols'}
-              autoFocus={true}
-              inputProps={{
-                onChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => setUrl(e.target.value),
-                value: url,
-              }}
-            />
             <div className={classes.buttonBox}>
+              <TextField
+                // className={classes.input}
+                // fullWidth
+                variant="outlined"
+                label="URL"
+                placeholder="URL"
+                // error={isErrored}
+                // helperText={isErrored && 'No more than 4 symbols'}
+                autoFocus={true}
+                inputProps={{
+                  onChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => setUrl(e.target.value),
+                  value: url,
+                }}
+              />
+              <TextField
+                id="outlined-number"
+                // className={classes.input}
+                label="Debounce"
+                type="number"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                inputProps={{
+                  onChange: (e: React.ChangeEvent<HTMLInputElement>) => setDebounce(Number(e.target.value)),
+                  value: debounce,
+                }}
+                variant="outlined"
+              />
+              {/*
               <Button
                 variant="contained"
                 fullWidth
                 color="primary"
-                // onClick={() => setIsForceAborted(true)}
+                onClick={() => setShouldBeAborted(true)}
                 title="Abort"
-                disabled={isLoaded}
+                disabled={!isLoading}
               >
                 Abort
               </Button>
+              <Button
+                variant="contained"
+                fullWidth
+                color="secondary"
+                onClick={() => setShouldBeAborted(false)}
+                title="Start"
+                disabled={isLoading}
+              >
+                Start
+              </Button>
+              */}
             </div>
           </Paper>
         </Grid>
@@ -121,7 +151,13 @@ export const AbortController = () => {
         </Grid>
         <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
           <Paper className={clsx(classes.paper, classes.code)}>
-            {isLoaded && !!testData ? <ReactJson src={testData} /> : <h1>Loading...</h1>}
+            {isLoaded && !!testData ? (
+              <ReactJson src={testData} />
+            ) : isLoading ? (
+              <h1>Loading...</h1>
+            ) : (
+              <h1>No correct data</h1>
+            )}
           </Paper>
         </Grid>
         <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
