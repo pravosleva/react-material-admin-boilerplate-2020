@@ -75,36 +75,43 @@ export const AbortController = () => {
       })
     )
   }, [])
+  const [isActiveOnCallMsg, setIsActiveOnCallMsg] = useState<boolean>(true)
   const onCall = useCallback(() => {
-    dispatch(
-      showAsyncToast({
-        text: 'Called...',
-        type: 'info',
-        delay: 5000,
-      })
-    )
-  }, [])
-  const onAbortIfRequestStarted = useCallback((_startedReqWasAborted: boolean) => {
-    setAbortedResponseCounter((c) => c + 1)
-    dispatch(
-      showAsyncToast({
-        text: 'Started request aborted...',
-        type: 'warning',
-        delay: 5000,
-      })
-    )
-  }, [])
+    if (isActiveOnCallMsg) {
+      dispatch(
+        showAsyncToast({
+          text: 'Called...',
+          type: 'info',
+          delay: 5000,
+        })
+      )
+    }
+  }, [isActiveOnCallMsg])
+  const [isActiveOnAbortIfRequestStarted, setIsActiveOnAbortIfRequestStarted] = useState<boolean>(true)
+  const onAbortIfRequestStarted = useCallback(
+    (_startedReqWasAborted: boolean) => {
+      setAbortedResponseCounter((c) => c + 1)
+      if (isActiveOnAbortIfRequestStarted) {
+        dispatch(
+          showAsyncToast({
+            text: 'Started request aborted...',
+            type: 'warning',
+            delay: 5000,
+          })
+        )
+      }
+    },
+    [isActiveOnAbortIfRequestStarted]
+  )
   const [url, setUrl] = useState<string>('https://jsonplaceholder.typicode.com/users')
   const [isActiveDelay, setIsActiveDelay] = useState<boolean>(true)
-  const [isActiveOnCallMsg, setIsActiveOnCallMsg] = useState<boolean>(true)
-  const [isActiveOnAbortIfRequestStarted, setIsActiveOnAbortIfRequestStarted] = useState<boolean>(true)
   const [testData, isLoaded, isLoading]: [IDataItem[], boolean, boolean] = useRemoteTestData({
     url,
     accessToken: '123',
     onSuccess,
     onFail,
-    onCall: isActiveOnCallMsg && onCall,
-    onAbortIfRequestStarted: isActiveOnAbortIfRequestStarted && onAbortIfRequestStarted,
+    onCall,
+    onAbortIfRequestStarted,
     debounce,
     isActiveDelay,
   })
