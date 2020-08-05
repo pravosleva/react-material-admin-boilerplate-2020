@@ -1,5 +1,5 @@
 {
-  "ADDITIONAL_DELAY_SEC_FOR_DEMONSTRATE": "Additional delay for demonstate {seconds}s",
+  "ADDITIONAL_DELAY_SEC_FOR_DEMONSTRATE": "Additional delay for demonstate {seconds}s (after fetch before resolve)",
   "TRAINING_ABORT-CONTROLLER@DESCRIPTION": "This is a `AbortController` demonstration. The request will be dropped if you switch to another route before the response from the server is received. And also you can change settings to mke new requests.",
   "BRAND": "Brand",
   "CREATE_USER": "Create user",

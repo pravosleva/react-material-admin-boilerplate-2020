@@ -1,5 +1,5 @@
 {
-  "ADDITIONAL_DELAY_SEC_FOR_DEMONSTRATE": "Доп. задержка для демонстрации {seconds} сек",
+  "ADDITIONAL_DELAY_SEC_FOR_DEMONSTRATE": "Доп. задержка для демонстрации {seconds} сек (после fetch, перед resolve)",
   "TRAINING_ABORT-CONTROLLER@DESCRIPTION": "Это простая демонстрация `AbortController`. Запрос будет сброшен, если вы перейдете на другой роут раньше, чем будет получен ответ от сервера. Изменения настроек также влияет на возобновление запросов.",
   "BRAND": "Бренд",
   "CREATE_USER": "Создать польз.",
