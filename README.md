@@ -47,8 +47,10 @@ _Build production to `./build`_
 - [x] `postbuild.local.prod.sh`
 - [x] Git hooks
 - [x] Styled layouts with material design
-  - [x] Dashboard layout
-    - [x] desktop / laptop / tablet
+  - [ ] Dashboard layout
+    - [x] desktop
+    - [ ] laptop
+    - [ ] tablet
     - [x] mobile
   - [x] Auth layout
 - [x] Test api Docker container
@@ -85,7 +87,7 @@ _Build production to `./build`_
   - [x] `useRef` [like this](https://www.youtube.com/watch?v=t2ypzz6gJm0)
   - [x] Custom hook
   - [ ] `useEffect` features [like this](https://www.youtube.com/watch?v=j1ZRyw7OtZs&list=RDCMUC-8QAzbLcRglXeN_MY9blyw&index=1)
-  - [ ] `AbortController` usage sample
+  - [x] `AbortController` usage sample
 
 ### toolbar-menu-levels
 

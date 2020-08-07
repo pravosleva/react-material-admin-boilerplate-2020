@@ -88,8 +88,8 @@ class ConnectedApp extends React.Component {
           } else {
             return renderAuthMobile()
           }
-        case 'tablet':
-        case 'laptop':
+        case 'tablet': // TODO: renderAuthTablet
+        case 'laptop': // TODO: renderAuthLaptop
         case 'desktop':
           if (isLogged) {
             return renderLoggedDesktop()

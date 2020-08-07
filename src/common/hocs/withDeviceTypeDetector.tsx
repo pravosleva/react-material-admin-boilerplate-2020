@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setDeviceType } from '@/actions/myDevice'
 import { useDebounce } from '@/common/hooks/useDebounce'
@@ -27,7 +27,6 @@ export const withMyDeviceTypeDetector = (WrappedComponent: React.FC) => {
     const dispatch = useDispatch()
     const [monitorWidth, setMonitorWidth] = useState(window.innerWidth)
     const debouncedCurrentWidth = useDebounce(monitorWidth, 500)
-    const getDeviceTypeByWidthCb = useCallback(getDeviceTypeByWidth, [])
 
     useEffect(() => {
       const setDevice = () => {
@@ -45,7 +44,7 @@ export const withMyDeviceTypeDetector = (WrappedComponent: React.FC) => {
     }, [])
 
     useEffect(() => {
-      dispatch(setDeviceType({ width: debouncedCurrentWidth, type: getDeviceTypeByWidthCb(debouncedCurrentWidth) }))
+      dispatch(setDeviceType({ width: debouncedCurrentWidth, type: getDeviceTypeByWidth(debouncedCurrentWidth) }))
     }, [debouncedCurrentWidth, dispatch])
 
     return <WrappedComponent {...props} />
