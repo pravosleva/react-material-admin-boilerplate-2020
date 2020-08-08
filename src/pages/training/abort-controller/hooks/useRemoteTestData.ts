@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import { httpErrorHandler } from '@/utils/errors/http/fetch'
-// import { UniversalError } from '@/'
 
 export interface IDataRequestProps {
   url: string
@@ -10,7 +9,6 @@ export interface IDataRequestProps {
   onSuccess?: (length: number) => void
   onFail?: (err: any) => void
   debounce?: number
-  // shouldBeAborted?: boolean
   isActiveDelay?: boolean
 }
 export interface IDataItem {
@@ -28,14 +26,13 @@ export function useRemoteTestData({
   onFail,
   debounce = 0,
   isActiveDelay,
-}: // shouldBeAborted,
-IDataRequestProps): [IDataItem[] | null, boolean, boolean, (val: boolean) => void] {
+}: IDataRequestProps): [IDataItem[] | null, boolean, boolean, (val: boolean) => void] {
   const [dataFromServer, setDataFromServer] = useState<IDataItem[] | null>(null)
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const isStartedImperativeRef: React.MutableRefObject<boolean> = useRef(false)
   const shouldBeForceArortedImperativeRef: React.MutableRefObject<boolean> = useRef(false)
-  const handleForceAbort = (val: boolean) => {
+  const forceAbortToggler = (val: boolean) => {
     shouldBeForceArortedImperativeRef.current = val
   }
 
@@ -100,5 +97,5 @@ IDataRequestProps): [IDataItem[] | null, boolean, boolean, (val: boolean) => voi
     }
   }, [accessToken, url, debounce, isActiveDelay, onCall, onAbortIfRequestStarted])
 
-  return [dataFromServer, isLoaded, isLoading, handleForceAbort]
+  return [dataFromServer, isLoaded, isLoading, forceAbortToggler]
 }

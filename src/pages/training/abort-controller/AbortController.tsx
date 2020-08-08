@@ -28,7 +28,6 @@ import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline'
 import PanToolIcon from '@material-ui/icons/PanTool'
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
 import CircularProgress from '@material-ui/core/CircularProgress'
-// import Button from '@material-ui/core/Button'
 
 const toolbarMenuItem: IToolbarMenuItem = toolbarMenu.find(({ path }) => path === '/training')
 const { sublist } = toolbarMenuItem
@@ -118,7 +117,7 @@ export const AbortController = () => {
   )
   const [url, setUrl] = useState<string>('https://jsonplaceholder.typicode.com/users')
   const [isActiveDelay, setIsActiveDelay] = useState<boolean>(true)
-  const [testData, isLoaded, isLoading, handleForceAbort]: [
+  const [testData, isLoaded, isLoading, forceAbortToggler]: [
     IDataItem[],
     boolean,
     boolean,
@@ -139,10 +138,10 @@ export const AbortController = () => {
       setSuccessResponseCounter(0)
       setFailedResponseCounter(0)
       setAbortedRequestCounter(0)
-      handleForceAbort(true)
+      forceAbortToggler(true)
     } else {
       setIsStoppedAll(false)
-      handleForceAbort(false)
+      forceAbortToggler(false)
     }
   }, [isStoppedAll])
 
@@ -159,13 +158,9 @@ export const AbortController = () => {
           <Paper className={classes.paper}>
             <div className={classes.gridBox}>
               <TextField
-                // fullWidth
                 variant="outlined"
                 label="URL"
                 placeholder="URL"
-                // TODO: Check by isValidURL
-                // error={isErrored}
-                // helperText={isErrored && 'No more than 4 symbols'}
                 autoFocus={true}
                 inputProps={{
                   onChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => setUrl(e.target.value),
@@ -187,10 +182,7 @@ export const AbortController = () => {
               />
               <FormControl component="fieldset">
                 <FormLabel component="legend">{t('SETTINGS')}</FormLabel>
-                <FormGroup
-                // row
-                // className={classes.switchersBox}
-                >
+                <FormGroup>
                   <FormControlLabel
                     control={
                       <Switch
@@ -230,12 +222,8 @@ export const AbortController = () => {
                         checked={isStoppedAll}
                         onChange={() => setIsStoppedAll((val) => !val)}
                         name="checkedD"
-                        // color="primary"
-                        // inputProps={{ 'aria-label': 'secondary checkbox' }}
                         classes={{
-                          // root: classes.root,
                           switchBase: classes.dangerSwitch,
-                          // thumb: classes.thumb,
                           track: classes.track,
                           checked: classes.checked,
                         }}
@@ -251,17 +239,6 @@ export const AbortController = () => {
                 </FormHelperText>
               </FormControl>
               <ReactJson src={{ isLoaded, isLoading }} />
-              {/*
-              <Button
-                variant="contained"
-                fullWidth
-                color="primary"
-                onClick={handleResetCounters}
-                title="RESET COUNTERS"
-              >
-                RESET COUNTERS
-              </Button>
-              */}
               <div className={classes.badgeBox}>
                 <Badge badgeContent={calledRequestCounter} {...calledBadgeProps} />
                 <Badge badgeContent={successResponseCounter} {...successBadgeProps} />
