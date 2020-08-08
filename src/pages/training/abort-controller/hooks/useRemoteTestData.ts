@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { httpErrorHandler } from '@/utils/errors/http/fetch'
+// import { UniversalError } from '@/'
 
 export interface IDataRequestProps {
   url: string
@@ -28,11 +29,15 @@ export function useRemoteTestData({
   debounce = 0,
   isActiveDelay,
 }: // shouldBeAborted,
-IDataRequestProps): [IDataItem[] | null, boolean, boolean] {
+IDataRequestProps): [IDataItem[] | null, boolean, boolean, (val: boolean) => void] {
   const [dataFromServer, setDataFromServer] = useState<IDataItem[] | null>(null)
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const isStartedImperativeRef: React.MutableRefObject<boolean> = useRef(false)
+  const shouldBeForceArortedImperativeRef: React.MutableRefObject<boolean> = useRef(false)
+  const handleForceAbort = (val: boolean) => {
+    shouldBeForceArortedImperativeRef.current = val
+  }
 
   useEffect(() => {
     isStartedImperativeRef.current = false
@@ -54,6 +59,14 @@ IDataRequestProps): [IDataItem[] | null, boolean, boolean] {
           })
           .then(async (res: Response) => {
             if (isActiveDelay) await delay(5000)
+            if (abortController.signal.aborted) {
+              setIsLoading(false)
+              throw Error('Already aborted')
+            }
+            if (shouldBeForceArortedImperativeRef.current) {
+              setIsLoading(false)
+              throw Error('Force abort')
+            }
             return res
           })
           .then(httpErrorHandler) // .then((res: Response) => res.json())
@@ -81,12 +94,11 @@ IDataRequestProps): [IDataItem[] | null, boolean, boolean] {
     return function cancel() {
       clearTimeout(debouncedHandler)
       abortController.abort()
-
       if (!!isStartedImperativeRef.current && !!onAbortIfRequestStarted) {
         onAbortIfRequestStarted(isStartedImperativeRef.current)
       }
     }
   }, [accessToken, url, debounce, isActiveDelay, onCall, onAbortIfRequestStarted])
 
-  return [dataFromServer, isLoaded, isLoading]
+  return [dataFromServer, isLoaded, isLoading, handleForceAbort]
 }
