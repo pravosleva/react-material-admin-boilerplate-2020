@@ -28,14 +28,14 @@ export function useRemoteTestData({
   debounce = 0,
   isActiveDelay,
 }: // shouldBeAborted,
-IDataRequestProps): [IDataItem[], boolean, boolean] | null {
+IDataRequestProps): [IDataItem[] | null, boolean, boolean] {
   const [dataFromServer, setDataFromServer] = useState<IDataItem[] | null>(null)
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const stratedImperativeRef: React.MutableRefObject<boolean> = useRef(false)
+  const isStartedImperativeRef: React.MutableRefObject<boolean> = useRef(false)
 
   useEffect(() => {
-    stratedImperativeRef.current = false
+    isStartedImperativeRef.current = false
     const abortController = new AbortController()
     setIsLoading(false)
 
@@ -43,7 +43,7 @@ IDataRequestProps): [IDataItem[], boolean, boolean] | null {
       if (!!window) {
         setIsLoading(true)
         setIsLoaded(false)
-        stratedImperativeRef.current = true
+        isStartedImperativeRef.current = true
         if (!!onCall) onCall()
         window
           .fetch(url, {
@@ -67,11 +67,11 @@ IDataRequestProps): [IDataItem[], boolean, boolean] | null {
             setIsLoaded(true)
             setIsLoading(false)
             if (!!onSuccess) onSuccess(resData.length)
-            stratedImperativeRef.current = false
+            isStartedImperativeRef.current = false
           })
           .catch((error) => {
             if (!!onFail) onFail(error)
-            stratedImperativeRef.current = false
+            isStartedImperativeRef.current = false
           })
       }
     }
@@ -82,8 +82,8 @@ IDataRequestProps): [IDataItem[], boolean, boolean] | null {
       clearTimeout(debouncedHandler)
       abortController.abort()
 
-      if (!!stratedImperativeRef.current && !!onAbortIfRequestStarted) {
-        onAbortIfRequestStarted(stratedImperativeRef.current)
+      if (!!isStartedImperativeRef.current && !!onAbortIfRequestStarted) {
+        onAbortIfRequestStarted(isStartedImperativeRef.current)
       }
     }
   }, [accessToken, url, debounce, isActiveDelay, onCall, onAbortIfRequestStarted])
