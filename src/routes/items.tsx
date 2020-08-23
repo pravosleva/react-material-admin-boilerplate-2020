@@ -8,6 +8,7 @@ import { UseReducer } from '@/pages/training/use-reducer'
 import { UseRef } from '@/pages/training/use-ref'
 import { CustomHook } from '@/pages/training/custom-hook'
 import { AbortController } from '@/pages/training/abort-controller'
+import { Formik } from '@/pages/training/formik'
 
 export const routes = {
   mainRoutes: [
@@ -54,6 +55,12 @@ export const routes = {
       path: '/training/abort-controller',
       exact: true,
       component: AbortController,
+      options: { access: ['free'] },
+    },
+    {
+      path: '/training/formik',
+      exact: true,
+      component: Formik,
       options: { access: ['free'] },
     },
   ],

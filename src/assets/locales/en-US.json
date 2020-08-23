@@ -23,5 +23,6 @@
   "SUBMIT": "Submit",
   "TRAINING": "Training",
   "TRAINING_ABORT-CONTROLLER@DESCRIPTION": "This is the `AbortController` demonstration. The request will be dropped if you switch to another route before the response from the server is received. And also you can change settings to mke new requests.",
+  "TRAINING_FORMIK@DESCRIPTION": "`Formik` usage example (local state)",
   "TRAINING_USE-REDUCER@DESCRIPTION": "This is a simplest `useReducer` usage example"
 }

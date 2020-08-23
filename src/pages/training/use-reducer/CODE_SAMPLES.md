@@ -1,4 +1,4 @@
-# Sample 1
+## Sample 1
 
 ```js
 interface IState {

@@ -79,6 +79,16 @@ export const toolbarMenu: IToolbarMenuItem[] = [
           description: 'TRAINING_ABORT-CONTROLLER@DESCRIPTION',
         },
       },
+      {
+        path: '/training/formik',
+        options: {
+          text: 'Formik',
+          noTranslate: true,
+          icon: <BookmarkIcon />,
+          access: ['free'],
+          description: 'TRAINING_FORMIK@DESCRIPTION',
+        },
+      },
     ],
   },
   {

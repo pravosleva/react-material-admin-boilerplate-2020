@@ -81,6 +81,9 @@ _Build production to `./build`_
   - [x] From cookies
   - [x] From navigator (if supported)
 - [x] [Toolbar menu levels](#toolbar-menu-levels)
+  - [x] Depth 1
+  - [x] Depth 2
+  - [ ] Depth 3
 - [ ] Training
   - [x] `useContext`
   - [x] `useReducer`
@@ -88,6 +91,7 @@ _Build production to `./build`_
   - [x] Custom hook
   - [ ] `useEffect` features [like this](https://www.youtube.com/watch?v=j1ZRyw7OtZs&list=RDCMUC-8QAzbLcRglXeN_MY9blyw&index=1)
   - [x] `AbortController` usage sample
+  - [x] `formik` usage sample
 
 ### toolbar-menu-levels
 
