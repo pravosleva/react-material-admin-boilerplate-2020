@@ -95,7 +95,7 @@ _Build production to `./build`_
 
 ### toolbar-menu-levels
 
-```tsx
+```js
 // @/mui/layouts/dashboard/toolbar-menu.tsx
 
 export interface IToolbarMenuItem {

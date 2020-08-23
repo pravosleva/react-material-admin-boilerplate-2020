@@ -105,6 +105,7 @@ function getModules() {
 
   if (hasTsConfig && hasJsConfig) {
     throw new Error(
+      // eslint-disable-next-line max-len
       'You have both a tsconfig.json and a jsconfig.json. If you are using TypeScript please remove your jsconfig.json file.'
     )
   }
