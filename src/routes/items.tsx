@@ -9,6 +9,8 @@ import { UseRef } from '@/pages/training/use-ref'
 import { CustomHook } from '@/pages/training/custom-hook'
 import { AbortController } from '@/pages/training/abort-controller'
 import { Formik } from '@/pages/training/formik'
+import { NestedMenu } from '@/pages/training/nested-menu'
+import { Depth3 } from '@/pages/training/nested-menu/depth3'
 
 export const routes = {
   mainRoutes: [
@@ -61,6 +63,18 @@ export const routes = {
       path: '/training/formik',
       exact: true,
       component: Formik,
+      options: { access: ['free'] },
+    },
+    {
+      path: '/training/nested-menu',
+      exact: true,
+      component: NestedMenu,
+      options: { access: ['free'] },
+    },
+    {
+      path: '/training/nested-menu/depth3',
+      exact: true,
+      component: Depth3,
       options: { access: ['free'] },
     },
   ],

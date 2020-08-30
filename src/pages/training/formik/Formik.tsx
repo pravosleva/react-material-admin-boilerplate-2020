@@ -14,6 +14,7 @@ import Prism from 'prismjs'
 import ReactMarkdown from 'react-markdown'
 // @ts-ignore Cannot find module './CODE_SAMPLES.md' or its corresponding type declarations.
 import codeSamplesMD from './CODE_SAMPLES.md'
+import { ProTip } from '@/mui/custom-components/ProTip'
 
 interface Values {
   email: string
@@ -127,6 +128,7 @@ export const Formik = () => {
           )}
         </Fk>
       </Grid>
+      <ProTip />
     </Container>
   )
 }

@@ -16,6 +16,7 @@ export interface IToolbarMenuItem {
     description?: string
   }
   sublist?: IToolbarMenuItem[]
+  depth?: number
 }
 
 export const toolbarMenu: IToolbarMenuItem[] = [
@@ -50,6 +51,7 @@ export const toolbarMenu: IToolbarMenuItem[] = [
           access: ['free'],
           description: 'TRAINING_USE-REDUCER@DESCRIPTION',
         },
+        depth: 2,
       },
       {
         path: '/training/use-ref',
@@ -60,14 +62,17 @@ export const toolbarMenu: IToolbarMenuItem[] = [
           icon: <BookmarkIcon />,
           access: ['free'],
         },
+        depth: 2,
       },
       {
         path: '/training/custom-hook',
         options: {
           text: 'Custom hook',
+          title: 'React hooks',
           icon: <BookmarkIcon />,
           access: ['free'],
         },
+        depth: 2,
       },
       {
         path: '/training/abort-controller',
@@ -78,6 +83,7 @@ export const toolbarMenu: IToolbarMenuItem[] = [
           access: ['free'],
           description: 'TRAINING_ABORT-CONTROLLER@DESCRIPTION',
         },
+        depth: 2,
       },
       {
         path: '/training/formik',
@@ -88,6 +94,28 @@ export const toolbarMenu: IToolbarMenuItem[] = [
           access: ['free'],
           description: 'TRAINING_FORMIK@DESCRIPTION',
         },
+        depth: 2,
+      },
+      {
+        path: '/training/nested-menu',
+        options: {
+          text: 'Nested_menu',
+          icon: <BookmarkIcon />,
+          access: ['free'],
+        },
+        depth: 2,
+        sublist: [
+          {
+            path: '/training/nested-menu/depth3',
+            options: {
+              text: 'Depth3',
+              noTranslate: true,
+              icon: <BookmarkIcon />,
+              access: ['free'],
+            },
+            depth: 3,
+          },
+        ],
       },
     ],
   },
@@ -109,6 +137,7 @@ export const toolbarMenu: IToolbarMenuItem[] = [
           icon: <BlockIcon />,
           access: ['free'],
         },
+        depth: 2,
       },
     ],
   },

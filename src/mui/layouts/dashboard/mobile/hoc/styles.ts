@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3, 0, 0, 0),
   },
   list: {
-    width: 250,
+    width: 300,
   },
   fullList: {
     width: 'auto',

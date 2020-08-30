@@ -68,7 +68,7 @@ const MiniDrawerLeftHOCWithRouter: React.FC = ({ location, children }: IProps) =
   const MemoizedList = useMemo(
     () => (
       <List>
-        {toolbarMenu.map(({ path, options, sublist }: IToolbarMenuItem, i) => {
+        {toolbarMenu.map(({ path, options, sublist, depth }: IToolbarMenuItem, i) => {
           const { text, noTranslate, icon, title } = options
           const subpaths = !!sublist ? sublist.map((s) => s.path) : []
           const isActive = subpaths.some((p) => isCurrentPath(location.pathname, p))
@@ -77,8 +77,11 @@ const MiniDrawerLeftHOCWithRouter: React.FC = ({ location, children }: IProps) =
             return (
               <RouterSublist
                 className={classes.listItem}
-                subclassName={classes.sublistItem}
-                subclassNameLast={classes.sublistItemLast}
+                subclassName={clsx(classes.sublistItem)}
+                depth={depth}
+                subclassNameDepth2={classes.sublistItemDepth2}
+                subclassNameDepth3={classes.sublistItemDepth3}
+                subclassNameLast={clsx(classes.sublistItemLast)}
                 key={path || i}
                 path={path}
                 icon={icon}

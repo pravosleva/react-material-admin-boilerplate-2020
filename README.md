@@ -83,7 +83,7 @@ _Build production to `./build`_
 - [x] [Toolbar menu levels](#toolbar-menu-levels)
   - [x] Depth 1
   - [x] Depth 2
-  - [ ] Depth 3
+  - [x] Depth 3
 - [ ] Training
   - [x] `useContext`
   - [x] `useReducer`
@@ -108,6 +108,7 @@ export interface IToolbarMenuItem {
     title?: string
   }
   sublist?: IToolbarMenuItem[]
+  depth?: number // Flag for recursion
 }
 
 const toolbarMenu: IToolbarMenuItem[] = [
@@ -128,16 +129,29 @@ const toolbarMenu: IToolbarMenuItem[] = [
           icon: <BookmarkIcon />,
           access: ['free'],
         },
+        depth: 2,
       },
       {
-        path: '/training/use-ref',
+        path: '/training/nested-depth',
         options: {
-          text: 'useRef',
-          title: 'React hooks | useRef',
+          text: 'Nested depth',
           noTranslate: true,
           icon: <BookmarkIcon />,
           access: ['free'],
         },
+        depth: 2,
+        sublist: [
+          {
+            path: '/training/nested-depth/depth3',
+            options: {
+              text: 'Depth3',
+              noTranslate: true,
+              icon: <BookmarkIcon />,
+              access: ['free'],
+            },
+            depth: 3,
+          },
+        ],
       },
     ],
   },

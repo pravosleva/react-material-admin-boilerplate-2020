@@ -2,7 +2,17 @@ import { makeStyles } from '@material-ui/core/styles'
 import grey from '@material-ui/core/colors/grey'
 // See also: https://material-ui.com/ru/customization/color/
 
-const drawerWidth = 250
+const getBorderLeftByDepth = (depth: number) => {
+  switch (depth) {
+    case 2:
+      return grey[100]
+    case 3:
+    default:
+      return grey[50]
+  }
+}
+
+const drawerWidth = 300
 export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -78,7 +88,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   sublistItem: {
     borderLeftStyle: 'solid',
-    borderLeftColor: grey[200],
+    borderLeftColor: grey[200], // By default
     // backgroundColor: grey[100],
     color: grey[600],
     [theme.breakpoints.up('xs')]: {
@@ -101,6 +111,14 @@ export const useStyles = makeStyles((theme) => ({
       paddingLeft: theme.spacing(2),
       borderLeftWidth: theme.spacing(1),
     },
+  },
+  sublistItemDepth2: {
+    borderLeftColor: getBorderLeftByDepth(2),
+    // color: grey[300],
+  },
+  sublistItemDepth3: {
+    borderLeftColor: getBorderLeftByDepth(3),
+    // color: grey[300],
   },
   sublistItemLast: {
     borderBottomLeftRadius: '8px',
