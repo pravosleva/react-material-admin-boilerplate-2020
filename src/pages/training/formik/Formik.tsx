@@ -120,7 +120,7 @@ export const Formik = () => {
               <Grid item xs={12} sm={6} md={6} lg={6} xl={8}>
                 <Paper className={classes.paper}>
                   <h2>Render prop (args)</h2>
-                  <ReactJson src={{ submitForm, isSubmitting, ...rest }} />
+                  <ReactJson src={{ errors, submitForm, isSubmitting, ...rest }} />
                 </Paper>
               </Grid>
             </>
