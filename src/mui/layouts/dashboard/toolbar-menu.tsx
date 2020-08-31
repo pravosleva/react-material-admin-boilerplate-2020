@@ -108,7 +108,7 @@ export const toolbarMenu: IToolbarMenuItem[] = [
           {
             path: '/training/nested-menu/depth3',
             options: {
-              text: 'Depth3',
+              text: 'Depth 3',
               noTranslate: true,
               icon: <BookmarkIcon />,
               access: ['free'],

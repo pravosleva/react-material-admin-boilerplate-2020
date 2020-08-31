@@ -77,11 +77,11 @@ const MiniDrawerLeftHOCWithRouter: React.FC = ({ location, children }: IProps) =
             return (
               <RouterSublist
                 className={classes.listItem}
-                subclassName={clsx(classes.sublistItem)}
+                subclassName={classes.sublistItem}
                 depth={depth}
                 subclassNameDepth2={classes.sublistItemDepth2}
                 subclassNameDepth3={classes.sublistItemDepth3}
-                subclassNameLast={clsx(classes.sublistItemLast)}
+                subclassNameLast={classes.sublistItemLast}
                 key={path || i}
                 path={path}
                 icon={icon}

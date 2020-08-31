@@ -2,16 +2,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import grey from '@material-ui/core/colors/grey'
 // See also: https://material-ui.com/ru/customization/color/
 
-const getBorderLeftByDepth = (depth: number) => {
-  switch (depth) {
-    case 2:
-      return grey[100]
-    case 3:
-    default:
-      return grey[50]
-  }
-}
-
 const drawerWidth = 300
 export const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,6 +68,8 @@ export const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3, 0, 0, 0),
   },
   listItem: {
+    borderLeftColor: grey[200],
+    // backgroundColor: grey[200],
     color: '#000',
     [theme.breakpoints.down('xs')]: {
       paddingLeft: theme.spacing(2),
@@ -85,11 +77,19 @@ export const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(3),
     },
+    // [theme.breakpoints.up('xs')]: {
+    //   paddingLeft: theme.spacing(1),
+    //   borderLeftWidth: theme.spacing(1),
+    // },
+    // [theme.breakpoints.up('sm')]: {
+    //   paddingLeft: theme.spacing(2),
+    //   borderLeftWidth: theme.spacing(1),
+    // },
   },
   sublistItem: {
     borderLeftStyle: 'solid',
-    borderLeftColor: grey[200], // By default
-    // backgroundColor: grey[100],
+    borderLeftColor: grey[200],
+    // backgroundColor: grey[200],
     color: grey[600],
     [theme.breakpoints.up('xs')]: {
       paddingLeft: theme.spacing(1),
@@ -113,11 +113,13 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   sublistItemDepth2: {
-    borderLeftColor: getBorderLeftByDepth(2),
+    borderLeftColor: grey[200],
+    // backgroundColor: grey[200],
     // color: grey[300],
   },
   sublistItemDepth3: {
-    borderLeftColor: getBorderLeftByDepth(3),
+    borderLeftColor: grey[200],
+    // backgroundColor: grey[200],
     // color: grey[300],
   },
   sublistItemLast: {

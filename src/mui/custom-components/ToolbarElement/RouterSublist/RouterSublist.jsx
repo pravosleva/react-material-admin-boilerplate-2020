@@ -27,7 +27,7 @@ import { getModifiedPhraseForTranslate } from '@/utils/multilingual/getModifiedP
 //   icon: any
 // }
 
-function RouterSublistWithRouter(props) {
+export const RouterSublist = (props) => {
   const {
     path,
     primary,
@@ -81,7 +81,7 @@ function RouterSublistWithRouter(props) {
 
             if (!!sublist) {
               return (
-                <RouterSublistWithRouter
+                <RouterSublist
                   className={className}
                   subclassName={subclassName}
                   subclassNameLast={clsx(subclassNameLast, {
@@ -119,4 +119,3 @@ function RouterSublistWithRouter(props) {
     </>
   )
 }
-export const RouterSublist = RouterSublistWithRouter

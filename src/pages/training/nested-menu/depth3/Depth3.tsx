@@ -21,7 +21,7 @@ export const Depth3 = () => {
         <Link className={classes.noTextDecoration} to="/training/nested-menu">
           {t('NESTED_MENU')}
         </Link>{' '}
-        | DEPTH 3
+        | Depth 3
       </h1>
       Nested route sample
       <ProTip />
