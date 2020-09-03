@@ -39,7 +39,7 @@ export const Formik = () => {
         }, 0)
       })
   }, [])
-  // {isCodeSamplesLoaded ? <ReactMarkdown source={codeSamples} /> : <h1>Pleace wait...</h1>}
+  // {isCodeSamplesLoaded ? <ReactMarkdown source={codeSamples} /> : <h1>Please wait...</h1>}
 
   return (
     <Container>
@@ -113,7 +113,7 @@ export const Formik = () => {
                   </Grid>
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Paper className={classes.paper}>
-                      {isCodeSamplesLoaded ? <ReactMarkdown source={codeSamples} /> : <h1>Pleace wait...</h1>}
+                      {isCodeSamplesLoaded ? <ReactMarkdown source={codeSamples} /> : <h1>Please wait...</h1>}
                     </Paper>
                   </Grid>
                 </Grid>

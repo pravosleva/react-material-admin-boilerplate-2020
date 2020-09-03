@@ -117,6 +117,38 @@ export const toolbarMenu: IToolbarMenuItem[] = [
           },
         ],
       },
+      {
+        path: '/training/tests-with-enzyme',
+        options: {
+          text: 'Tests_with_enzyme',
+          icon: <BookmarkIcon />,
+          access: ['free'],
+        },
+        depth: 2,
+        sublist: [
+          {
+            path: '/training/tests-with-enzyme/component-renders',
+            options: {
+              text: 'Component renders',
+              noTranslate: true,
+              icon: <BookmarkIcon />,
+              access: ['free'],
+              description: 'TRAINING_TESTS-WITH-ENZYME_COMPONENT-RENDERS@DESCRIPTION',
+            },
+            depth: 3,
+          },
+          {
+            path: '/training/tests-with-enzyme/initial-todos-get-displayed',
+            options: {
+              text: 'INITIAL_TODOS_GET_DISPLAYED',
+              icon: <BookmarkIcon />,
+              access: ['free'],
+              description: 'TRAINING_TESTS-WITH-ENZYME_INITIAL-TODOS-GET-DISPLAYED@DESCRIPTION',
+            },
+            depth: 3,
+          },
+        ],
+      },
     ],
   },
   {

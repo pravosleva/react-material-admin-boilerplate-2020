@@ -11,6 +11,9 @@ import { AbortController } from '@/pages/training/abort-controller'
 import { Formik } from '@/pages/training/formik'
 import { NestedMenu } from '@/pages/training/nested-menu'
 import { Depth3 } from '@/pages/training/nested-menu/depth3'
+import { TestsWithEnzyme } from '@/pages/training/tests-with-enzyme'
+import { ComponentRenders } from '@/pages/training/tests-with-enzyme/component-renders'
+import { InitialTodosGetDisplayed } from '@/pages/training/tests-with-enzyme/initial-todos-get-displayed'
 
 export const routes = {
   mainRoutes: [
@@ -75,6 +78,24 @@ export const routes = {
       path: '/training/nested-menu/depth3',
       exact: true,
       component: Depth3,
+      options: { access: ['free'] },
+    },
+    {
+      path: '/training/tests-with-enzyme',
+      exact: true,
+      component: TestsWithEnzyme,
+      options: { access: ['free'] },
+    },
+    {
+      path: '/training/tests-with-enzyme/component-renders',
+      exact: true,
+      component: ComponentRenders,
+      options: { access: ['free'] },
+    },
+    {
+      path: '/training/tests-with-enzyme/initial-todos-get-displayed',
+      exact: true,
+      component: InitialTodosGetDisplayed,
       options: { access: ['free'] },
     },
   ],

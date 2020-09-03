@@ -138,7 +138,7 @@ export const UseReducer = () => {
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
           <Paper className={classes.paper}>
-            {isCodeSamplesLoaded ? <ReactMarkdown source={codeSamples} /> : <h1>Pleace wait...</h1>}
+            {isCodeSamplesLoaded ? <ReactMarkdown source={codeSamples} /> : <h1>Please wait...</h1>}
           </Paper>
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>

@@ -84,7 +84,7 @@ export const Home = () => {
         </Grid>
         <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
           <Paper className={classes.paper}>
-            {isCodeSamplesLoaded ? <ReactMarkdown source={codeSamples} /> : <h1>Pleace wait...</h1>}
+            {isCodeSamplesLoaded ? <ReactMarkdown source={codeSamples} /> : <h1>Please wait...</h1>}
           </Paper>
         </Grid>
       </Grid>
