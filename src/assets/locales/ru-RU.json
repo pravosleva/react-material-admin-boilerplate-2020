@@ -8,6 +8,7 @@
   "DESCRIPTION_IN_PROGRESS": "Описание в разработке...",
   "DESCRIPTION_NOT_FOUND": "Описание не найдено",
   "FAILED_RESPONSES": "Неудачных результатов: {counter}",
+  "GALLERY": "Галерея",
   "HOME": "Главная",
   "IN_PROGRESS": "В разработке...",
   "INITIAL_TODOS_GET_DISPLAYED": "Отображение нач. задач",
