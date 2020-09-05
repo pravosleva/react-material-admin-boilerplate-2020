@@ -14,6 +14,7 @@ import { Depth3 } from '@/pages/training/nested-menu/depth3'
 import { TestsWithEnzyme } from '@/pages/training/tests-with-enzyme'
 import { ComponentRenders } from '@/pages/training/tests-with-enzyme/component-renders'
 import { InitialTodosGetDisplayed } from '@/pages/training/tests-with-enzyme/initial-todos-get-displayed'
+import { ReactImageGallery } from '@/pages/training/react-image-gallery'
 
 export const routes = {
   mainRoutes: [
@@ -96,6 +97,12 @@ export const routes = {
       path: '/training/tests-with-enzyme/initial-todos-get-displayed',
       exact: true,
       component: InitialTodosGetDisplayed,
+      options: { access: ['free'] },
+    },
+    {
+      path: '/training/react-image-gallery',
+      exact: true,
+      component: ReactImageGallery,
       options: { access: ['free'] },
     },
   ],

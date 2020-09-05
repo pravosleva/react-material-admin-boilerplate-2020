@@ -149,6 +149,17 @@ export const toolbarMenu: IToolbarMenuItem[] = [
           },
         ],
       },
+      {
+        path: '/training/react-image-gallery',
+        options: {
+          text: 'react-image-gallery',
+          noTranslate: true,
+          icon: <BookmarkIcon />,
+          access: ['free'],
+          // description: 'TRAINING_FORMIK@DESCRIPTION',
+        },
+        depth: 2,
+      },
     ],
   },
   {
