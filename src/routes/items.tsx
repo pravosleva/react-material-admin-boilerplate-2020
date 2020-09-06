@@ -16,6 +16,8 @@ import { ComponentRenders } from '@/pages/training/tests-with-enzyme/component-r
 import { InitialTodosGetDisplayed } from '@/pages/training/tests-with-enzyme/initial-todos-get-displayed'
 import { Gallery } from '@/pages/training/gallery'
 import { ReactImageGallery } from '@/pages/training/gallery/react-image-gallery'
+import { State } from '@/pages/training/state'
+import { UseImmer } from '@/pages/training/state/use-immer'
 
 export const routes = {
   mainRoutes: [
@@ -110,6 +112,18 @@ export const routes = {
       path: '/training/gallery/react-image-gallery',
       exact: true,
       component: ReactImageGallery,
+      options: { access: ['free'] },
+    },
+    {
+      path: '/training/state',
+      exact: true,
+      component: State,
+      options: { access: ['free'] },
+    },
+    {
+      path: '/training/state/use-immer',
+      exact: true,
+      component: UseImmer,
       options: { access: ['free'] },
     },
   ],

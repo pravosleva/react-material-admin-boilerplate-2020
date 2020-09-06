@@ -154,7 +154,7 @@ export const toolbarMenu: IToolbarMenuItem[] = [
           text: 'Gallery',
           icon: <BookmarkIcon />,
           access: ['free'],
-          // description: 'TRAINING_FORMIK@DESCRIPTION',
+          // description: 'TRAINING_GALLERY@DESCRIPTION',
         },
         depth: 2,
         sublist: [
@@ -165,7 +165,30 @@ export const toolbarMenu: IToolbarMenuItem[] = [
               noTranslate: true,
               icon: <BookmarkIcon />,
               access: ['free'],
-              // description: 'TRAINING_FORMIK@DESCRIPTION',
+              // description: 'TRAINING_REACT-IMAGE-GALLERY@DESCRIPTION',
+            },
+            depth: 3,
+          },
+        ],
+      },
+      {
+        path: '/training/state',
+        options: {
+          text: 'State',
+          icon: <BookmarkIcon />,
+          access: ['free'],
+          // description: 'TRAINING_STATE@DESCRIPTION',
+        },
+        depth: 2,
+        sublist: [
+          {
+            path: '/training/state/use-immer',
+            options: {
+              text: 'Use-immer hook',
+              noTranslate: true,
+              icon: <BookmarkIcon />,
+              access: ['free'],
+              description: 'TRAINING_USE-IMMER@DESCRIPTION',
             },
             depth: 3,
           },
