@@ -29,16 +29,35 @@ export const ReactImageGallery = () => {
       </h1>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <h2>v2</h2>
           <BannerAsGallery2
             bannerHeight={400} // Optional
             bannerMaxWidth={1000}
             items={[
               {
+                original: 'https://smartprice.ru/static/img/smartprice/rdbanners/index/desktop/1745251.jpg',
+                color1: '#F2F2F2',
+                color2: '#F2F2F2',
+                url: 'https://smartprice.ru',
+              },
+              {
+                original: 'https://smartprice.ru/static/img/smartprice/rdbanners/index/desktop/1551246.jpg',
+                color1: '#3482C4',
+                color2: '#3482C4',
+                url: 'https://smartprice.ru',
+              },
+              {
+                original: 'https://smartprice.ru/static/img/smartprice/rdbanners/index/desktop/1461867.jpg',
+                color1: '#3482C4',
+                color2: '#3482C4',
+                url: 'https://smartprice.ru',
+              },
+              {
                 original: 'http://80.87.194.181/api/uploads/fd083df137d445d69deb253fd8201ef6.jpg',
                 color1: '#fff',
                 // color2: '#01AEEF',
                 color2: '#172233',
-                url: 'http://pravosleva.ru',
+                url: 'http://uremont.com',
               },
               {
                 original: 'https://i.pinimg.com/originals/59/01/ae/5901ae2060def93a2ad332385e03dab8.png',
@@ -76,6 +95,7 @@ export const ReactImageGallery = () => {
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <h2>v1</h2>
           <BannerAsGallery1
             bannerHeight={400} // Optional
             items={[
