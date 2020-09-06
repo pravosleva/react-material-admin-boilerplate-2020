@@ -1,8 +1,11 @@
+/* eslint-disable max-len */
 import React from 'react'
-import ImageGallery from '@/utils/react-image-gallery/src@1.0.8' // from 'react-image-gallery'
+import ImageGallery, { SVG } from '@/utils/react-image-gallery/src@1.0.8' // from 'react-image-gallery'
 import { withStyles, Theme as ITheme } from '@material-ui/core/styles'
 import styled, { css } from 'styled-components'
 import { IProps } from './interfaces'
+import './css/styles.css'
+import { invertColor } from '@/utils/colors/invertColor'
 
 const defaultBannerHeight = 360
 const BannerGalleryWrapper = styled('div')<IProps>`
@@ -59,7 +62,6 @@ const ImgGradientWrapper = styled('div')<IGradientWrapperProps>`
     bannerHeight &&
     css`
       height: ${bannerHeight}px;
-      border: 1px solid blue;
     `}
   ${({ color1, color2 }) =>
     color1 &&
@@ -99,6 +101,7 @@ export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
 })(({ bannerHeight, ...props }: IProps) => (
   <BannerGalleryWrapper bannerHeight={bannerHeight} mobileOnly={props.mobileOnly} desktopOnly={props.desktopOnly}>
     <ImageGallery
+      className="top_carousel"
       {...props}
       showBullets
       showPlayButton={false}
@@ -117,16 +120,38 @@ export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
           />
         </ImgGradientWrapper>
       )}
-      renderRightNav={(onClick: () => void, disabled: boolean) => (
+      renderLeftNav={(onClick: () => void, disabled: boolean, { color2 }) => (
+        <button
+          type="button"
+          className="image-gallery-icon image-gallery-left-nav"
+          disabled={disabled}
+          onClick={onClick}
+          aria-label="Prev Slide"
+        >
+          {/* <i className="sp-ico sp-ico_for_rev slick-arrow"></i> */}
+          <SVG
+            icon="leftSmartPrice"
+            viewBox="0 0 5 8"
+            // strokeWidth={1}
+            color={invertColor(color2)}
+          />
+        </button>
+      )}
+      renderRightNav={(onClick: () => void, disabled: boolean, { color2 }) => (
         <button
           type="button"
           className="image-gallery-icon image-gallery-right-nav"
           disabled={disabled}
           onClick={onClick}
           aria-label="Next Slide"
-          style={{ border: '1px dashed red' }}
         >
-          Custom R
+          <SVG
+            icon="rightSmartPrice"
+            viewBox="0 0 5 8"
+            // strokeWidth={1}
+            color={invertColor(color2)}
+          />
+          {/* <i className="sp-ico sp-ico_for_fwd slick-arrow"></i> */}
         </button>
       )}
     />

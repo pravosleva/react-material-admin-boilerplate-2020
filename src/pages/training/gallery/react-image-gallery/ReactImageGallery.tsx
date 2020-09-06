@@ -26,7 +26,7 @@ export const ReactImageGallery = () => {
         | <code>react-image-gallery</code>
       </h1>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={5}>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
           <BannerAsGallery
             bannerHeight={400} // Optional
             items={[

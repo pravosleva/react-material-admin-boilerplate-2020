@@ -155,7 +155,6 @@ export default class ImageGallery extends React.Component {
         disabled={disabled}
         onClick={onClick}
         aria-label="Previous Slide"
-        style={{ border: '1px dashed red' }}
       >
         <SVG icon="left" viewBox="6 0 12 24" />
       </button>
@@ -167,7 +166,6 @@ export default class ImageGallery extends React.Component {
         disabled={disabled}
         onClick={onClick}
         aria-label="Next Slide"
-        style={{ border: '1px dashed red' }}
       >
         <SVG icon="right" viewBox="6 0 12 24" />
       </button>
@@ -1316,8 +1314,8 @@ export default class ImageGallery extends React.Component {
           <React.Fragment>
             {showNav && (
               <React.Fragment>
-                {renderLeftNav(this.slideLeft, !this.canSlideLeft())}
-                {renderRightNav(this.slideRight, !this.canSlideRight())}
+                {renderLeftNav(this.slideLeft, !this.canSlideLeft(), items[currentIndex])}
+                {renderRightNav(this.slideRight, !this.canSlideRight(), items[currentIndex])}
               </React.Fragment>
             )}
             <Swipeable
@@ -1380,3 +1378,5 @@ export default class ImageGallery extends React.Component {
     )
   }
 }
+
+export { SVG }
