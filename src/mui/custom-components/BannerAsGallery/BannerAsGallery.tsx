@@ -57,6 +57,12 @@ interface IGradientWrapperProps {
   bannerHeight: number
 }
 const ImgGradientWrapper = styled('div')<IGradientWrapperProps>`
+  /* width: 100vw;
+  display: flex;
+  justify-content: center;
+  & > div {
+    max-width: 1000px;
+  } */
   height: ${defaultBannerHeight}px;
   ${({ bannerHeight }) =>
     bannerHeight &&
@@ -128,13 +134,15 @@ export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
           onClick={onClick}
           aria-label="Prev Slide"
         >
-          {/* <i className="sp-ico sp-ico_for_rev slick-arrow"></i> */}
-          <SVG
-            icon="leftSmartPrice"
-            viewBox="0 0 5 8"
-            // strokeWidth={1}
-            color={invertColor(color2)}
-          />
+          <div style={{ transform: 'rotateY(180deg)' }}>
+            {/* <i className="sp-ico sp-ico_for_rev slick-arrow"></i> */}
+            <SVG
+              icon="leftSmartPrice"
+              viewBox="0 0 5 8"
+              // strokeWidth={1}
+              color={invertColor(color2)}
+            />
+          </div>
         </button>
       )}
       renderRightNav={(onClick: () => void, disabled: boolean, { color2 }) => (

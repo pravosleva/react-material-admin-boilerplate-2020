@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useContext } from 'react'
 import { ProTip } from '@/mui/custom-components/ProTip'
 import { Container } from '@material-ui/core'
@@ -6,7 +7,8 @@ import Grid from '@material-ui/core/Grid'
 import { MultilingualContext } from '@/common/context/mutilingual'
 import { Link } from 'react-router-dom'
 import { useStyles } from './styles'
-import { BannerAsGallery } from '@/mui/custom-components/BannerAsGallery'
+import { BannerAsGallery as BannerAsGallery1 } from '@/mui/custom-components/BannerAsGallery'
+import { BannerAsGallery as BannerAsGallery2 } from '@/mui/custom-components/BannerAsGallery2'
 import 'react-image-gallery/styles/css/image-gallery.css'
 
 export const ReactImageGallery = () => {
@@ -27,25 +29,86 @@ export const ReactImageGallery = () => {
       </h1>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <BannerAsGallery
+          <BannerAsGallery2
             bannerHeight={400} // Optional
+            bannerMaxWidth={1000}
             items={[
               {
-                original: 'http://80.87.194.181/api/uploads/849cf23ce1e74127a36c2b84788588ab.png',
+                original: 'http://80.87.194.181/api/uploads/fd083df137d445d69deb253fd8201ef6.jpg',
                 color1: '#fff',
-                color2: '#01AEEF',
+                // color2: '#01AEEF',
+                color2: '#172233',
                 url: 'http://pravosleva.ru',
               },
               {
-                original: 'http://80.87.194.181/api/uploads/8129c3be2f9c42318f56c1904bc3c9b6.png',
+                original: 'https://i.pinimg.com/originals/59/01/ae/5901ae2060def93a2ad332385e03dab8.png',
                 color1: '#fff',
-                color2: '#01AEEF',
+                color2: '#000',
                 url: 'http://uremont.com',
               },
               {
-                original: 'https://sps26.ooo/uploads/posts/2019-03/1553167658_7ed518f17bcc5fcf99c37f5c59217cd7.png',
+                original: 'https://img1.goodfon.com/wallpaper/nbig/c/1b/programmirovanie-funkciya.jpg',
                 color1: '#fff',
-                color2: '#E51D2B',
+                color2: '#24251F',
+                url: 'http://uremont.com',
+              },
+              {
+                original: '/5a3a250e0952d4.09849609151376001403825607.png',
+                color1: '#fff',
+                color2: '#E61D2B',
+                url: 'http://uremont.com',
+              },
+              {
+                original:
+                  'https://i0.wp.com/worldscholarshipforum.com/wp-content/uploads/2018/11/pepsi-scholarship.png?fit=733%2C508&ssl=1',
+                color1: '#0F3792',
+                color2: '#0F5CA2',
+                url: 'http://uremont.com',
+              },
+              {
+                original:
+                  'https://cdn.scores24.ru/static/ru/repost-previews/scores24/match/csgo/10-03-2020-teamone-infinity.jpg',
+                color1: '#F1F1F3',
+                color2: '#C8C8CA',
+                url: 'http://uremont.com',
+              },
+            ]}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <BannerAsGallery1
+            bannerHeight={400} // Optional
+            items={[
+              {
+                original: 'http://80.87.194.181/api/uploads/fd083df137d445d69deb253fd8201ef6.jpg',
+                color1: '#fff',
+                // color2: '#01AEEF',
+                color2: '#172233',
+                url: 'http://pravosleva.ru',
+              },
+              {
+                original: 'https://i.pinimg.com/originals/59/01/ae/5901ae2060def93a2ad332385e03dab8.png',
+                color1: '#fff',
+                color2: '#000',
+                url: 'http://uremont.com',
+              },
+              {
+                original: 'https://img1.goodfon.com/wallpaper/nbig/c/1b/programmirovanie-funkciya.jpg',
+                color1: '#fff',
+                color2: '#24251F',
+                url: 'http://uremont.com',
+              },
+              {
+                original: '/5a3a250e0952d4.09849609151376001403825607.png',
+                color1: '#fff',
+                color2: '#E61D2B',
+                url: 'http://uremont.com',
+              },
+              {
+                original:
+                  'https://i0.wp.com/worldscholarshipforum.com/wp-content/uploads/2018/11/pepsi-scholarship.png?fit=733%2C508&ssl=1',
+                color1: '#0F3792',
+                color2: '#0F5CA2',
                 url: 'http://uremont.com',
               },
             ]}
