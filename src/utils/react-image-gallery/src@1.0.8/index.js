@@ -66,7 +66,7 @@ export default class ImageGallery extends React.Component {
     preventDefaultTouchmoveEvent: bool,
     onErrorImageURL: string,
     indexSeparator: string,
-    thumbnailPosition: oneOf(['top', 'bottom', 'left', 'right']),
+    thumbnailPosition: oneOf(['top', 'bottom', 'left', 'leftSmartPrice', 'right', 'rightSmartPrice']),
     startIndex: number,
     slideDuration: number,
     slideInterval: number,

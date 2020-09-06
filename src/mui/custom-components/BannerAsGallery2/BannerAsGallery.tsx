@@ -156,7 +156,7 @@ const ImgGradientWrapper = styled('div')<IGradientWrapperProps>`
 `
 
 export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
-  name: 'custom-banner-gallery',
+  name: 'custom-banner-gallery2',
 })(({ bannerHeight, bannerMaxWidth, ...props }: IProps) => {
   const [color1, setColor1] = useState(props.items[0].color1)
   const [color2, setColor2] = useState(props.items[0].color2)
@@ -173,7 +173,6 @@ export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
     >
       <ImageGallery
         onSlide={(index: number) => {
-          // eslint-disable-next-line no-console
           setColor1(props.items[index].color1)
           setColor2(props.items[index].color2)
         }}
@@ -184,6 +183,10 @@ export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
         // showNav={false}
         showThumbnails={false}
         showFullscreenButton={false}
+        // onErrorImageURL="/steamuserimages-a.akamaihd.net.gif"
+        // onErrorImageURL="https://cmates.blob.core.windows.net/cmmaterial/material_18_4_25_rqyps.jpeg"
+        autoPlay
+        slideInterval={3000}
         renderItem={({ original, color1, color2, url }: any) => (
           <ImgGradientWrapper
             bannerMaxWidth={bannerMaxWidth}
@@ -204,7 +207,7 @@ export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
         renderLeftNav={(onClick: () => void, disabled: boolean, { color2 }) => (
           <button
             type="button"
-            className="image-gallery-icon image-gallery-left-nav"
+            className="image-gallery-icon image-gallery-left-nav modified2"
             disabled={disabled}
             onClick={onClick}
             aria-label="Prev Slide"
@@ -223,7 +226,7 @@ export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
         renderRightNav={(onClick: () => void, disabled: boolean, { color2 }) => (
           <button
             type="button"
-            className="image-gallery-icon image-gallery-right-nav"
+            className="image-gallery-icon image-gallery-right-nav modified2"
             disabled={disabled}
             onClick={onClick}
             aria-label="Next Slide"

@@ -53,7 +53,8 @@ const SVG = (props) => {
 SVG.propTypes = {
   strokeWidth: number,
   viewBox: string,
-  icon: oneOf(['left', 'right', 'maximize', 'minimize', 'play', 'pause']).isRequired,
+  icon: oneOf(['left', 'leftSmartPrice', 'right', 'rightSmartPrice', 'maximize', 'minimize', 'play', 'pause'])
+    .isRequired,
   color: string,
 }
 
