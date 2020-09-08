@@ -10,10 +10,64 @@ import { useStyles } from './styles'
 import { BannerAsGallery as BannerAsGallery1 } from '@/mui/custom-components/BannerAsGallery'
 import { BannerAsGallery as BannerAsGallery2 } from '@/mui/custom-components/BannerAsGallery2'
 import 'react-image-gallery/styles/css/image-gallery.css'
+import ColorPicker from 'material-ui-color-picker'
+import { useImmerReducer } from 'use-immer'
+
+function v2Reducer(draft, action) {
+  switch (action.type) {
+    case 'SET_COLOR2': {
+      draft[action.index].color2 = action.value
+      return
+    }
+    case 'SET_COLOR1': {
+      draft[action.index].color1 = action.value
+      return
+    }
+    default:
+      return
+  }
+}
+const initialV2State = [
+  {
+    original: 'https://smartprice.ru/static/img/smartprice/rdbanners/index/desktop/1551246.jpg',
+    color1: '#3482C4',
+    color2: '#3482C4',
+    url: 'https://smartprice.ru',
+  },
+  {
+    original: 'https://smartprice.ru/static/img/smartprice/rdbanners/index/desktop/1461867.jpg',
+    color1: '#3482C4',
+    color2: '#3482C4',
+    url: 'https://smartprice.ru',
+  },
+  {
+    original: 'https://smartprice.ru/static/img/smartprice/rdbanners/index/desktop/1745251.jpg',
+    color1: '#F2F2F2',
+    color2: '#F2F2F2',
+    url: 'https://smartprice.ru',
+  },
+  {
+    original: '/10-03-2020-teamone-infinity.920x360.jpg',
+    color1: '#EFEFF1',
+    color2: '#DBDBDD',
+    url: 'http://uremont.com',
+  },
+]
 
 export const ReactImageGallery = () => {
   const { t } = useContext(MultilingualContext)
   const classes = useStyles()
+  const [v2State, dispatchV2] = useImmerReducer(v2Reducer, initialV2State)
+  const handleV2Color2Change = (index: number) => (value: string) => {
+    if (!!value) {
+      dispatchV2({ type: 'SET_COLOR2', index, value })
+    }
+  }
+  const handleV2Color1Change = (index: number) => (value: string) => {
+    if (!!value) {
+      dispatchV2({ type: 'SET_COLOR1', index, value })
+    }
+  }
 
   return (
     <Container>
@@ -28,37 +82,37 @@ export const ReactImageGallery = () => {
         | <code>react-image-gallery</code>
       </h1>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-          <h2>v2: 920x360?</h2>
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+          <h2>v2: 920x360</h2>
+          <p>First slide</p>
+          <ColorPicker
+            name="color1"
+            defaultValue={v2State[0].color1}
+            value={v2State[0].color1}
+            onChange={handleV2Color1Change(0)}
+            fullWidth
+            variant="filled"
+            label="color1"
+            size="small"
+            style={{ marginBottom: '10px' }}
+          />
+          <ColorPicker
+            name="color2"
+            defaultValue={v2State[0].color2}
+            value={v2State[0].color2}
+            onChange={handleV2Color2Change(0)}
+            fullWidth
+            variant="filled"
+            label="color2"
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} md={1} lg={1} xl={1}></Grid>
+        <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
           <BannerAsGallery2
             bannerHeight={400} // Optional
             bannerMaxWidth={1000}
-            items={[
-              {
-                original: 'https://smartprice.ru/static/img/smartprice/rdbanners/index/desktop/1745251.jpg',
-                color1: '#F2F2F2',
-                color2: '#F2F2F2',
-                url: 'https://smartprice.ru',
-              },
-              {
-                original: 'https://smartprice.ru/static/img/smartprice/rdbanners/index/desktop/1551246.jpg',
-                color1: '#3482C4',
-                color2: '#3482C4',
-                url: 'https://smartprice.ru',
-              },
-              {
-                original: 'https://smartprice.ru/static/img/smartprice/rdbanners/index/desktop/1461867.jpg',
-                color1: '#3482C4',
-                color2: '#3482C4',
-                url: 'https://smartprice.ru',
-              },
-              {
-                original: '/10-03-2020-teamone-infinity.920x360.jpg',
-                color1: '#EFEFF1',
-                color2: '#DBDBDD',
-                url: 'http://uremont.com',
-              },
-            ]}
+            items={v2State}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>

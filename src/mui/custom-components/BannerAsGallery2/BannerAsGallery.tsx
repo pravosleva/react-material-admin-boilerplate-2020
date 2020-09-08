@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import ImageGallery, { SVG } from '@/utils/react-image-gallery/src@1.0.8' // from 'react-image-gallery'
 import { withStyles, Theme as ITheme } from '@material-ui/core/styles'
 import styled, { css } from 'styled-components'
@@ -158,8 +158,9 @@ const ImgGradientWrapper = styled('div')<IGradientWrapperProps>`
 export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
   name: 'custom-banner-gallery2',
 })(({ bannerHeight, bannerMaxWidth, ...props }: IProps) => {
-  const [color1, setColor1] = useState(props.items[0].color1)
-  const [color2, setColor2] = useState(props.items[0].color2)
+  const [currentIndex, setCurrentIndex] = useState<number>(0)
+  const color1 = useMemo(() => props.items[currentIndex].color1, [currentIndex, props.items[currentIndex].color1])
+  const color2 = useMemo(() => props.items[currentIndex].color2, [currentIndex, props.items[currentIndex].color2])
 
   return (
     <BannerGalleryWrapper
@@ -173,8 +174,7 @@ export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
     >
       <ImageGallery
         onSlide={(index: number) => {
-          setColor1(props.items[index].color1)
-          setColor2(props.items[index].color2)
+          setCurrentIndex(index)
         }}
         className="top_carousel"
         {...props}
@@ -185,8 +185,8 @@ export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
         showFullscreenButton={false}
         // onErrorImageURL="/steamuserimages-a.akamaihd.net.gif"
         // onErrorImageURL="https://cmates.blob.core.windows.net/cmmaterial/material_18_4_25_rqyps.jpeg"
-        autoPlay
-        slideInterval={3000}
+        // autoPlay
+        // slideInterval={3000}
         renderItem={({ original, color1, color2, url }: any) => (
           <ImgGradientWrapper
             bannerMaxWidth={bannerMaxWidth}
