@@ -1,10 +1,10 @@
 import React from 'react'
 import { number, oneOf, string } from 'prop-types'
-import { ChevronRightIcon as NextSmartPriceSVG } from '@/mui/custom-components/BannerAsGallery/svg/ChevronRightIcon'
-// import { Back as BackSmartPriceSVG } from '@/mui/custom-components/BannerAsGallery/svg/Back'
+import { ChevronRightIcon as NextSmartPriceSVG } from '@/mui/custom-components/BannerAsGallery2/svg/ChevronRightIcon'
+import { ChevronLeftIcon as BackSmartPriceSVG } from '@/mui/custom-components/BannerAsGallery2/svg/ChevronLeftIcon'
 
 const left = () => <polyline points="15 18 9 12 15 6" />
-const leftSmartPrice = ({ color }) => <NextSmartPriceSVG color={color} />
+const leftSmartPrice = ({ color }) => <BackSmartPriceSVG color={color} />
 const right = () => <polyline points="9 18 15 12 9 6" />
 const rightSmartPrice = ({ color }) => <NextSmartPriceSVG color={color} />
 const maximize = () => (

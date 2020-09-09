@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import ImageGallery, { SVG } from '@/utils/react-image-gallery/src@1.0.8' // from 'react-image-gallery'
 import { withStyles, Theme as ITheme } from '@material-ui/core/styles'
 import styled, { css } from 'styled-components'
-import { IProps } from './interfaces'
+import { IProps, IWrapperProps } from './interfaces'
 import './css/styles.css'
 import { invertColor } from '@/utils/colors/invertColor'
 // import { fadeIn } from '@/utils/styled-mui/animations/fadeIn'
@@ -11,7 +11,7 @@ import { invertColor } from '@/utils/colors/invertColor'
 
 const defaultBannerHeight = 360
 const defautBannerMaxWidthPercentage = 100
-const BannerGalleryWrapper = styled('div')<IProps>`
+const BannerGalleryWrapper = styled('div')<IWrapperProps>`
   ${({ desktopOnly }) =>
     desktopOnly &&
     css`
@@ -125,23 +125,10 @@ const BannerGalleryWrapper = styled('div')<IProps>`
   justify-content: center;
 `
 interface IGradientWrapperProps {
-  color1: string
-  color2: string
   bannerHeight?: number
   bannerMaxWidth?: number
 }
 const ImgGradientWrapper = styled('div')<IGradientWrapperProps>`
-  /* width: 100vw;
-  display: flex;
-  justify-content: center;
-  & > div {
-    max-width: 1000px;
-  } */
-  /* ${({ bannerMaxWidth }) =>
-    bannerMaxWidth &&
-    css`
-      width: ${bannerMaxWidth}px;
-    `} */
   height: ${defaultBannerHeight}px;
   ${({ bannerHeight }) =>
     bannerHeight &&
@@ -157,11 +144,7 @@ const ImgGradientWrapper = styled('div')<IGradientWrapperProps>`
 
 export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
   name: 'custom-banner-gallery2',
-})(({ bannerHeight, bannerMaxWidth, ...props }: IProps) => {
-  const [currentIndex, setCurrentIndex] = useState<number>(0)
-  const color1 = useMemo(() => props.items[currentIndex].color1, [currentIndex, props.items[currentIndex].color1])
-  const color2 = useMemo(() => props.items[currentIndex].color2, [currentIndex, props.items[currentIndex].color2])
-
+})(({ bannerHeight, bannerMaxWidth, onSlide, color1, color2, ...props }: IProps) => {
   return (
     <BannerGalleryWrapper
       // key={`${color1};${color2}`}
@@ -173,9 +156,7 @@ export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
       desktopOnly={props.desktopOnly}
     >
       <ImageGallery
-        onSlide={(index: number) => {
-          setCurrentIndex(index)
-        }}
+        onSlide={onSlide}
         className="top_carousel"
         {...props}
         showBullets
@@ -188,12 +169,7 @@ export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
         // autoPlay
         // slideInterval={3000}
         renderItem={({ original, color1, color2, url }: any) => (
-          <ImgGradientWrapper
-            bannerMaxWidth={bannerMaxWidth}
-            bannerHeight={bannerHeight}
-            color1={color1}
-            color2={color2}
-          >
+          <ImgGradientWrapper bannerMaxWidth={bannerMaxWidth} bannerHeight={bannerHeight}>
             <img
               src={original}
               alt="no"
@@ -204,36 +180,45 @@ export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
             />
           </ImgGradientWrapper>
         )}
-        renderLeftNav={(onClick: () => void, disabled: boolean, { color2 }) => (
+        renderLeftNav={(
+          onClick: () => void,
+          disabled: boolean
+          // _originalProps
+        ) => (
           <button
             type="button"
             className="image-gallery-icon image-gallery-left-nav modified2"
             disabled={disabled}
             onClick={onClick}
             aria-label="Prev Slide"
+            style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
           >
-            <div style={{ transform: 'rotateY(180deg)' }}>
-              {/* <i className="sp-ico sp-ico_for_rev slick-arrow"></i> */}
-              <SVG
-                icon="leftSmartPrice"
-                viewBox="0 0 5 8"
-                // strokeWidth={1}
-                color={invertColor(color2)}
-              />
-            </div>
+            {/* <i className="sp-ico sp-ico_for_rev slick-arrow"></i> */}
+            <SVG
+              icon="leftSmartPrice"
+              viewBox="-7 -5 24 24"
+              // strokeWidth={1}
+              color={invertColor(color2)}
+            />
           </button>
         )}
-        renderRightNav={(onClick: () => void, disabled: boolean, { color2 }) => (
+        renderRightNav={(
+          onClick: () => void,
+          disabled: boolean
+          // _originalProps
+        ) => (
           <button
             type="button"
             className="image-gallery-icon image-gallery-right-nav modified2"
             disabled={disabled}
             onClick={onClick}
             aria-label="Next Slide"
+            style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
           >
             <SVG
               icon="rightSmartPrice"
-              viewBox="0 0 5 8"
+              // viewBox="0 0 5 8"
+              viewBox="-7 -5 24 24"
               // strokeWidth={1}
               color={invertColor(color2)}
             />

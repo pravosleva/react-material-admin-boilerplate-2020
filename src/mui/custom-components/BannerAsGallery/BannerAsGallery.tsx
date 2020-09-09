@@ -134,15 +134,14 @@ export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
           onClick={onClick}
           aria-label="Prev Slide"
         >
-          <div style={{ transform: 'rotateY(180deg)' }}>
-            {/* <i className="sp-ico sp-ico_for_rev slick-arrow"></i> */}
-            <SVG
-              icon="leftSmartPrice"
-              viewBox="0 0 5 8"
-              // strokeWidth={1}
-              color={invertColor(color2)}
-            />
-          </div>
+          {/* <i className="sp-ico sp-ico_for_rev slick-arrow"></i> */}
+          <SVG
+            icon="leftSmartPrice"
+            // viewBox="0 0 5 8"
+            viewBox="-7 -5 24 24"
+            // strokeWidth={1}
+            color={invertColor(color2)}
+          />
         </button>
       )}
       renderRightNav={(onClick: () => void, disabled: boolean, { color2 }) => (
@@ -155,7 +154,7 @@ export const BannerAsGallery = withStyles((_theme: ITheme) => ({}), {
         >
           <SVG
             icon="rightSmartPrice"
-            viewBox="0 0 5 8"
+            viewBox="-7 -5 24 24"
             // strokeWidth={1}
             color={invertColor(color2)}
           />

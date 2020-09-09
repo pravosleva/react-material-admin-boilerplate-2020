@@ -66,11 +66,11 @@
 
 .image-gallery-right-nav svg,
 .image-gallery-left-nav svg {
-  transform: scale(0.35) !important;
+  transform: scale(1) !important;
 }
 .image-gallery-right-nav svg:hover
 .image-gallery-left-nav svg:hover {
-  transform: scale(0.4);
+  transform: scale(1);
 }
 
 @media (min-width: 768px) {

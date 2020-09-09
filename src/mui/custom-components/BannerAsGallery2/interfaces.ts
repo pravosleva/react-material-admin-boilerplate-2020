@@ -10,7 +10,17 @@ export interface IProps {
   desktopOnly?: boolean
   mobileOnly?: boolean
   items: IItem[]
-  [key: string]: any
+  color1: string
+  color2: string
+  bannerHeight?: number
+  bannerMaxWidth?: number
+  onSlide: (index: number) => void
+}
+export interface IWrapperProps {
+  desktopOnly?: boolean
+  mobileOnly?: boolean
+  color1: string
+  color2: string
   bannerHeight?: number
   bannerMaxWidth?: number
 }

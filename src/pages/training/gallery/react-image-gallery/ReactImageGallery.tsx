@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { ProTip } from '@/mui/custom-components/ProTip'
 import { Container } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
@@ -13,21 +13,7 @@ import 'react-image-gallery/styles/css/image-gallery.css'
 import ColorPicker from 'material-ui-color-picker'
 import { useImmerReducer } from 'use-immer'
 
-function v2Reducer(draft, action) {
-  switch (action.type) {
-    case 'SET_COLOR2': {
-      draft[action.index].color2 = action.value
-      return
-    }
-    case 'SET_COLOR1': {
-      draft[action.index].color1 = action.value
-      return
-    }
-    default:
-      return
-  }
-}
-const initialV2State = [
+const v2Items = [
   {
     original: 'https://smartprice.ru/static/img/smartprice/rdbanners/index/desktop/1551246.jpg',
     color1: '#3482C4',
@@ -41,10 +27,10 @@ const initialV2State = [
     url: 'https://smartprice.ru',
   },
   {
-    original: 'https://smartprice.ru/static/img/smartprice/rdbanners/index/desktop/1745251.jpg',
-    color1: '#F2F2F2',
-    color2: '#F2F2F2',
-    url: 'https://smartprice.ru',
+    original: '/2020-09-09-smartprice-1520527.jpg',
+    color1: '#FFF',
+    color2: '#FFF',
+    url: 'https://smartprice.ru/product/Xiaomi_MI-5S-PLUS_used/',
   },
   {
     original: '/10-03-2020-teamone-infinity.920x360.jpg',
@@ -53,21 +39,47 @@ const initialV2State = [
     url: 'http://uremont.com',
   },
 ]
+const initialV2State = {
+  color1: v2Items[0].color1,
+  color2: v2Items[0].color2,
+}
+function v2Reducer(draft, action) {
+  switch (action.type) {
+    case 'SET_COLOR2': {
+      draft.color2 = action.value
+      return
+    }
+    case 'SET_COLOR1': {
+      draft.color1 = action.value
+      return
+    }
+    default:
+      return
+  }
+}
 
 export const ReactImageGallery = () => {
   const { t } = useContext(MultilingualContext)
   const classes = useStyles()
+
+  // --- V2
   const [v2State, dispatchV2] = useImmerReducer(v2Reducer, initialV2State)
-  const handleV2Color2Change = (index: number) => (value: string) => {
+  const handleV2Color2Change = (value: string) => {
     if (!!value) {
-      dispatchV2({ type: 'SET_COLOR2', index, value })
+      dispatchV2({ type: 'SET_COLOR2', value })
     }
   }
-  const handleV2Color1Change = (index: number) => (value: string) => {
+  const handleV2Color1Change = (value: string) => {
     if (!!value) {
-      dispatchV2({ type: 'SET_COLOR1', index, value })
+      dispatchV2({ type: 'SET_COLOR1', value })
     }
   }
+  const handleSlide = (index: number) => {
+    // setCurrentIndex(index)
+    handleV2Color2Change(v2Items[index].color2)
+    handleV2Color1Change(v2Items[index].color1)
+  }
+  // ---
 
   return (
     <Container>
@@ -87,9 +99,9 @@ export const ReactImageGallery = () => {
           <p>First slide</p>
           <ColorPicker
             name="color1"
-            defaultValue={v2State[0].color1}
-            value={v2State[0].color1}
-            onChange={handleV2Color1Change(0)}
+            defaultValue={v2State.color1}
+            value={v2State.color1}
+            onChange={handleV2Color1Change}
             fullWidth
             variant="filled"
             label="color1"
@@ -98,9 +110,9 @@ export const ReactImageGallery = () => {
           />
           <ColorPicker
             name="color2"
-            defaultValue={v2State[0].color2}
-            value={v2State[0].color2}
-            onChange={handleV2Color2Change(0)}
+            defaultValue={v2State.color2}
+            value={v2State.color2}
+            onChange={handleV2Color2Change}
             fullWidth
             variant="filled"
             label="color2"
@@ -110,9 +122,12 @@ export const ReactImageGallery = () => {
         <Grid item xs={12} sm={12} md={1} lg={1} xl={1}></Grid>
         <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
           <BannerAsGallery2
+            color1={v2State.color1}
+            color2={v2State.color2}
             bannerHeight={400} // Optional
             bannerMaxWidth={1000}
-            items={v2State}
+            items={v2Items}
+            onSlide={handleSlide}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>

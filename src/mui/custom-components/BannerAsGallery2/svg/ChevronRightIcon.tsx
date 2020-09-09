@@ -1,5 +1,10 @@
 import React from 'react'
 
 export const ChevronRightIcon = ({ color = '#B8BDCE' }) => (
-  <path d="M0 7.06L3.06 4L0 0.94L0.946667 0L4.94667 4L0.946667 8L0 7.06Z" fill={color} />
+  <path
+    fillRule="evenodd"
+    clipRule="evenodd"
+    d="M0.600098 1.4L2.0001 0L8.0001 6L2.0001 12L0.600098 10.6L5.2001 6L0.600098 1.4Z"
+    fill={color}
+  />
 )
