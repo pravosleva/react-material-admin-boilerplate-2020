@@ -1,10 +1,9 @@
 /* eslint-disable max-len */
-import React, { useState, useMemo, useEffect } from 'react'
+import React from 'react'
 import ImageGallery, { SVG } from '@/utils/react-image-gallery/src@1.0.8' // from 'react-image-gallery'
 import { withStyles, Theme as ITheme } from '@material-ui/core/styles'
 import styled, { css } from 'styled-components'
 import { IProps, IWrapperProps } from './interfaces'
-import './css/styles.css'
 import { invertColor } from '@/utils/colors/invertColor'
 // import { fadeIn } from '@/utils/styled-mui/animations/fadeIn'
 // animation: ${fadeIn} 0.3s ease-in-out;
@@ -12,6 +11,39 @@ import { invertColor } from '@/utils/colors/invertColor'
 const defaultBannerHeight = 360
 const defautBannerMaxWidthPercentage = 100
 const BannerGalleryWrapper = styled('div')<IWrapperProps>`
+  && .image-gallery-icon.modified2 {
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2)) !important;
+  }
+  && .image-gallery-right-nav.modified2 svg {
+    transform: scale(1) !important;
+  }
+  && .image-gallery-left-nav.modified2 svg {
+    transform: scale(1) !important;
+  }
+  && .image-gallery-right-nav.modified2 svg:hover,
+  && .image-gallery-left-nav.modified2 svg:hover {
+    opacity: 0.6;
+  }
+  @media(min-width: 768px) {
+    && .image-gallery-right-nav.modified2 svg {
+      transform: scale(1) translateX(100%) !important;
+    }
+    && .image-gallery-left-nav.modified2 svg {
+      transform: scale(1) translateX(-100%) !important;
+    }
+  }
+  @media(min-width: 1500px) {
+    && .image-gallery-right-nav.modified2 svg {
+      transform: scale(1) translateX(100%) !important;
+    }
+    && .image-gallery-left-nav.modified2 svg {
+      transform: scale(1) translateX(-100%) !important;
+    }
+  }
+  && .image-gallery-icon.modified2:focus {
+    outline: none;
+  }
+
   ${({ desktopOnly }) =>
     desktopOnly &&
     css`
@@ -85,12 +117,6 @@ const BannerGalleryWrapper = styled('div')<IWrapperProps>`
     right: 0;
     bottom: 0;
     left: 0;
-    /* background-image: linear-gradient(
-      to bottom,
-      hsl(344, 100%, 50%),
-      hsl(31, 100%, 40%)
-    ); */
-    
     ${({ color1, color2 }) =>
       color1 &&
       color2 &&

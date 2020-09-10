@@ -67,6 +67,9 @@ export const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3, 0, 0, 0),
   },
+  list: {
+    overflowX: 'hidden',
+  },
   listItem: {
     borderLeftColor: grey[200],
     // backgroundColor: grey[200],

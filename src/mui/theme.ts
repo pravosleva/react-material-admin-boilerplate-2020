@@ -48,6 +48,9 @@ export const GlobalCss = withStyles({
       fontWeight: '500',
       letterSpacing: '0.3px',
     },
+    body: {
+      overflowX: 'hidden',
+    },
   },
 })(() => null)
 

@@ -4,11 +4,40 @@ import ImageGallery, { SVG } from '@/utils/react-image-gallery/src@1.0.8' // fro
 import { withStyles, Theme as ITheme } from '@material-ui/core/styles'
 import styled, { css } from 'styled-components'
 import { IProps, IBannerGalleryWrapperProps } from './interfaces'
-import './css/styles.css'
 import { invertColor } from '@/utils/colors/invertColor'
 
 const defaultBannerHeight = 360
 const BannerGalleryWrapper = styled('div')<IBannerGalleryWrapperProps>`
+  && .image-gallery-icon {
+    color: #fff;
+    transition: all .2s ease-out;
+    appearance: none;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    z-index: 4;
+    /* filter: drop-shadow(0 2px 2px #1a1a1a); } */
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4)) !important;
+  }
+  && .image-gallery-using-mouse .image-gallery-icon:focus {
+    outline: none;
+  }
+  && .image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg {
+    height: 110px !important;
+    width: 50px !important;
+  }
+
+  && .image-gallery-right-nav svg,
+  && .image-gallery-left-nav svg {
+    transform: scale(1) !important;
+  }
+  && .image-gallery-right-nav svg:hover
+  && .image-gallery-left-nav svg:hover {
+    transform: scale(1);
+  }
+
   ${({ desktopOnly }) =>
     desktopOnly &&
     css`

@@ -67,7 +67,7 @@ const MiniDrawerLeftHOCWithRouter: React.FC = ({ location, children }: IProps) =
   const { t, currentLang } = useContext(MultilingualContext)
   const MemoizedList = useMemo(
     () => (
-      <List>
+      <List className={classes.list}>
         {toolbarMenu.map(({ path, options, sublist, depth }: IToolbarMenuItem, i) => {
           const { text, noTranslate, icon, title } = options
           const subpaths = !!sublist ? sublist.map((s) => s.path) : []
