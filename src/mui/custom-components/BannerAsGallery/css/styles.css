@@ -1,48 +1,3 @@
-.sp-ico_for_fwd {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAaCAYAAACHD21cAAAAL0lEQVR4AWMAAg0gtgdiRgYSgRkQpwGxw+DVPKp5VLMtPTQSduqoplFNhAHZBTIANBwVgYHEiZMAAAAASUVORK5CYII=");
-}
-
-.sp-ico_for_rev {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAaCAYAAACHD21cAAAAM0lEQVR4AWMgETACsT0Qa5CqyQGI04DYDE1uVNOoJhKALbImWmtEOHVQah7VPKoZUSADABU8FYFhTnGWAAAAAElFTkSuQmCC");
-}
-
-.sp-ico_for_fwd, .sp-ico_for_rev {
-  width: 14px;
-  height: 26px;
-  background-size: 14px 26px;
-}
-
-.top_carousel .sp-ico_for_fwd {
-  transform: translateX(490px);
-  background-position: 95% center;
-}
-.top_carousel .sp-ico_for_fwd, .top_carousel .sp-ico_for_rev {
-  cursor: pointer;
-  position: absolute;
-  top: 40%;
-  transform: translateY(-50%);
-  left: 50%;
-  z-index: 1000;
-  -webkit-transition: opacity 0.7s ease;
-  -moz-transition: opacity 0.7s ease;
-  transition: opacity 0.7s ease;
-}
-.sp-ico {
-  font-size: 0;
-  line-height: 12px;
-  vertical-align: middle;
-  display: inline-block;
-  width: 12px;
-  /* height: 12px;
-  background-size: 12px 12px; */
-  height: 24px;
-  background-size: 12px 24px;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-/* --- */
-
 .image-gallery-icon {
   color: #fff;
   transition: all .2s ease-out;
@@ -77,36 +32,8 @@
   .image-gallery-icon:hover {
     color: #337ab7;
   }
-  /*
-  .image-gallery-icon:hover .image-gallery-svg {
-    transform: scale(0.4) !important;
-  }
-  .image-gallery-icon:hover .image-gallery-svg {
-    transform: scale(0.4) !important;
-  }
-  */
 }
 
 .image-gallery-icon:focus {
   outline: 2px solid #337ab7;
 }
-/*
-.image-gallery-left-nav, .image-gallery-right-nav {
-  padding: 50px 10px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-*/
-
-/*
-@media(min-width: 1136px) {
-  .image-gallery-right-nav {
-    transform: translateY(-50%), translateX(calc((100vw - 1136px)/2));
-  }
-}
-@media(max-width: 767px) {
-  .image-gallery-right-nav {
-    transform: translateY(-50%), translateX(calc((100vw - 767px - 32px)/2)) !important;
-  }
-}
-*/

@@ -3,12 +3,12 @@ import React from 'react'
 import ImageGallery, { SVG } from '@/utils/react-image-gallery/src@1.0.8' // from 'react-image-gallery'
 import { withStyles, Theme as ITheme } from '@material-ui/core/styles'
 import styled, { css } from 'styled-components'
-import { IProps } from './interfaces'
+import { IProps, IBannerGalleryWrapperProps } from './interfaces'
 import './css/styles.css'
 import { invertColor } from '@/utils/colors/invertColor'
 
 const defaultBannerHeight = 360
-const BannerGalleryWrapper = styled('div')<IProps>`
+const BannerGalleryWrapper = styled('div')<IBannerGalleryWrapperProps>`
   ${({ desktopOnly }) =>
     desktopOnly &&
     css`
