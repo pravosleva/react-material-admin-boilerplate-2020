@@ -70,6 +70,14 @@ export const useStyles = makeStyles((theme) => ({
   list: {
     overflowX: 'hidden',
   },
+  listItemClosed: {
+    transition: 'opacity 1s linear',
+    opacity: '0',
+  },
+  listItemOpened: {
+    transition: 'opacity 1s linear',
+    opacity: '1',
+  },
   listItem: {
     borderLeftColor: grey[200],
     // backgroundColor: grey[200],
