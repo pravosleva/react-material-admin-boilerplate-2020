@@ -103,7 +103,7 @@
     "start:wob": "BROWSER=none node scripts/start.js",
     "build:local": "node scripts/build.js && bash postbuild.local.prod.sh",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
+    "test": "node scripts/test.js --watchAll=false",
     "analyze": "node scripts/analyze.js",
     "lint": "eslint --debug src/**/*.ts*",
     "lint:write": "eslint src/**/*.ts* --fix"
@@ -112,7 +112,7 @@
     "*.{js, jsx, ts, tsx}": [
       "node_modules/.bin/eslint --max-warnings=0",
       "prettier --write",
-      "yarn test --watchAll=false"
+      "yarn test"
     ]
   },
   "husky": {
