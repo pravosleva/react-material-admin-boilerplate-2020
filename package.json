@@ -112,7 +112,7 @@
     "*.{js, jsx, ts, tsx}": [
       "node_modules/.bin/eslint --max-warnings=0",
       "prettier --write",
-      "yarn test"
+      "yarn test --watchAll=false"
     ]
   },
   "husky": {
