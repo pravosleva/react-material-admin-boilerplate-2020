@@ -22,13 +22,25 @@ interface IState {
   value: number
   name: string
 }
-interface IAction {
-  type: 'INC' | 'DEC' | 'CHANGE_NAME' | 'RESET'
-  payload?: string
-}
+type TAction =
+  | {
+      type: 'INC'
+    }
+  | {
+      type: 'DEC'
+    }
+  | {
+      type: 'CHANGE_NAME'
+      payload: string
+    }
+  | {
+      type: 'RESET'
+    }
+
+type TReducer<IState, TAction> = (prevState: IState, action: TAction) => IState
 
 const initialState = { value: 0, name: '' }
-function reducer(state: IState, action: IAction): IState {
+function reducer(state: IState, action: TAction): IState {
   switch (action.type) {
     case 'INC':
       return { ...state, value: state.value + 1 }
@@ -45,7 +57,7 @@ function reducer(state: IState, action: IAction): IState {
 
 export const UseReducer = () => {
   const { t } = useContext(MultilingualContext)
-  const [count, dispatch] = useReducer(reducer, initialState)
+  const [count, dispatch] = useReducer<TReducer<IState, TAction>>(reducer, initialState)
   const handleInc = useCallback(() => {
     dispatch({ type: 'INC' })
   }, [dispatch])

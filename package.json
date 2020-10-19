@@ -100,7 +100,8 @@
     "test": "node scripts/test.js",
     "analyze": "node scripts/analyze.js",
     "lint": "eslint --debug src/**/*.ts*",
-    "lint:write": "eslint src/**/*.ts* --fix"
+    "lint:write": "eslint src/**/*.ts* --fix",
+    "format": "prettier --write \"**/*.{js,ts,tsx}\" !.next !components"
   },
   "lint-staged": {
     "*.{js, jsx, ts, tsx}": [
@@ -110,7 +111,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "lint-staged && yarn format",
       "commit-msg": "node ./scripts/write-task-name-to-commit"
     }
   },
@@ -181,6 +182,9 @@
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
       "^.+\\.module\\.(css|sass|scss)$"
+    ],
+    "moduleDirectories": [
+      "node_modules"
     ],
     "modulePaths": [],
     "moduleNameMapper": {
