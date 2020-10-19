@@ -129,8 +129,7 @@ export const toolbarMenu: IToolbarMenuItem[] = [
           {
             path: '/training/tests-with-enzyme/component-renders',
             options: {
-              text: 'Component renders',
-              noTranslate: true,
+              text: 'Component_renders',
               icon: <BookmarkIcon />,
               access: ['free'],
               description: 'TRAINING_TESTS-WITH-ENZYME_COMPONENT-RENDERS@DESCRIPTION',
@@ -150,15 +149,50 @@ export const toolbarMenu: IToolbarMenuItem[] = [
         ],
       },
       {
-        path: '/training/react-image-gallery',
+        path: '/training/gallery',
         options: {
-          text: 'react-image-gallery',
-          noTranslate: true,
+          text: 'Gallery',
           icon: <BookmarkIcon />,
           access: ['free'],
-          // description: 'TRAINING_FORMIK@DESCRIPTION',
+          // description: 'TRAINING_GALLERY@DESCRIPTION',
         },
         depth: 2,
+        sublist: [
+          {
+            path: '/training/gallery/react-image-gallery',
+            options: {
+              text: 'react-image-gallery',
+              noTranslate: true,
+              icon: <BookmarkIcon />,
+              access: ['free'],
+              // description: 'TRAINING_REACT-IMAGE-GALLERY@DESCRIPTION',
+            },
+            depth: 3,
+          },
+        ],
+      },
+      {
+        path: '/training/state',
+        options: {
+          text: 'State',
+          icon: <BookmarkIcon />,
+          access: ['free'],
+          // description: 'TRAINING_STATE@DESCRIPTION',
+        },
+        depth: 2,
+        sublist: [
+          {
+            path: '/training/state/use-immer',
+            options: {
+              text: 'Use-immer hook',
+              noTranslate: true,
+              icon: <BookmarkIcon />,
+              access: ['free'],
+              description: 'TRAINING_USE-IMMER@DESCRIPTION',
+            },
+            depth: 3,
+          },
+        ],
       },
     ],
   },

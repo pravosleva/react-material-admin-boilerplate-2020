@@ -37,12 +37,12 @@ const MiniDrawerLeftHOCWithRouter: React.FC = ({ location, children }: IProps) =
   const theme = useTheme()
 
   // Main menu
-  const [isToolbarOpen, setIsToolbarOpen] = useState(false)
+  const [isToolbarOpened, setIsToolbarOpened] = useState(false)
   const handleDrawerOpen = () => {
-    setIsToolbarOpen(true)
+    setIsToolbarOpened(true)
   }
   const handleDrawerClose = () => {
-    setIsToolbarOpen(false)
+    setIsToolbarOpened(false)
   }
 
   // Profile menu
@@ -67,7 +67,7 @@ const MiniDrawerLeftHOCWithRouter: React.FC = ({ location, children }: IProps) =
   const { t, currentLang } = useContext(MultilingualContext)
   const MemoizedList = useMemo(
     () => (
-      <List>
+      <List className={classes.list}>
         {toolbarMenu.map(({ path, options, sublist, depth }: IToolbarMenuItem, i) => {
           const { text, noTranslate, icon, title } = options
           const subpaths = !!sublist ? sublist.map((s) => s.path) : []
@@ -80,6 +80,10 @@ const MiniDrawerLeftHOCWithRouter: React.FC = ({ location, children }: IProps) =
                 subclassName={classes.sublistItem}
                 depth={depth}
                 subclassNameDepth2={classes.sublistItemDepth2}
+                descriptionClassName={clsx({
+                  [classes.listItemClosed]: !isToolbarOpened,
+                  [classes.listItemOpened]: isToolbarOpened,
+                })}
                 subclassNameDepth3={classes.sublistItemDepth3}
                 subclassNameLast={classes.sublistItemLast}
                 key={path || i}
@@ -96,6 +100,10 @@ const MiniDrawerLeftHOCWithRouter: React.FC = ({ location, children }: IProps) =
           } else {
             return (
               <RouterLinkAsToolbarListItem
+                descriptionClassName={clsx({
+                  [classes.listItemClosed]: !isToolbarOpened,
+                  [classes.listItemOpened]: isToolbarOpened,
+                })}
                 className={classes.listItem}
                 key={path}
                 to={path}
@@ -110,7 +118,7 @@ const MiniDrawerLeftHOCWithRouter: React.FC = ({ location, children }: IProps) =
         })}
       </List>
     ),
-    [isCurrentPath, location.pathname, currentLang]
+    [isCurrentPath, location.pathname, currentLang, isToolbarOpened]
   )
 
   return (
@@ -118,7 +126,7 @@ const MiniDrawerLeftHOCWithRouter: React.FC = ({ location, children }: IProps) =
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
-          [classes.appBarShift]: isToolbarOpen,
+          [classes.appBarShift]: isToolbarOpened,
         })}
       >
         <Toolbar>
@@ -128,7 +136,7 @@ const MiniDrawerLeftHOCWithRouter: React.FC = ({ location, children }: IProps) =
             onClick={handleDrawerOpen}
             edge="start"
             className={clsx(classes.menuButton, {
-              [classes.hide]: isToolbarOpen,
+              [classes.hide]: isToolbarOpened,
             })}
           >
             <MenuIcon />
@@ -162,13 +170,13 @@ const MiniDrawerLeftHOCWithRouter: React.FC = ({ location, children }: IProps) =
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
-          [classes.drawerOpen]: isToolbarOpen,
-          [classes.drawerClose]: !isToolbarOpen,
+          [classes.drawerOpen]: isToolbarOpened,
+          [classes.drawerClose]: !isToolbarOpened,
         })}
         classes={{
           paper: clsx({
-            [classes.drawerOpen]: isToolbarOpen,
-            [classes.drawerClose]: !isToolbarOpen,
+            [classes.drawerOpen]: isToolbarOpened,
+            [classes.drawerClose]: !isToolbarOpened,
           }),
         }}
       >

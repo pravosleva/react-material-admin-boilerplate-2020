@@ -8,6 +8,7 @@
   "DESCRIPTION_IN_PROGRESS": "Описание в разработке...",
   "DESCRIPTION_NOT_FOUND": "Описание не найдено",
   "FAILED_RESPONSES": "Неудачных результатов: {counter}",
+  "GALLERY": "Галерея",
   "HOME": "Главная",
   "IN_PROGRESS": "В разработке...",
   "INITIAL_TODOS_GET_DISPLAYED": "Отображение нач. задач",
@@ -21,6 +22,7 @@
   "SERVICE_MSG_ON_CALL": "Сервисное сообщение на onCall",
   "SERVICE_MSG_ON_ABORT_IF_REQUEST_STARTED": "Сервисное сообщение на onAbortIfRequestStarted",
   "SETTINGS": "Настройки",
+  "STATE": "Состояние",
   "STOP_ALL_ANYWAY": "Остановить принудительно (императивный доступ к триггеру, но проверка происходит после {seconds} сек задекжки, если она включена ⚠️)",
   "SUCCESS_RESPONSES": "Успешных ответов получено: {counter}",
   "SUBMIT": "Отправить",
@@ -30,5 +32,6 @@
   "TRAINING_FORMIK@DESCRIPTION": "Пример использования `Formik` (работа с локальным стейтом)",
   "TRAINING_TESTS-WITH-ENZYME_COMPONENT-RENDERS@DESCRIPTION": "Для этого воспользуемся мелкой визуализацией. Неглубокий рендеринг позволяет нам проверить, вызывается ли метод рендеринга компонента - это то, что мы хотим здесь подтвердить, потому что это необходимое нам доказательство того, что компонент рендерит.",
   "TRAINING_TESTS-WITH-ENZYME_INITIAL-TODOS-GET-DISPLAYED@DESCRIPTION": "Здесь мы воспользуемся методом крепления, который позволяет нам пойти глубже, чем дает нам мелководье. Таким образом, мы можем проверить длину списка дел.",
+  "TRAINING_USE-IMMER@DESCRIPTION": "`Use-immer` — это хук, который позволяет управлять состоянием React-приложений.",
   "TRAINING_USE-REDUCER@DESCRIPTION": "Это простой пример использования `useReducer`"
 }

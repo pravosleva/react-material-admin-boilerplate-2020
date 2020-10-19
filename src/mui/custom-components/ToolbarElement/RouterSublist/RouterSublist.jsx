@@ -45,6 +45,7 @@ export const RouterSublist = (props) => {
     // depth = 2,
     subclassNameDepth2,
     subclassNameDepth3,
+    descriptionClassName,
   } = props
   const [isOpened, setIsOpened] = useState(isHeaderActive)
   const location = useLocation()
@@ -71,7 +72,7 @@ export const RouterSublist = (props) => {
         title={title || null}
       >
         <ListItemIcon>{icon}</ListItemIcon>
-        <ListItemText primary={primary} />
+        <ListItemText className={descriptionClassName} primary={primary} />
         {Icon}
       </ListItem>
       <Collapse in={isOpened || isMobile || isHeaderActive} timeout="auto" unmountOnExit>
@@ -88,6 +89,7 @@ export const RouterSublist = (props) => {
                     [subclassNameDepth2]: depth === 2,
                     [subclassNameDepth3]: depth === 3,
                   })}
+                  descriptionClassName={descriptionClassName}
                   key={path || i}
                   path={path}
                   icon={icon}
@@ -109,6 +111,7 @@ export const RouterSublist = (props) => {
                 primary={displayText}
                 icon={icon}
                 className={i === a.length - 1 ? clsx(subclassName, subclassNameLast) : subclassName}
+                descriptionClassName={descriptionClassName}
                 selected={isCurrentPath(location.pathname, `${path}`)}
                 title={title || null}
               />
