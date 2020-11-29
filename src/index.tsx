@@ -10,48 +10,25 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { GlobalCss } from '@/mui/theme'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '@/mui/theme'
-import { MultilingualContext } from '@/common/context/mutilingual'
-import {
-  translateFnInit,
-  getDeafultLangFromCookieOrNavigator,
-  SUPPOER_LOCALES as suppoerLocales,
-  setLangToCookie,
-} from '@/utils/multilingual'
-import intl from 'react-intl-universal'
+import { GlobalAppContextProvider } from '@/common/context/mutilingual'
+
 import './prismjs.scss'
 
-const ReactApp = () => {
-  const [lang, setLang] = useState(getDeafultLangFromCookieOrNavigator())
-  const handleSetLang = useCallback((lang) => {
-    setLang(lang)
-    translateFnInit(lang)
-    setLangToCookie(lang)
-  }, [])
-  const t = useCallback((str: string, opts?: any) => intl.get(str, opts), [])
-
-  return (
-    <ThemeProvider theme={theme}>
-      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-      <CssBaseline />
-      <GlobalCss />
-      <BrowserRouter>
-        <Provider store={store}>
-          <MultilingualContext.Provider
-            value={{
-              currentLang: lang,
-              setCurrentLang: handleSetLang,
-              t,
-              suppoerLocales,
-            }}
-          >
-            <Toaster />
-            <App />
-          </MultilingualContext.Provider>
-        </Provider>
-      </BrowserRouter>
-    </ThemeProvider>
-  )
-}
+const ReactApp = () => (
+  <ThemeProvider theme={theme}>
+    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+    <CssBaseline />
+    <GlobalCss />
+    <BrowserRouter>
+      <Provider store={store}>
+        <GlobalAppContextProvider>
+          <Toaster />
+          <App />
+        </GlobalAppContextProvider>
+      </Provider>
+    </BrowserRouter>
+  </ThemeProvider>
+)
 
 ReactDOM.render(<ReactApp />, document.querySelector('#root'))
 

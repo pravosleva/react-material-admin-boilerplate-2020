@@ -1,13 +1,14 @@
+import React from 'react'
 import intl from 'react-intl-universal'
 import Cookie from 'js-cookie'
 import enUS from '@assets/locales/en-US.json'
 import ruRU from '@assets/locales/ru-RU.json'
-// Others...
+import { TLang } from '@/common/context/mutilingual'
 
-interface ILang {
+export interface ILang {
   label: string
   name: string
-  value: string
+  value: TLang
 }
 
 export const SUPPOER_LOCALES: ILang[] = [
