@@ -1,4 +1,4 @@
-import React, { useState, useContext, useMemo, useEffect, useRef } from 'react'
+import React, { useState, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import clsx from 'clsx'
@@ -24,7 +24,7 @@ import { RouterSublist } from '@/mui/custom-components/ToolbarElement/RouterSubl
 import { toolbarMenu, IToolbarMenuItem } from '@/mui/layouts/dashboard/toolbar-menu'
 import { isCurrentPath } from '@/utils/routing/isCurrentPath'
 import { showAsyncToast } from '@/actions'
-import { MultilingualContext } from '@/common/context/mutilingual'
+import { useMultilingualContext } from '@/common/context/mutilingual'
 import { getModifiedPhraseForTranslate } from '@/utils/multilingual/getModifiedPhraseForTranslate'
 
 interface IProps {
@@ -64,7 +64,7 @@ const MiniDrawerLeftHOCWithRouter: React.FC = ({ location, children }: IProps) =
     )
     handleProfileMenuClose()
   }
-  const { t, currentLang } = useContext(MultilingualContext)
+  const { t, currentLang } = useMultilingualContext()
   const MemoizedList = useMemo(
     () => (
       <List className={classes.list}>

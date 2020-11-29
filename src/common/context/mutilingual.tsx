@@ -27,7 +27,7 @@ export const MultilingualContext = createContext<TMultilingualContextProps>({
   suppoerLocales: [],
 })
 
-export const GlobalAppContextProvider = ({ children }) => {
+export const MultilingualContextProvider = ({ children }) => {
   const [lang, setLang] = useState(getDeafultLangFromCookieOrNavigator())
   const handleSetLang = useCallback((lang) => {
     setLang(lang)
@@ -50,7 +50,7 @@ export const GlobalAppContextProvider = ({ children }) => {
   )
 }
 
-export const useGlobalAppContext = () => {
+export const useMultilingualContext = () => {
   const globalAppContext = useContext(MultilingualContext)
 
   return globalAppContext

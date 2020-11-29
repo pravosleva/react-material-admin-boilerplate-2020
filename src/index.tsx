@@ -10,7 +10,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import { GlobalCss } from '@/mui/theme'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from '@/mui/theme'
-import { GlobalAppContextProvider } from '@/common/context/mutilingual'
+import { MultilingualContextProvider } from '@/common/context/mutilingual'
 
 import './prismjs.scss'
 
@@ -21,10 +21,10 @@ const ReactApp = () => (
     <GlobalCss />
     <BrowserRouter>
       <Provider store={store}>
-        <GlobalAppContextProvider>
+        <MultilingualContextProvider>
           <Toaster />
           <App />
-        </GlobalAppContextProvider>
+        </MultilingualContextProvider>
       </Provider>
     </BrowserRouter>
   </ThemeProvider>
