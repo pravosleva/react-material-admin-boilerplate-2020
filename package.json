@@ -99,7 +99,7 @@
     "yarn": "^1.22.5"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "bash inotify-tool.sh && node scripts/start.js",
     "start:wob": "BROWSER=none node scripts/start.js",
     "build:local": "node scripts/build.js && bash postbuild.local.prod.sh",
     "build": "node scripts/build.js",
