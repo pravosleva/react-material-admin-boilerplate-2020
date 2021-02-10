@@ -241,9 +241,9 @@ export const AbortController = () => {
               <ReactJson src={{ isLoaded, isLoading }} />
               <div className={classes.badgeBox}>
                 <Badge badgeContent={calledRequestCounter} {...calledBadgeProps} />
+                <Badge badgeContent={abortedRequestCounter} {...abortedBadgeProps} />
                 <Badge badgeContent={successResponseCounter} {...successBadgeProps} />
                 <Badge badgeContent={failedResponseCounter} {...failedBadgeProps} />
-                <Badge badgeContent={abortedRequestCounter} {...abortedBadgeProps} />
               </div>
             </div>
           </Paper>

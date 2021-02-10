@@ -2,11 +2,11 @@
 
 ## Preview
 
-![Demo image](./demo/demo-2020-08-02-05-25.gif)
+![Demo image](./demo/demo-2021-02-10-13-52.gif)
 
 ## Development
 
-> ⚡ Правила наименования веток!  
+> ⚡ Правила наименования веток!
 > `/^(feature|bugfix)\/(TPF)-[0-9]{1,4}/`
 
 ### `yarn start`
